@@ -123,6 +123,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC Eigen3::Eigen)
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
+
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFABASELINEARSOLVER_DIR}/src")
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAEIGEN2SOLVER_DIR}/src")
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGENERALLINEARSOLVER_DIR}/src")
