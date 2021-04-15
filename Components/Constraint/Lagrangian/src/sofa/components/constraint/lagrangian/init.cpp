@@ -1,6 +1,6 @@
-#include <sofa/components/constraint/config.h>
+#include <sofa/components/constraint/lagrangian/config.h>
 
-namespace sofa::component::constraint
+namespace sofa::components::constraint::lagrangian
 {
 
-} // namespace sofa::component::constraint
+} // namespace sofa::components::constraint::lagrangian

@@ -1,0 +1,9 @@
+#pragma once
+
+#include <sofa/components/constraint/projective/config.h>
+
+#ifdef SOFA_BUILD_SOFABOUNDARYCONDITION
+#  define SOFA_SOFABOUNDARYCONDITION_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#else
+#  define SOFA_SOFABOUNDARYCONDITION_API SOFA_IMPORT_DYNAMIC_LIBRARY
+#endif
