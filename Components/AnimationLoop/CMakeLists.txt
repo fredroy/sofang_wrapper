@@ -8,16 +8,22 @@ set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
 
 set(SOFACONSTRAINT_DIR "${SOFA_SOURCE_DIR}/modules/SofaConstraint/")
 set(SOFACONSTRAINT_SRC "${SOFACONSTRAINT_DIR}/src/SofaConstraint")
+set(SOFAGENERALANIMATIONLOOP_DIR "${SOFA_SOURCE_DIR}/modules/SofaGeneralAnimationLoop/")
+set(SOFAGENERALANIMATIONLOOP_SRC "${SOFAGENERALANIMATIONLOOP_DIR}/src/SofaGeneralAnimationLoop")
 
 set(HEADER_FILES
 	${SOFACOMPONENTSANIMATIONLOOP_SOURCE_DIR}/config.h.in
     ${SOFACONSTRAINT_SRC}/ConstraintAnimationLoop.h
     ${SOFACONSTRAINT_SRC}/FreeMotionAnimationLoop.h
+    ${SOFAGENERALANIMATIONLOOP_SRC}/MultiStepAnimationLoop.h
+    ${SOFAGENERALANIMATIONLOOP_SRC}/MultiTagAnimationLoop.h
 )
 
 set(SOURCE_FILES
     ${SOFACONSTRAINT_SRC}/ConstraintAnimationLoop.cpp
     ${SOFACONSTRAINT_SRC}/FreeMotionAnimationLoop.cpp
+    ${SOFAGENERALANIMATIONLOOP_SRC}/MultiStepAnimationLoop.cpp
+    ${SOFAGENERALANIMATIONLOOP_SRC}/MultiTagAnimationLoop.cpp
 )
 
 sofa_find_package(SofaFramework REQUIRED)
@@ -25,6 +31,7 @@ sofa_find_package(SofaFramework REQUIRED)
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.LinearSolver)
+target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Constraint)
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
@@ -36,5 +43,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/s
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFACONSTRAINT_DIR}/src")
+target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGENERALANIMATIONLOOP_DIR}/src")
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFACONSTRAINT)
+target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGENERALANIMATIONLOOP)
