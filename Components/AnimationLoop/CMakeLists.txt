@@ -31,7 +31,7 @@ sofa_find_package(SofaFramework REQUIRED)
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.LinearSolver)
-target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Constraint)
+target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Constraint.Lagrangian)
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")

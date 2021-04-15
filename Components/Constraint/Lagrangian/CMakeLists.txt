@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
-project(Sofa.Components.Constraint LANGUAGES CXX)
+project(Sofa.Components.Constraint.Lagrangian LANGUAGES CXX)
 
-set(SOFACOMPONENTSCONSTRAINT_SOURCE_DIR "src/sofa/components/constraint")
+set(SOFACOMPONENTSCONSTRAINTLAGRANGIAN_SOURCE_DIR "src/sofa/components/constraint/lagrangian")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -10,7 +10,7 @@ set(SOFACONSTRAINT_DIR "${SOFA_SOURCE_DIR}/modules/SofaConstraint/")
 set(SOFACONSTRAINT_SRC "${SOFACONSTRAINT_DIR}/src/SofaConstraint")
 
 set(HEADER_FILES
-	${SOFACOMPONENTSCONSTRAINT_SOURCE_DIR}/config.h.in
+	${SOFACOMPONENTSCONSTRAINTLAGRANGIAN_SOURCE_DIR}/config.h.in
     ${SOFACONSTRAINT_SRC}/BilateralConstraintResolution.h
     ${SOFACONSTRAINT_SRC}/BilateralInteractionConstraint.h
     ${SOFACONSTRAINT_SRC}/BilateralInteractionConstraint.inl
@@ -36,7 +36,7 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-    ${SOFACOMPONENTSCONSTRAINT_SOURCE_DIR}/init.cpp
+    ${SOFACOMPONENTSCONSTRAINTLAGRANGIAN_SOURCE_DIR}/init.cpp
     ${SOFACONSTRAINT_SRC}/BilateralInteractionConstraint.cpp
     ${SOFACONSTRAINT_SRC}/ConstraintSolverImpl.cpp
     ${SOFACONSTRAINT_SRC}/ConstraintStoreLambdaVisitor.cpp
@@ -54,7 +54,7 @@ set(SOURCE_FILES
 
 sofa_find_package(SofaFramework REQUIRED)
 
-configure_file(${SOFACOMPONENTSCONSTRAINT_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/constraint/config.h)
+configure_file(${SOFACOMPONENTSCONSTRAINTLAGRANGIAN_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/constraint/lagrangian/config.h)
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
