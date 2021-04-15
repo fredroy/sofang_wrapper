@@ -1,0 +1,9 @@
+#pragma once
+
+#include <sofa/components/odesolver/config.h>
+
+#ifdef SOFA_BUILD_SOFAIMPLICITODESOLVER
+#  define SOFA_SOFAIMPLICITODESOLVER_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#else
+#  define SOFA_SOFAIMPLICITODESOLVER_API SOFA_IMPORT_DYNAMIC_LIBRARY
+#endif

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 
 
 add_subdirectory(LinearSolver)
-# add_subdirectory(OdeSolver)
+add_subdirectory(ODESolver)
 # add_subdirectory(Utils)
 # add_subdirectory(AnimationLoop)
 # add_subdirectory(Collision)
