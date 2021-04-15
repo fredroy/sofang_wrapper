@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.12)
+
+
+add_subdirectory(LinearSolver)
+# add_subdirectory(OdeSolver)
+# add_subdirectory(Utils)
+# add_subdirectory(AnimationLoop)
+# add_subdirectory(Collision)
+# add_subdirectory(Constraint)
+# add_subdirectory(Container)
+# add_subdirectory(Controller)
+# add_subdirectory(Engine)
+# add_subdirectory(Mapping)
+# add_subdirectory(PhysicalModel)
+# add_subdirectory(Visual)
+# add_subdirectory(Device)
+# add_subdirectory(IO)
