@@ -44,11 +44,20 @@ set(SOURCE_FILES
     ${SOFAMISCSOLVER_SRC}/NewmarkImplicitSolver.cpp
 )
 
+set(WRAPPER_FILES
+    wrapper/SofaExplicitOdeSolver/config.h
+    wrapper/SofaImplicitOdeSolver/config.h
+    wrapper/SofaGeneralImplicitOdeSolver/config.h
+    wrapper/SofaGeneralExplicitOdeSolver/config.h
+    wrapper/SofaMiscSolver/config.h
+)
+source_group("wrapper" FILES ${WRAPPER_FILES})
+
 sofa_find_package(SofaFramework REQUIRED)
 
 configure_file(${SOFACOMPONENTSODESOLVER_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/odesolver/config.h)
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
+add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
 
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")

@@ -90,12 +90,21 @@ set(SOURCE_FILES
     ${SOFASPARSESOLVER_SRC}/SparseLUSolver.cpp
 )
 
+set(WRAPPER_FILES
+    wrapper/SofaBaseLinearSolver/config.h
+    wrapper/SofaEigen2Solver/config.h
+    wrapper/SofaGeneralLinearSolver/config.h
+    wrapper/SofaDenseSolver/config.h
+    wrapper/SofaSparseSolver/config.h
+)
+source_group("wrapper" FILES ${WRAPPER_FILES})
+
 add_subdirectory(${SOFASPARSESOLVER_DIR}/extlibs/csparse ${CMAKE_CURRENT_BINARY_DIR}/extlibs/csparse)
 sofa_set_01(SOFA_COMPONENTS_LINEARSOLVER_HAVE_CSPARSE VALUE TRUE)
 
 sofa_find_package(metis QUIET) # Unix users can have an installed version of metis
 if(NOT metis_FOUND)
-    message(STATUS "SofaSparseSolver: using built-in metis library")
+    message(STATUS "Sofa.Components.LinearSolver: using built-in metis library")
     add_subdirectory(${SOFASPARSESOLVER_DIR}/extlibs/metis-5.1.0 ${CMAKE_CURRENT_BINARY_DIR}/extlibs/metis-5.1.0)
 endif()
 sofa_set_01(SOFA_COMPONENTS_LINEARSOLVER_HAVE_METIS VALUE TRUE)
@@ -114,7 +123,7 @@ endif()
 
 configure_file(${SOFACOMPONENTSLINEARSOLVER_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/linearsolver/config.h)
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
+add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${PROJECT_NAME} PUBLIC newmat)
 target_link_libraries(${PROJECT_NAME} PUBLIC metis csparse)

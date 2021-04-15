@@ -1,6 +1,6 @@
-#include <sofa/components/physicalmodels/mass/config.h>
+#include <sofa/components/physicalmodel/mass/config.h>
 
-namespace sofa::component::mass
+namespace sofa::components::physicalmodel::mass
 {
 
-} // namespace sofa::component::mass
+} // namespace sofa::components::physicalmodel::mass

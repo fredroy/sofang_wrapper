@@ -1,6 +1,6 @@
-#include <sofa/components/physicalmodels/mass/config.h>
+#include <sofa/components/physicalmodel/solidmechanics/elasticity/fem/config.h>
 
-namespace sofa::component::mass
+namespace sofa::components::physicalmodel::solidmechanics::elasticity::fem
 {
 
-} // namespace sofa::component::mass
+} // namespace sofa::components::physicalmodel::solidmechanics::elasticity::fem

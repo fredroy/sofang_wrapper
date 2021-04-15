@@ -13,6 +13,8 @@ set(SOFAGENERALOBJECTINTERACTION_SRC "${SOFAGENERALOBJECTINTERACTION_DIR}/src/So
 
 set(HEADER_FILES
 	${SOFACOMPONENTSCONSTRAINTPROJECTIVE_SOURCE_DIR}/config.h.in
+    wrapper/SofaBoundaryCondition/config.h
+    wrapper/SofaGeneralObjectInteraction/config.h
     ${SOFABOUNDARYCONDITION_SRC}/AffineMovementConstraint.h
     ${SOFABOUNDARYCONDITION_SRC}/AffineMovementConstraint.inl
     ${SOFABOUNDARYCONDITION_SRC}/FixedConstraint.h
@@ -83,11 +85,17 @@ set(SOURCE_FILES
     ${SOFAGENERALOBJECTINTERACTION_SRC}/AttachConstraint.inl
 )
 
+set(WRAPPER_FILES
+    wrapper/SofaBoundaryCondition/config.h
+    wrapper/SofaGeneralObjectInteraction/config.h
+)
+source_group("wrapper" FILES ${WRAPPER_FILES})
+
 sofa_find_package(SofaFramework REQUIRED)
 
 configure_file(${SOFACOMPONENTSCONSTRAINTPROJECTIVE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/constraint/projective/config.h)
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
+add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.LinearSolver)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Topology)

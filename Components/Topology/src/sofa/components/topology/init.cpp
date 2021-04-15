@@ -1,6 +1,6 @@
-#include <sofa/components/odesolver/config.h>
+#include <sofa/components/topology/config.h>
 
-namespace sofa::component::odesolver
+namespace sofa::component::topology
 {
 
-} // namespace sofa::component::odesolver
+} // namespace sofa::component::topology

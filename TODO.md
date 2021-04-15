@@ -15,4 +15,5 @@
 # Sofa.Components.AnimationLoop
 - dont forget the mapping(?) from GeneralAnimationLoop
 
-# Sofa.
+# Sofa.Components.LinearSolver
+- SofaPreconditioner contains PrecondWarpConditioner, which needs weirdily TetraFem

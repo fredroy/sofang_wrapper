@@ -134,11 +134,18 @@ set(SOURCE_FILES
     ${SOFATOPOLOGYMAPPING_SRC}/Triangle2EdgeTopologicalMapping.cpp
 )
 
+set(WRAPPER_FILES
+    wrapper/SofaBaseTopology/config.h
+    wrapper/SofaGeneralTopology/config.h
+    wrapper/SofaTopologyMapping/config.h
+)
+source_group("wrapper" FILES ${WRAPPER_FILES})
+
 sofa_find_package(SofaFramework REQUIRED)
 
 configure_file(${SOFACOMPONENTSODETOPOLOGY_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/topology/config.h)
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
+add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
 
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")

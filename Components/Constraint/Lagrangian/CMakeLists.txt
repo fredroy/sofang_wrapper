@@ -52,11 +52,16 @@ set(SOURCE_FILES
     ${SOFACONSTRAINT_SRC}/UnilateralInteractionConstraint.cpp
 )
 
+set(WRAPPER_FILES
+    wrapper/SofaConstraint/config.h
+)
+source_group("wrapper" FILES ${WRAPPER_FILES})
+
 sofa_find_package(SofaFramework REQUIRED)
 
 configure_file(${SOFACOMPONENTSCONSTRAINTLAGRANGIAN_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/constraint/lagrangian/config.h)
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
+add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.LinearSolver)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.ODESolver)

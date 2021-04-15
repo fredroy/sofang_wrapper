@@ -4,6 +4,11 @@
 #include <SofaDenseSolver/NewMatMatrix.h>
 #include <SofaDenseSolver/NewMatVector.h>
 
+namespace sofa::components::linearsolver
+{
+
+}
+
 namespace sofa::component::linearsolver
 {
     // template specialization on specific matrix types
