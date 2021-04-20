@@ -1,5 +1,6 @@
 # Sofa.Components.Topology
 - Remove RadiusContainer (from SofaGeneralFEM) in EdgeToQuad
+- remove MechanicalObj dep on DynamicSparseGridGeometryAlgorithms
 
 # Sofa.Components.Constraint.Lagrangian
 - Remove use of UniformMass from UncoupledConstraintCorrection
@@ -18,7 +19,6 @@
 # Sofa.Components.LinearSolver
 - SofaPreconditioner contains PrecondWarpConditioner, which needs weirdily TetraFem
 
-
 # Sofa.Components.Collision
 - remove useless headers in SofaMeshCollision
 - refactor LMDFilters
@@ -26,5 +26,10 @@
 - move RayTriangleIntersection utility class into helper ?
 - move OBB/Intr* things
 
+# Sofa.Components.Engine
+- Distance engine has a weird dep on 
+- remove dep on IdentityMapping for GenerateGrid (because of helper::eq.... 🤨)
+
 # Sofa.Components.LinearSolver
-- Lots of modules needs LinearSolver just for *Matrix files (Sparse, etc) -> move to core ?
+- Lots of modules needs LinearSolver just for \*Matrix files (Sparse, etc) -> move to core ?
+

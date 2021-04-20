@@ -13,6 +13,8 @@ set(SOFAGENERALTOPOLOGY_DIR "${SOFAMODULES_SOURCE_DIR}/SofaGeneralTopology/")
 set(SOFAGENERALTOPOLOGY_SRC "${SOFAGENERALTOPOLOGY_DIR}/src/SofaGeneralTopology")
 set(SOFATOPOLOGYMAPPING_DIR "${SOFAMODULES_SOURCE_DIR}/SofaTopologyMapping/")
 set(SOFATOPOLOGYMAPPING_SRC "${SOFATOPOLOGYMAPPING_DIR}/src/SofaTopologyMapping")
+set(SOFANONUNIFORMFEM_DIR "${SOFAMODULES_SOURCE_DIR}/SofaNonUniformFem/")
+set(SOFANONUNIFORMFEM_SRC "${SOFANONUNIFORMFEM_DIR}/src/SofaNonUniformFem")
 
 set(HEADER_FILES
 	${SOFACOMPONENTSTOPOLOGY_SOURCE_DIR}/config.h.in
@@ -85,6 +87,14 @@ set(HEADER_FILES
     ${SOFATOPOLOGYMAPPING_SRC}/SubsetTopologicalMapping.h
     ${SOFATOPOLOGYMAPPING_SRC}/Tetra2TriangleTopologicalMapping.h
     ${SOFATOPOLOGYMAPPING_SRC}/Triangle2EdgeTopologicalMapping.h
+    #${SOFANONUNIFORMFEM_SRC}/DynamicSparseGridGeometryAlgorithms.h
+    #${SOFANONUNIFORMFEM_SRC}/DynamicSparseGridGeometryAlgorithms.inl
+    ${SOFANONUNIFORMFEM_SRC}/DynamicSparseGridTopologyAlgorithms.h
+    ${SOFANONUNIFORMFEM_SRC}/DynamicSparseGridTopologyContainer.h
+    ${SOFANONUNIFORMFEM_SRC}/DynamicSparseGridTopologyModifier.h
+    ${SOFANONUNIFORMFEM_SRC}/MultilevelHexahedronSetTopologyContainer.h
+    ${SOFANONUNIFORMFEM_SRC}/SparseGridMultipleTopology.h
+    ${SOFANONUNIFORMFEM_SRC}/SparseGridRamificationTopology.h
 )
 
 set(SOURCE_FILES
@@ -132,12 +142,19 @@ set(SOURCE_FILES
     ${SOFATOPOLOGYMAPPING_SRC}/SubsetTopologicalMapping.cpp
     ${SOFATOPOLOGYMAPPING_SRC}/Tetra2TriangleTopologicalMapping.cpp
     ${SOFATOPOLOGYMAPPING_SRC}/Triangle2EdgeTopologicalMapping.cpp
+    # ${SOFANONUNIFORMFEM_SRC}/DynamicSparseGridGeometryAlgorithms.cpp
+    ${SOFANONUNIFORMFEM_SRC}/DynamicSparseGridTopologyContainer.cpp
+    ${SOFANONUNIFORMFEM_SRC}/DynamicSparseGridTopologyModifier.cpp
+    ${SOFANONUNIFORMFEM_SRC}/SparseGridMultipleTopology.cpp
+    ${SOFANONUNIFORMFEM_SRC}/SparseGridRamificationTopology.cpp
 )
 
 set(WRAPPER_FILES
     wrapper/SofaBaseTopology/config.h
     wrapper/SofaGeneralTopology/config.h
     wrapper/SofaTopologyMapping/config.h
+    wrapper/SofaNonUniformFem/config.h
+
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
@@ -155,7 +172,9 @@ target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/w
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFABASETOPOLOGY_DIR}/src")
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGENERALTOPOLOGY_DIR}/src")
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFATOPOLOGYMAPPING_DIR}/src")
+target_include_directories(${PROJECT_NAME} PUBLIC "${SOFANONUNIFORMFEM_DIR}/src")
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFABASETOPOLOGY)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGENERALTOPOLOGY)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFATOPOLOGYMAPPING)
+target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFANONUNIFORMFEM)
