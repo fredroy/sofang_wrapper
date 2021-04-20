@@ -34,6 +34,8 @@ set(SOURCE_FILES
 
 set(WRAPPER_FILES
     wrapper/SofaBaseCollision/config.h
+    wrapper/SofaGeneralMeshCollision/config.h
+    wrapper/SofaUserInteraction/config.h
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 

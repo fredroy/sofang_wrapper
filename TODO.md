@@ -24,3 +24,4 @@
 - refactor LMDFilters
 - remove RigidMapping dep from LocalMinDistanceFilter ?
 - move RayTriangleIntersection utility class into helper ?
+- move OBB/Intr* things
