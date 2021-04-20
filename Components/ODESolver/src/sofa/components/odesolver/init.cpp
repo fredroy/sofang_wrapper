@@ -3,4 +3,4 @@
 namespace sofa::components::odesolver
 {
 
-} // namespace sofa::component::odesolver
+} // namespace sofa::components::odesolver

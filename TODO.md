@@ -17,3 +17,10 @@
 
 # Sofa.Components.LinearSolver
 - SofaPreconditioner contains PrecondWarpConditioner, which needs weirdily TetraFem
+
+
+# Sofa.Components.Collision
+- remove useless headers in SofaMeshCollision
+- refactor LMDFilters
+- remove RigidMapping dep from LocalMinDistanceFilter ?
+- move RayTriangleIntersection utility class into helper ?
