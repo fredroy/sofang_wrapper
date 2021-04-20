@@ -1,0 +1,9 @@
+#pragma once
+
+#include <sofa/components/visual/gl/config.h>
+
+#ifdef SOFA_BUILD_SOFAGENERALENGINE
+#  define SOFA_SOFAGENERALENGINE_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#else
+#  define SOFA_SOFAGENERALENGINE_API SOFA_IMPORT_DYNAMIC_LIBRARY
+#endif

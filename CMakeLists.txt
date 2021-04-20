@@ -117,6 +117,9 @@ if(SOFA_BUILD_TESTS)
     add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/modules/Sofa.Testing ${CMAKE_CURRENT_BINARY_DIR}/Sofa/Sofa.Testing)
 endif()
 
+if(SOFA_WITH_OPENGL)
+    add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/modules/Sofa.GL ${CMAKE_CURRENT_BINARY_DIR}/Sofa/Sofa.GL)
+endif()
 # Components
 add_subdirectory(Components ${CMAKE_CURRENT_BINARY_DIR}/Components)
 
