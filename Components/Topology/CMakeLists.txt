@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 project(Sofa.Components.Topology LANGUAGES CXX)
 
-set(SOFACOMPONENTSODETOPOLOGY_SOURCE_DIR "src/sofa/components/topology")
+set(SOFACOMPONENTSTOPOLOGY_SOURCE_DIR "src/sofa/components/topology")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -15,7 +15,7 @@ set(SOFATOPOLOGYMAPPING_DIR "${SOFAMODULES_SOURCE_DIR}/SofaTopologyMapping/")
 set(SOFATOPOLOGYMAPPING_SRC "${SOFATOPOLOGYMAPPING_DIR}/src/SofaTopologyMapping")
 
 set(HEADER_FILES
-	${SOFACOMPONENTSODETOPOLOGY_SOURCE_DIR}/config.h.in
+	${SOFACOMPONENTSTOPOLOGY_SOURCE_DIR}/config.h.in
     ${SOFABASETOPOLOGY_SRC}/fwd.h
     ${SOFABASETOPOLOGY_SRC}/initSofaBaseTopology.h
     ${SOFABASETOPOLOGY_SRC}/CommonAlgorithms.h
@@ -88,7 +88,7 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-    ${SOFACOMPONENTSODETOPOLOGY_SOURCE_DIR}/init.cpp
+    ${SOFACOMPONENTSTOPOLOGY_SOURCE_DIR}/init.cpp
     ${SOFABASETOPOLOGY_SRC}/EdgeSetGeometryAlgorithms.cpp
     ${SOFABASETOPOLOGY_SRC}/EdgeSetTopologyContainer.cpp
     ${SOFABASETOPOLOGY_SRC}/EdgeSetTopologyModifier.cpp
@@ -143,7 +143,7 @@ source_group("wrapper" FILES ${WRAPPER_FILES})
 
 sofa_find_package(SofaFramework REQUIRED)
 
-configure_file(${SOFACOMPONENTSODETOPOLOGY_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/topology/config.h)
+configure_file(${SOFACOMPONENTSTOPOLOGY_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/topology/config.h)
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)

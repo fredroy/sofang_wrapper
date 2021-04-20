@@ -25,3 +25,6 @@
 - remove RigidMapping dep from LocalMinDistanceFilter ?
 - move RayTriangleIntersection utility class into helper ?
 - move OBB/Intr* things
+
+# Sofa.Components.LinearSolver
+- Lots of modules needs LinearSolver just for *Matrix files (Sparse, etc) -> move to core ?

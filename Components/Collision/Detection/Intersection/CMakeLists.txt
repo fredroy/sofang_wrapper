@@ -35,6 +35,28 @@ set(HEADER_FILES
     ${SOFAUSERINTERACTION_SRC}/RayDiscreteIntersection.h
     ${SOFAUSERINTERACTION_SRC}/RayDiscreteIntersection.inl
     ${SOFAUSERINTERACTION_SRC}/RayNewProximityIntersection.h
+### OBB things to remove
+    ${SOFABASECOLLISION_SRC}/BaseIntTool.h
+    ${SOFABASECOLLISION_SRC}/CapsuleIntTool.h
+    ${SOFABASECOLLISION_SRC}/CapsuleIntTool.inl
+    ${SOFABASECOLLISION_SRC}/IntrCapsuleOBB.h
+    ${SOFABASECOLLISION_SRC}/IntrCapsuleOBB.inl
+    ${SOFABASECOLLISION_SRC}/IntrOBBOBB.h
+    ${SOFABASECOLLISION_SRC}/IntrOBBOBB.inl
+    ${SOFABASECOLLISION_SRC}/IntrSphereOBB.h
+    ${SOFABASECOLLISION_SRC}/IntrSphereOBB.inl
+    ${SOFABASECOLLISION_SRC}/IntrUtility3.h
+    ${SOFABASECOLLISION_SRC}/IntrUtility3.inl
+    ${SOFABASECOLLISION_SRC}/OBBIntTool.h
+    ${SOFABASECOLLISION_SRC}/OBBModel.h
+    ${SOFABASECOLLISION_SRC}/OBBModel.inl
+    ${SOFAMESHCOLLISION_SRC}/IntrMeshUtility.h
+    ${SOFAMESHCOLLISION_SRC}/IntrMeshUtility.inl
+    ${SOFAMESHCOLLISION_SRC}/IntrTriangleOBB.h
+    ${SOFAMESHCOLLISION_SRC}/IntrTriangleOBB.inl
+    ${SOFAMESHCOLLISION_SRC}/MeshIntTool.h
+    ${SOFAMESHCOLLISION_SRC}/MeshIntTool.inl
+### OBB things to remove
 
 )
 
