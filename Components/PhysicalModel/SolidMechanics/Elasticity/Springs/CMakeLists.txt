@@ -8,10 +8,16 @@ set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
 
 set(SOFADEFORMABLE_DIR "${SOFAKERNELMODULES_SOURCE_DIR}/SofaDeformable/")
 set(SOFADEFORMABLE_SRC "${SOFADEFORMABLE_DIR}/src/SofaDeformable")
+set(SOFAOBJECTINTERACTION_DIR "${SOFAKERNELMODULES_SOURCE_DIR}/SofaObjectInteraction/")
+set(SOFAOBJECTINTERACTION_SRC "${SOFAOBJECTINTERACTION_DIR}/src/SofaObjectInteraction")
 
 # WARNING: this takes all of SofaGeneralDeformable **EXCEPT** TriangularTensorMassForceField
 set(SOFAGENERALDEFORMABLE_DIR "${SOFAMODULES_SOURCE_DIR}/SofaGeneralDeformable/")
 set(SOFAGENERALDEFORMABLE_SRC "${SOFAGENERALDEFORMABLE_DIR}/src/SofaGeneralDeformable")
+set(SOFAGENERALDEFORMABLE_DIR "${SOFAMODULES_SOURCE_DIR}/SofaGeneralDeformable/")
+set(SOFAGENERALDEFORMABLE_SRC "${SOFAGENERALDEFORMABLE_DIR}/src/SofaGeneralDeformable")
+set(SOFAGENERALOBJECTINTERACTION_DIR "${SOFAMODULES_SOURCE_DIR}/SofaGeneralObjectInteraction/")
+set(SOFAGENERALOBJECTINTERACTION_SRC "${SOFAGENERALOBJECTINTERACTION_DIR}/src/SofaGeneralObjectInteraction")
 
 set(HEADER_FILES
 	${SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYSPRINGS_SOURCE_DIR}/config.h.in 
@@ -51,6 +57,12 @@ set(HEADER_FILES
     # ${SOFAGENERALDEFORMABLE_SRC}/TriangularTensorMassForceField.inl
     ${SOFAGENERALDEFORMABLE_SRC}/VectorSpringForceField.h
     ${SOFAGENERALDEFORMABLE_SRC}/VectorSpringForceField.inl
+    ${SOFAOBJECTINTERACTION_SRC}/PenalityContactForceField.h
+    ${SOFAOBJECTINTERACTION_SRC}/PenalityContactForceField.inl
+    ${SOFAGENERALOBJECTINTERACTION_SRC}/BoxStiffSpringForceField.h
+    ${SOFAGENERALOBJECTINTERACTION_SRC}/BoxStiffSpringForceField.inl
+    ${SOFAGENERALOBJECTINTERACTION_SRC}/RepulsiveSpringForceField.h
+    ${SOFAGENERALOBJECTINTERACTION_SRC}/RepulsiveSpringForceField.inl
 )
 
 set(SOURCE_FILES
@@ -73,11 +85,16 @@ set(SOURCE_FILES
     ${SOFAGENERALDEFORMABLE_SRC}/TriangularQuadraticSpringsForceField.cpp
     ${SOFAGENERALDEFORMABLE_SRC}/TriangularTensorMassForceField.cpp
     ${SOFAGENERALDEFORMABLE_SRC}/VectorSpringForceField.cpp
+    ${SOFAOBJECTINTERACTION_SRC}/PenalityContactForceField.cpp
+    ${SOFAGENERALOBJECTINTERACTION_SRC}/BoxStiffSpringForceField.cpp
+    ${SOFAGENERALOBJECTINTERACTION_SRC}/RepulsiveSpringForceField.cpp
 )
 
 set(WRAPPER_FILES
     wrapper/SofaDeformable/config.h
+    wrapper/SofaObjectInteraction/config.h
     wrapper/SofaGeneralDeformable/config.h
+    wrapper/SofaGeneralObjectInteraction/config.h
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
@@ -96,7 +113,11 @@ target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/s
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFADEFORMABLE_DIR}/src")
+target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAOBJECTINTERACTION_DIR}/src")
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGENERALDEFORMABLE_DIR}/src")
+target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGENERALOBJECTINTERACTION_DIR}/src")
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFADEFORMABLE)
+target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAOBJECTINTERACTION)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGENERALDEFORMABLE)
+target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGENERALOBJECTINTERACTION)
