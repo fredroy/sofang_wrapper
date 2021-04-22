@@ -11,6 +11,8 @@ set(SOFALOADER_SRC "${SOFALOADER_DIR}/src/SofaLoader")
 
 set(SOFAGENERALLOADER_DIR "${SOFAMODULES_SOURCE_DIR}/SofaGeneralLoader/")
 set(SOFAGENERALLOADER_SRC "${SOFAGENERALLOADER_DIR}/src/SofaGeneralLoader")
+set(SOFAEXPORTER_DIR "${SOFAMODULES_SOURCE_DIR}/SofaExporter/")
+set(SOFAEXPORTER_SRC "${SOFAEXPORTER_DIR}/src/SofaExporter")
 
 set(HEADER_FILES
 	${SOFACOMPONENTSIOMESH_SOURCE_DIR}/config.h.in
@@ -29,6 +31,12 @@ set(HEADER_FILES
     ${SOFAGENERALLOADER_SRC}/SphereLoader.h
     ${SOFAGENERALLOADER_SRC}/StringMeshCreator.h
     ${SOFAGENERALLOADER_SRC}/VoxelGridLoader.h
+    ${SOFAEXPORTER_SRC}/BlenderExporter.h
+    ${SOFAEXPORTER_SRC}/BlenderExporter.inl
+    ${SOFAEXPORTER_SRC}/MeshExporter.h
+    ${SOFAEXPORTER_SRC}/OBJExporter.h
+    ${SOFAEXPORTER_SRC}/STLExporter.h
+    ${SOFAEXPORTER_SRC}/VTKExporter.h
 )
 
 set(SOURCE_FILES
@@ -47,11 +55,17 @@ set(SOURCE_FILES
     ${SOFAGENERALLOADER_SRC}/SphereLoader.cpp
     ${SOFAGENERALLOADER_SRC}/StringMeshCreator.cpp
     ${SOFAGENERALLOADER_SRC}/VoxelGridLoader.cpp
+    ${SOFAEXPORTER_SRC}/BlenderExporter.cpp
+    ${SOFAEXPORTER_SRC}/MeshExporter.cpp
+    ${SOFAEXPORTER_SRC}/OBJExporter.cpp
+    ${SOFAEXPORTER_SRC}/STLExporter.cpp
+    ${SOFAEXPORTER_SRC}/VTKExporter.cpp
 )
 
 set(WRAPPER_FILES
     wrapper/SofaLoader/config.h
     wrapper/SofaGeneralLoader/config.h
+    wrapper/SofaExporter/config.h
 
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
@@ -71,6 +85,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/w
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFALOADER_DIR}/src")
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGENERALLOADER_DIR}/src")
+target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAEXPORTER_DIR}/src")
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFALOADER)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGENERALLOADER)
+target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAEXPORTER)
