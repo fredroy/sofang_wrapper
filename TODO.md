@@ -33,3 +33,6 @@
 # Sofa.Components.LinearSolver
 - Lots of modules needs LinearSolver just for \*Matrix files (Sparse, etc) -> move to core ?
 
+
+# Sofa.Components.IO.Mesh
+- Grid creator mesh... is this more an engine ? to merge with the CreateGrid engine ?
