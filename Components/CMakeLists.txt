@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 
 
+add_subdirectory(Utils)
 add_subdirectory(LinearSolver)
 add_subdirectory(ODESolver)
 add_subdirectory(Topology)
@@ -20,7 +21,6 @@ add_subdirectory(Engine)
 add_subdirectory(Visual)
 add_subdirectory(IO/Mesh)
 add_subdirectory(IO/Misc)
-# add_subdirectory(Utils)
 # add_subdirectory(Controller)
 # add_subdirectory(Device)
 sofa_find_package(Sofa.GL REQUIRED)
