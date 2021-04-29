@@ -15,6 +15,7 @@ set(HEADER_FILES
 	${SOFACOMPONENTSANIMATIONLOOP_SOURCE_DIR}/config.h.in
     ${SOFACONSTRAINT_SRC}/ConstraintAnimationLoop.h
     ${SOFACONSTRAINT_SRC}/FreeMotionAnimationLoop.h
+    ${SOFACONSTRAINT_SRC}/FreeMotionTask.h
     ${SOFAGENERALANIMATIONLOOP_SRC}/MultiStepAnimationLoop.h
     ${SOFAGENERALANIMATIONLOOP_SRC}/MultiTagAnimationLoop.h
 )
@@ -23,6 +24,7 @@ set(SOURCE_FILES
 	${SOFACOMPONENTSANIMATIONLOOP_SOURCE_DIR}/init.cpp
     ${SOFACONSTRAINT_SRC}/ConstraintAnimationLoop.cpp
     ${SOFACONSTRAINT_SRC}/FreeMotionAnimationLoop.cpp
+    ${SOFACONSTRAINT_SRC}/FreeMotionTask.cpp
     ${SOFAGENERALANIMATIONLOOP_SRC}/MultiStepAnimationLoop.cpp
     ${SOFAGENERALANIMATIONLOOP_SRC}/MultiTagAnimationLoop.cpp
 )
