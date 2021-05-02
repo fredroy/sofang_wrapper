@@ -122,6 +122,8 @@ if(SOFA_WITH_OPENGL)
 endif()
 # Components
 add_subdirectory(Components ${CMAKE_CURRENT_BINARY_DIR}/Components)
+# Applications
+# add_subdirectory(Components ${CMAKE_CURRENT_BINARY_DIR}/Applications)
 
 # ## Scene creator option
 # option(SOFA_BUILD_SCENECREATOR "Compile the C++ API located in applications/plugins/SceneCreator" OFF)
