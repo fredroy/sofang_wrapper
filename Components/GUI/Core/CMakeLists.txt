@@ -11,6 +11,9 @@ set(SOFAGRAPHCOMPONENT_SRC "${SOFAGRAPHCOMPONENT_DIR}/src/SofaGraphComponent/")
 set(SOFAUSERINTERACTION_DIR "${SOFAMODULES_SOURCE_DIR}/SofaUserInteraction/")
 set(SOFAUSERINTERACTION_SRC "${SOFAUSERINTERACTION_DIR}/src/SofaUserInteraction")
 
+set(SOFAGUICOMMON_DIR "${SOFAMODULES_SOURCE_DIR}/SofaGuiCommon/")
+set(SOFAGUICOMMON_SRC "${SOFAGUICOMMON_DIR}/src/sofa/gui")
+
 set(HEADER_FILES
 	${SOFACOMPONENTSGUICORE_SOURCE_DIR}/config.h.in
     ${SOFAGRAPHCOMPONENT_SRC}/AddFrameButtonSetting.h
@@ -41,6 +44,19 @@ set(HEADER_FILES
     ${SOFAUSERINTERACTION_SRC}/StartNavigationPerformer.h
     ${SOFAUSERINTERACTION_SRC}/SuturePointPerformer.h
     ${SOFAUSERINTERACTION_SRC}/SuturePointPerformer.inl
+    ${SOFAGUICOMMON_SRC}/BaseGUI.h
+    ${SOFAGUICOMMON_SRC}/BaseViewer.h
+    ${SOFAGUICOMMON_SRC}/BatchGUI.h
+    ${SOFAGUICOMMON_SRC}/ColourPickingVisitor.h
+    ${SOFAGUICOMMON_SRC}/FilesRecentlyOpenedManager.h
+    ${SOFAGUICOMMON_SRC}/GuiDataRepository.h
+    ${SOFAGUICOMMON_SRC}/GUIManager.h
+    ${SOFAGUICOMMON_SRC}/MouseOperations.h
+    ${SOFAGUICOMMON_SRC}/OperationFactory.h
+    ${SOFAGUICOMMON_SRC}/PickHandler.h
+    ${SOFAGUICOMMON_SRC}/SofaGUI.h
+    ${SOFAGUICOMMON_SRC}/ViewerFactory.h
+    ${SOFAGUICOMMON_SRC}/ArgumentParser.h
 )
 
 set(SOURCE_FILES
@@ -66,6 +82,17 @@ set(SOURCE_FILES
     ${SOFAUSERINTERACTION_SRC}/RemovePrimitivePerformer.cpp
     ${SOFAUSERINTERACTION_SRC}/StartNavigationPerformer.cpp
     ${SOFAUSERINTERACTION_SRC}/SuturePointPerformer.cpp
+    ${SOFAGUICOMMON_SRC}/BaseGUI.cpp
+    ${SOFAGUICOMMON_SRC}/BaseViewer.cpp
+    ${SOFAGUICOMMON_SRC}/BatchGUI.cpp
+    ${SOFAGUICOMMON_SRC}/ColourPickingVisitor.cpp
+    ${SOFAGUICOMMON_SRC}/FilesRecentlyOpenedManager.cpp
+    ${SOFAGUICOMMON_SRC}/GuiDataRepository.cpp
+    ${SOFAGUICOMMON_SRC}/GUIManager.cpp
+    ${SOFAGUICOMMON_SRC}/MouseOperations.cpp
+    ${SOFAGUICOMMON_SRC}/PickHandler.cpp
+    ${SOFAGUICOMMON_SRC}/ViewerFactory.cpp
+    ${SOFAGUICOMMON_SRC}/ArgumentParser.cpp
 )
 
 set(WRAPPER_FILES
@@ -75,11 +102,13 @@ set(WRAPPER_FILES
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
 sofa_find_package(SofaFramework REQUIRED)
+sofa_find_package(Boost REQUIRED COMPONENTS program_options)
 
 configure_file(${SOFACOMPONENTSGUICORE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/gui/core/config.h)
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
-target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
+target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCommon SofaSimulationCore)
+target_link_libraries(${PROJECT_NAME} PUBLIC Boost::program_options)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Collision.Response.Contact)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Collision.Models)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Visual)
@@ -92,6 +121,9 @@ target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/w
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGRAPHCOMPONENT_DIR}/src")
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAUSERINTERACTION_DIR}/src")
+target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGUICOMMON_DIR}/src")
+target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGUICOMMON_DIR}/compat")
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGRAPHCOMPONENT)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAUSERINTERACTION)
+target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGUICOMMON)
