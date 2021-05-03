@@ -87,6 +87,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC "${SOFALOADER_DIR}/src")
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGENERALLOADER_DIR}/src")
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAEXPORTER_DIR}/src")
 
+target_compile_definitions(${PROJECT_NAME} PRIVATE BUILD_SOFACOMPONENTSIOMESH)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFALOADER)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGENERALLOADER)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAEXPORTER)

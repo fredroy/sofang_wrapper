@@ -1,2 +1,15 @@
+#pragma once
+
 #include <sofa/config.h>
 #include <sofa/config/sharedlibrary_defines.h>
+
+#ifdef BUILD_SOFACOMPONENTSODESOLVER
+#  define SOFACOMPONENTSODESOLVER_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#else
+#  define SOFACOMPONENTSODESOLVER_API SOFA_IMPORT_DYNAMIC_LIBRARY
+#endif
+
+namespace sofa::components::odesolver
+{
+	constexpr char* MODULE_NAME = "@PROJECT_NAME@";
+} // namespace sofa::components::odesolver

@@ -37,7 +37,6 @@
 # Sofa.Components.IO.Mesh
 - Grid creator mesh... is this more an engine ? to merge with the CreateGrid engine ?
 
-
 # Sofa.Components.GUI.Core
 - Remove or move InteractingBehaviorModel to ExternalBM ?
 - Remove boost:program_options dep

@@ -29,6 +29,7 @@ add_executable(${PROJECT_NAME} ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationGraph)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.GUI.Core)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Utils)
+target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.IO.Mesh)
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${RUNSOFA_SOURCE_DIR}")
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
