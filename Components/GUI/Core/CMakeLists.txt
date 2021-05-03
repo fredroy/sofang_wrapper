@@ -14,6 +14,9 @@ set(SOFAUSERINTERACTION_SRC "${SOFAUSERINTERACTION_DIR}/src/SofaUserInteraction"
 set(SOFAGUICOMMON_DIR "${SOFAMODULES_SOURCE_DIR}/SofaGuiCommon/")
 set(SOFAGUICOMMON_SRC "${SOFAGUICOMMON_DIR}/src/sofa/gui")
 
+set(SOFAGUI_DIR "${SOFA_SOURCE_DIR}/SofaGui/")
+set(SOFAGUI_SRC "${SOFAGUI_DIR}/src/SofaGui")
+
 set(HEADER_FILES
 	${SOFACOMPONENTSGUICORE_SOURCE_DIR}/config.h.in
     ${SOFAGRAPHCOMPONENT_SRC}/AddFrameButtonSetting.h
@@ -93,12 +96,15 @@ set(SOURCE_FILES
     ${SOFAGUICOMMON_SRC}/PickHandler.cpp
     ${SOFAGUICOMMON_SRC}/ViewerFactory.cpp
     ${SOFAGUICOMMON_SRC}/ArgumentParser.cpp
+    ${SOFAGUI_SRC}/initSofaGui.cpp
 )
 
 set(WRAPPER_FILES
     wrapper/SofaGraphComponent/config.h
     wrapper/SofaUserInteraction/config.h
     wrapper/sofa/gui/config.h
+    wrapper/SofaGui/config.h
+    wrapper/SofaGui/initSofaGui.h
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
