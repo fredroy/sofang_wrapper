@@ -98,6 +98,7 @@ set(SOURCE_FILES
 set(WRAPPER_FILES
     wrapper/SofaGraphComponent/config.h
     wrapper/SofaUserInteraction/config.h
+    wrapper/sofa/gui/config.h
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 

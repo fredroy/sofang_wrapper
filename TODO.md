@@ -40,3 +40,4 @@
 
 # Sofa.Components.GUI.Core
 - Remove or move InteractingBehaviorModel to ExternalBM ?
+- Remove boost:program_options dep
