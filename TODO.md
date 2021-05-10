@@ -18,6 +18,7 @@
 
 # Sofa.Components.LinearSolver
 - SofaPreconditioner contains PrecondWarpConditioner, which needs weirdily TetraFem
+- Lots of modules needs LinearSolver just for \*Matrix files (Sparse, etc) -> move to core ?
 
 # Sofa.Components.Collision
 - remove useless headers in SofaMeshCollision
@@ -29,10 +30,6 @@
 # Sofa.Components.Engine
 - Distance engine has a weird dep on 
 - remove dep on IdentityMapping for GenerateGrid (because of helper::eq.... 🤨)
-
-# Sofa.Components.LinearSolver
-- Lots of modules needs LinearSolver just for \*Matrix files (Sparse, etc) -> move to core ?
-
 
 # Sofa.Components.IO.Mesh
 - Grid creator mesh... is this more an engine ? to merge with the CreateGrid engine ?
