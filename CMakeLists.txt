@@ -102,7 +102,7 @@ endif()
 
 
 ### Testing
-option(SOFA_BUILD_TESTS "Compile the automatic tests for Sofa, along with the gtest library." ON)
+# option(SOFA_BUILD_TESTS "Compile the automatic tests for Sofa, along with the gtest library." ON)
 
 ### Extlibs
 add_subdirectory(${SOFA_SOURCE_DIR}/extlibs  ${CMAKE_CURRENT_BINARY_DIR}/extlibs)
@@ -113,9 +113,9 @@ add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/modules/Sofa.Compat ${CMAKE_CURRENT_B
 add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/SofaFramework ${CMAKE_CURRENT_BINARY_DIR}/Sofa/SofaFramework)
 add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/SofaSimulation ${CMAKE_CURRENT_BINARY_DIR}/Sofa/SofaSimulation)
 
-if(SOFA_BUILD_TESTS)
-    add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/modules/Sofa.Testing ${CMAKE_CURRENT_BINARY_DIR}/Sofa/Sofa.Testing)
-endif()
+# if(SOFA_BUILD_TESTS)
+#     add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/modules/Sofa.Testing ${CMAKE_CURRENT_BINARY_DIR}/Sofa/Sofa.Testing)
+# endif()
 
 if(SOFA_WITH_OPENGL)
     add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/modules/Sofa.GL ${CMAKE_CURRENT_BINARY_DIR}/Sofa/Sofa.GL)
