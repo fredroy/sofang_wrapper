@@ -1,5 +1,4 @@
 # Sofa.Components.Topology
-- Remove RadiusContainer (from SofaGeneralFEM) in EdgeToQuad
 - remove MechanicalObj dep on DynamicSparseGridGeometryAlgorithms
 
 # Sofa.Components.Constraint.Lagrangian
@@ -10,7 +9,6 @@
 - dont forget some of the ff stuff from SofaBoundaryCondition
 
 # Sofa.Components.blabla.FEM
-- Try to remove the {Poisson/Radius/...}Container
 - dont forget the nonFEM from GeneralFem
 
 # Sofa.Components.AnimationLoop
@@ -25,11 +23,9 @@
 - refactor LMDFilters
 - remove RigidMapping dep from LocalMinDistanceFilter ?
 - move RayTriangleIntersection utility class into helper ?
-- move OBB/Intr* things
 
 # Sofa.Components.Engine
 - Distance engine has a weird dep on 
-- remove dep on IdentityMapping for GenerateGrid (because of helper::eq.... 🤨)
 
 # Sofa.Components.IO.Mesh
 - Grid creator mesh... is this more an engine ? to merge with the CreateGrid engine ?
