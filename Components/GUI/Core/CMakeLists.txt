@@ -57,7 +57,6 @@ set(HEADER_FILES
     ${SOFAGUICOMMON_SRC}/MouseOperations.h
     ${SOFAGUICOMMON_SRC}/OperationFactory.h
     ${SOFAGUICOMMON_SRC}/PickHandler.h
-    ${SOFAGUICOMMON_SRC}/SofaGUI.h
     ${SOFAGUICOMMON_SRC}/ViewerFactory.h
     ${SOFAGUICOMMON_SRC}/ArgumentParser.h
 )

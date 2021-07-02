@@ -17,6 +17,8 @@ set(SOFAGENERALMESHCOLLISION_DIR "${SOFAMODULES_SOURCE_DIR}/SofaGeneralMeshColli
 set(SOFAGENERALMESHCOLLISION_SRC "${SOFAGENERALMESHCOLLISION_DIR}/src/SofaGeneralMeshCollision")
 set(SOFAUSERINTERACTION_DIR "${SOFAMODULES_SOURCE_DIR}/SofaUserInteraction/")
 set(SOFAUSERINTERACTION_SRC "${SOFAUSERINTERACTION_DIR}/src/SofaUserInteraction")
+set(SOFAMISCCOLLISION_DIR "${SOFAMODULES_SOURCE_DIR}/SofaMiscCollision/")
+set(SOFAMISCCOLLISION_SRC "${SOFAMISCCOLLISION_DIR}/src/SofaMiscCollision")
 
 set(HEADER_FILES
 	${SOFACOMPONENTSCOLLISIONDETECTIONINTERSECTION_SOURCE_DIR}/config.h.in
@@ -26,7 +28,6 @@ set(HEADER_FILES
     ${SOFABASECOLLISION_SRC}/NewProximityIntersection.h
     ${SOFABASECOLLISION_SRC}/NewProximityIntersection.inl
     ${SOFACONSTRAINT_SRC}/LocalMinDistance.h
-    ${SOFACONSTRAINT_SRC}/LocalMinDistance.inl
     ${SOFACONSTRAINT_SRC}/LMDNewProximityIntersection.h
     ${SOFACONSTRAINT_SRC}/LMDNewProximityIntersection.inl
     ${SOFAGENERALMESHCOLLISION_SRC}/MeshDiscreteIntersection.h
@@ -35,28 +36,26 @@ set(HEADER_FILES
     ${SOFAUSERINTERACTION_SRC}/RayDiscreteIntersection.h
     ${SOFAUSERINTERACTION_SRC}/RayDiscreteIntersection.inl
     ${SOFAUSERINTERACTION_SRC}/RayNewProximityIntersection.h
-### OBB things to remove
-    ${SOFABASECOLLISION_SRC}/BaseIntTool.h
-    ${SOFABASECOLLISION_SRC}/CapsuleIntTool.h
-    ${SOFABASECOLLISION_SRC}/CapsuleIntTool.inl
-    ${SOFABASECOLLISION_SRC}/IntrCapsuleOBB.h
-    ${SOFABASECOLLISION_SRC}/IntrCapsuleOBB.inl
-    ${SOFABASECOLLISION_SRC}/IntrOBBOBB.h
-    ${SOFABASECOLLISION_SRC}/IntrOBBOBB.inl
-    ${SOFABASECOLLISION_SRC}/IntrSphereOBB.h
-    ${SOFABASECOLLISION_SRC}/IntrSphereOBB.inl
-    ${SOFABASECOLLISION_SRC}/IntrUtility3.h
-    ${SOFABASECOLLISION_SRC}/IntrUtility3.inl
-    ${SOFABASECOLLISION_SRC}/OBBIntTool.h
-    ${SOFABASECOLLISION_SRC}/OBBModel.h
-    ${SOFABASECOLLISION_SRC}/OBBModel.inl
-    ${SOFAMESHCOLLISION_SRC}/IntrMeshUtility.h
-    ${SOFAMESHCOLLISION_SRC}/IntrMeshUtility.inl
-    ${SOFAMESHCOLLISION_SRC}/IntrTriangleOBB.h
-    ${SOFAMESHCOLLISION_SRC}/IntrTriangleOBB.inl
-    ${SOFAMESHCOLLISION_SRC}/MeshIntTool.h
-    ${SOFAMESHCOLLISION_SRC}/MeshIntTool.inl
-### OBB things to remove
+    ${SOFAMISCCOLLISION_SRC}/BaseIntTool.h
+    ${SOFAMISCCOLLISION_SRC}/CapsuleIntTool.h
+    ${SOFAMISCCOLLISION_SRC}/CapsuleIntTool.inl
+    ${SOFAMISCCOLLISION_SRC}/IntrCapsuleOBB.h
+    ${SOFAMISCCOLLISION_SRC}/IntrCapsuleOBB.inl
+    ${SOFAMISCCOLLISION_SRC}/IntrOBBOBB.h
+    ${SOFAMISCCOLLISION_SRC}/IntrOBBOBB.inl
+    ${SOFAMISCCOLLISION_SRC}/IntrSphereOBB.h
+    ${SOFAMISCCOLLISION_SRC}/IntrSphereOBB.inl
+    ${SOFAMISCCOLLISION_SRC}/IntrUtility3.h
+    ${SOFAMISCCOLLISION_SRC}/IntrUtility3.inl
+    ${SOFAMISCCOLLISION_SRC}/OBBIntTool.h
+    ${SOFAMISCCOLLISION_SRC}/OBBModel.h
+    ${SOFAMISCCOLLISION_SRC}/OBBModel.inl
+    ${SOFAMISCCOLLISION_SRC}/IntrMeshUtility.h
+    ${SOFAMISCCOLLISION_SRC}/IntrMeshUtility.inl
+    ${SOFAMISCCOLLISION_SRC}/IntrTriangleOBB.h
+    ${SOFAMISCCOLLISION_SRC}/IntrTriangleOBB.inl
+    ${SOFAMISCCOLLISION_SRC}/MeshIntTool.h
+    ${SOFAMISCCOLLISION_SRC}/MeshIntTool.inl
 
 )
 
@@ -72,19 +71,17 @@ set(SOURCE_FILES
     ${SOFAGENERALMESHCOLLISION_SRC}/MeshMinProximityIntersection.cpp
     ${SOFAUSERINTERACTION_SRC}/RayDiscreteIntersection.cpp
     ${SOFAUSERINTERACTION_SRC}/RayNewProximityIntersection.cpp
-### OBB things to remove
-    ${SOFABASECOLLISION_SRC}/BaseIntTool.cpp
-    ${SOFABASECOLLISION_SRC}/CapsuleIntTool.cpp
-    ${SOFABASECOLLISION_SRC}/IntrCapsuleOBB.cpp
-    ${SOFABASECOLLISION_SRC}/IntrOBBOBB.cpp
-    ${SOFABASECOLLISION_SRC}/IntrSphereOBB.cpp
-    ${SOFABASECOLLISION_SRC}/IntrUtility3.cpp
-    ${SOFABASECOLLISION_SRC}/OBBIntTool.cpp
-    ${SOFABASECOLLISION_SRC}/OBBModel.cpp
-    ${SOFAMESHCOLLISION_SRC}/IntrMeshUtility.cpp
-    ${SOFAMESHCOLLISION_SRC}/IntrTriangleOBB.cpp
-    ${SOFAMESHCOLLISION_SRC}/MeshIntTool.cpp
-### OBB things to remove
+    ${SOFAMISCCOLLISION_SRC}/BaseIntTool.cpp
+    ${SOFAMISCCOLLISION_SRC}/CapsuleIntTool.cpp
+    ${SOFAMISCCOLLISION_SRC}/IntrCapsuleOBB.cpp
+    ${SOFAMISCCOLLISION_SRC}/IntrOBBOBB.cpp
+    ${SOFAMISCCOLLISION_SRC}/IntrSphereOBB.cpp
+    ${SOFAMISCCOLLISION_SRC}/IntrUtility3.cpp
+    ${SOFAMISCCOLLISION_SRC}/OBBIntTool.cpp
+    ${SOFAMISCCOLLISION_SRC}/OBBModel.cpp
+    ${SOFAMISCCOLLISION_SRC}/IntrMeshUtility.cpp
+    ${SOFAMISCCOLLISION_SRC}/IntrTriangleOBB.cpp
+    ${SOFAMISCCOLLISION_SRC}/MeshIntTool.cpp
 )
 
 set(WRAPPER_FILES
@@ -93,6 +90,7 @@ set(WRAPPER_FILES
     wrapper/SofaConstraint/config.h
     wrapper/SofaGeneralMeshCollision/config.h
     wrapper/SofaUserInteraction/config.h
+    wrapper/SofaMiscCollision/config.h
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
@@ -114,6 +112,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAMESHCOLLISION_DIR}/src"
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFACONSTRAINT_DIR}/src")
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGENERALMESHCOLLISION_DIR}/src")
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAUSERINTERACTION_DIR}/src")
+target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAMISCCOLLISION_DIR}/src")
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE BUILD_SOFACOMPONENTSCOLLISIONDETECTIONINTERSECTION)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFABASECOLLISION)
@@ -121,3 +120,4 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAMESHCOLLISION)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFACONSTRAINT)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGENERALMESHCOLLISION)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAUSERINTERACTION)
+target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAMISCCOLLISION)

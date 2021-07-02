@@ -15,19 +15,15 @@ set(SOFAGENERALMESHCOLLISION_DIR "${SOFAMODULES_SOURCE_DIR}/SofaGeneralMeshColli
 set(SOFAGENERALMESHCOLLISION_SRC "${SOFAGENERALMESHCOLLISION_DIR}/src/SofaGeneralMeshCollision")
 set(SOFAUSERINTERACTION_DIR "${SOFAMODULES_SOURCE_DIR}/SofaUserInteraction/")
 set(SOFAUSERINTERACTION_SRC "${SOFAUSERINTERACTION_DIR}/src/SofaUserInteraction")
+set(SOFAMISCCOLLISION_DIR "${SOFAMODULES_SOURCE_DIR}/SofaMiscCollision/")
+set(SOFAMISCCOLLISION_SRC "${SOFAMISCCOLLISION_DIR}/src/SofaMiscCollision")
 
 set(HEADER_FILES
 	${SOFACOMPONENTSCOLLISIONMODELS_SOURCE_DIR}/config.h.in
-    ${SOFABASECOLLISION_SRC}/CapsuleModel.h
-    ${SOFABASECOLLISION_SRC}/CapsuleModel.inl
     ${SOFABASECOLLISION_SRC}/Cube.h
     ${SOFABASECOLLISION_SRC}/CubeModel.h
     ${SOFABASECOLLISION_SRC}/CylinderModel.h
     ${SOFABASECOLLISION_SRC}/CylinderModel.inl
-    ${SOFABASECOLLISION_SRC}/OBBModel.h
-    ${SOFABASECOLLISION_SRC}/OBBModel.inl
-    ${SOFABASECOLLISION_SRC}/RigidCapsuleModel.h
-    ${SOFABASECOLLISION_SRC}/RigidCapsuleModel.inl
     ${SOFABASECOLLISION_SRC}/Sphere.h
     ${SOFABASECOLLISION_SRC}/SphereModel.h
     ${SOFABASECOLLISION_SRC}/SphereModel.inl
@@ -49,16 +45,19 @@ set(HEADER_FILES
     ${SOFAGENERALMESHCOLLISION_SRC}/TriangleOctree.h
     ${SOFAGENERALMESHCOLLISION_SRC}/TriangleOctreeModel.h
     ${SOFAUSERINTERACTION_SRC}/RayModel.h
+    ${SOFAMISCCOLLISION_SRC}/CapsuleModel.h
+    ${SOFAMISCCOLLISION_SRC}/CapsuleModel.inl
+    ${SOFAMISCCOLLISION_SRC}/OBBModel.h
+    ${SOFAMISCCOLLISION_SRC}/OBBModel.inl
+    ${SOFAMISCCOLLISION_SRC}/RigidCapsuleModel.h
+    ${SOFAMISCCOLLISION_SRC}/RigidCapsuleModel.inl
 
 )
 
 set(SOURCE_FILES
     ${SOFACOMPONENTSCOLLISIONMODELS_SOURCE_DIR}/init.cpp
-    ${SOFABASECOLLISION_SRC}/CapsuleModel.cpp
     ${SOFABASECOLLISION_SRC}/CubeModel.cpp
     ${SOFABASECOLLISION_SRC}/CylinderModel.cpp
-    ${SOFABASECOLLISION_SRC}/OBBModel.cpp
-    ${SOFABASECOLLISION_SRC}/RigidCapsuleModel.cpp
     ${SOFABASECOLLISION_SRC}/SphereModel.cpp
     ${SOFAMESHCOLLISION_SRC}/LineModel.cpp
     ${SOFAMESHCOLLISION_SRC}/PointModel.cpp
@@ -71,6 +70,9 @@ set(SOURCE_FILES
     ${SOFAGENERALMESHCOLLISION_SRC}/TriangleOctree.cpp
     ${SOFAGENERALMESHCOLLISION_SRC}/TriangleOctreeModel.cpp
     ${SOFAUSERINTERACTION_SRC}/RayModel.cpp
+    ${SOFAMISCCOLLISION_SRC}/CapsuleModel.cpp
+    ${SOFAMISCCOLLISION_SRC}/OBBModel.cpp
+    ${SOFAMISCCOLLISION_SRC}/RigidCapsuleModel.cpp
 )
 
 set(WRAPPER_FILES
@@ -78,6 +80,7 @@ set(WRAPPER_FILES
     wrapper/SofaMeshCollision/config.h
     wrapper/SofaGeneralMeshCollision/config.h
     wrapper/SofaUserInteraction/config.h
+    wrapper/SofaMiscCollision/config.h
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
@@ -98,8 +101,10 @@ target_include_directories(${PROJECT_NAME} PUBLIC "${SOFABASECOLLISION_DIR}/src"
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAMESHCOLLISION_DIR}/src")
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGENERALMESHCOLLISION_DIR}/src")
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAUSERINTERACTION_DIR}/src")
+target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAMISCCOLLISION_DIR}/src")
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFABASECOLLISION)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAMESHCOLLISION)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGENERALMESHCOLLISION)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAUSERINTERACTION)
+target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAMISCCOLLISION)
