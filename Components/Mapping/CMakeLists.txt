@@ -14,8 +14,9 @@ set(SOFARIGID_SRC "${SOFARIGID_DIR}/src/SofaRigid")
 set(SOFAGENERALRIGID_DIR "${SOFAMODULES_SOURCE_DIR}/SofaGeneralRigid/")
 set(SOFAGENERALRIGID_SRC "${SOFAGENERALRIGID_DIR}/src/SofaGeneralRigid")
 
-set(HEADER_FILES
-	${SOFACOMPONENTSANIMATIONMAPPING_SOURCE_DIR}/config.h.in
+# Minimal set
+set(MINIMAL_HEADER_FILES
+    ${SOFACOMPONENTSANIMATIONMAPPING_SOURCE_DIR}/config.h.in
     ${SOFABASEMECHANICS_SRC}/BarycentricMapping.h
     ${SOFABASEMECHANICS_SRC}/BarycentricMapping.inl
     ${SOFABASEMECHANICS_SRC}/IdentityMapping.h
@@ -48,6 +49,31 @@ set(HEADER_FILES
     ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperHexahedronSetTopology.inl
     ${SOFARIGID_SRC}/RigidMapping.h
     ${SOFARIGID_SRC}/RigidMapping.inl
+)
+
+set(MINIMAL_SOURCE_FILES
+    ${SOFACOMPONENTSANIMATIONMAPPING_SOURCE_DIR}/initMinimal.cpp
+    ${SOFABASEMECHANICS_SRC}/BarycentricMapping.cpp
+    ${SOFABASEMECHANICS_SRC}/IdentityMapping.cpp
+    ${SOFABASEMECHANICS_SRC}/MappedObject.cpp
+    ${SOFABASEMECHANICS_SRC}/SubsetMapping.cpp
+    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapper.cpp
+    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/TopologyBarycentricMapper.cpp
+    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperMeshTopology.cpp
+    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperRegularGridTopology.cpp
+    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperSparseGridTopology.cpp
+    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperTopologyContainer.cpp
+    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperEdgeSetTopology.cpp
+    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperTriangleSetTopology.cpp
+    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperQuadSetTopology.cpp
+    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperTetrahedronSetTopology.cpp
+    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperHexahedronSetTopology.cpp
+    ${SOFARIGID_SRC}/RigidMapping.cpp
+)
+
+# Full set
+set(HEADER_FILES
+    ${SOFACOMPONENTSANIMATIONMAPPING_SOURCE_DIR}/init.cpp
     ${SOFARIGID_SRC}/RigidRigidMapping.h
     ${SOFARIGID_SRC}/RigidRigidMapping.inl
     ${SOFAGENERALRIGID_SRC}/ArticulatedHierarchyContainer.h
@@ -66,23 +92,6 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-	${SOFACOMPONENTSANIMATIONMAPPING_SOURCE_DIR}/init.cpp
-    ${SOFABASEMECHANICS_SRC}/BarycentricMapping.cpp
-    ${SOFABASEMECHANICS_SRC}/IdentityMapping.cpp
-    ${SOFABASEMECHANICS_SRC}/MappedObject.cpp
-    ${SOFABASEMECHANICS_SRC}/SubsetMapping.cpp
-    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapper.cpp
-    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/TopologyBarycentricMapper.cpp
-    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperMeshTopology.cpp
-    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperRegularGridTopology.cpp
-    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperSparseGridTopology.cpp
-    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperTopologyContainer.cpp
-    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperEdgeSetTopology.cpp
-    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperTriangleSetTopology.cpp
-    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperQuadSetTopology.cpp
-    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperTetrahedronSetTopology.cpp
-    ${SOFABASEMECHANICS_SRC}/BarycentricMappers/BarycentricMapperHexahedronSetTopology.cpp
-    ${SOFARIGID_SRC}/RigidMapping.cpp
     ${SOFARIGID_SRC}/RigidRigidMapping.cpp
     ${SOFAGENERALRIGID_SRC}/ArticulatedHierarchyContainer.cpp
     ${SOFAGENERALRIGID_SRC}/ArticulatedSystemMapping.cpp
@@ -100,27 +109,35 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
+# Minimal config
+set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
 sofa_find_package(SofaFramework REQUIRED)
-
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
-target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.LinearSolver)
-target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Topology)
-# target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Constraint.Lagrangian)
-
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
 
 configure_file(${SOFACOMPONENTSANIMATIONMAPPING_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/mapping/config.h)
 
-target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
+add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
+set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver_minimal)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Topology_minimal)
 
-target_include_directories(${PROJECT_NAME} PUBLIC "${SOFABASEMECHANICS_DIR}/src")
-target_include_directories(${PROJECT_NAME} PUBLIC "${SOFARIGID_DIR}/src")
-target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGENERALRIGID_DIR}/src")
+target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFABASEMECHANICS)
+target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFARIGID)
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFABASEMECHANICS_DIR}/src")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFARIGID_DIR}/src")
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFABASEMECHANICS)
-target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFARIGID)
-target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGENERALRIGID)
+# Full config
+set(FULL_TARGET_NAME ${PROJECT_NAME})
+
+add_library(${FULL_TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver)
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.Topology)
+
+target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAGENERALRIGID_DIR}/src")
+
+target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFARIGID)
+target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALRIGID)
