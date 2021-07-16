@@ -14,16 +14,32 @@ set(SOFAGENERALSIMPLEFEM_SRC "${SOFAGENERALSIMPLEFEM_DIR}/src/SofaGeneralSimpleF
 set(SOFAMISCFEM_DIR "${SOFAMODULES_SOURCE_DIR}/SofaMiscFem/")
 set(SOFAMISCFEM_SRC "${SOFAMISCFEM_DIR}/src/SofaMiscFem")
 
-set(HEADER_FILES
+
+# Minimal set
+set(MINIMAL_HEADER_FILES
     ${SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_SOURCE_DIR}/config.h.in
     ${SOFASIMPLEFEM_SRC}/HexahedronFEMForceField.h
     ${SOFASIMPLEFEM_SRC}/HexahedronFEMForceField.inl
     ${SOFASIMPLEFEM_SRC}/TetrahedronFEMForceField.h
     ${SOFASIMPLEFEM_SRC}/TetrahedronFEMForceField.inl
-    ${SOFASIMPLEFEM_SRC}/TetrahedronDiffusionFEMForceField.h
-    ${SOFASIMPLEFEM_SRC}/TetrahedronDiffusionFEMForceField.inl
     ${SOFAGENERALSIMPLEFEM_SRC}/BeamFEMForceField.h
     ${SOFAGENERALSIMPLEFEM_SRC}/BeamFEMForceField.inl
+    ${SOFAMISCFEM_SRC}/TriangleFEMForceField.h
+    ${SOFAMISCFEM_SRC}/TriangleFEMForceField.inl
+)
+
+set(MINIMAL_SOURCE_FILES
+    ${SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_SOURCE_DIR}/initMinimal.cpp
+    ${SOFASIMPLEFEM_SRC}/HexahedronFEMForceField.cpp
+    ${SOFASIMPLEFEM_SRC}/TetrahedronFEMForceField.cpp
+    ${SOFAGENERALSIMPLEFEM_SRC}/BeamFEMForceField.cpp
+    ${SOFAMISCFEM_SRC}/TriangleFEMForceField.cpp
+)
+
+# Full set
+set(HEADER_FILES
+    ${SOFASIMPLEFEM_SRC}/TetrahedronDiffusionFEMForceField.h
+    ${SOFASIMPLEFEM_SRC}/TetrahedronDiffusionFEMForceField.inl
     ${SOFAGENERALSIMPLEFEM_SRC}/HexahedralFEMForceField.h
     ${SOFAGENERALSIMPLEFEM_SRC}/HexahedralFEMForceField.inl
     ${SOFAGENERALSIMPLEFEM_SRC}/HexahedralFEMForceFieldAndMass.h
@@ -36,23 +52,17 @@ set(HEADER_FILES
     ${SOFAGENERALSIMPLEFEM_SRC}/TriangularFEMForceFieldOptim.inl
     ${SOFAMISCFEM_SRC}/FastTetrahedralCorotationalForceField.h
     ${SOFAMISCFEM_SRC}/FastTetrahedralCorotationalForceField.inl
-    ${SOFAMISCFEM_SRC}/TriangleFEMForceField.h
-    ${SOFAMISCFEM_SRC}/TriangleFEMForceField.inl
 )
 
 set(SOURCE_FILES
     ${SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_SOURCE_DIR}/init.cpp
-    ${SOFASIMPLEFEM_SRC}/HexahedronFEMForceField.cpp
-    ${SOFASIMPLEFEM_SRC}/TetrahedronFEMForceField.cpp
     ${SOFASIMPLEFEM_SRC}/TetrahedronDiffusionFEMForceField.cpp
-    ${SOFAGENERALSIMPLEFEM_SRC}/BeamFEMForceField.cpp
     ${SOFAGENERALSIMPLEFEM_SRC}/HexahedralFEMForceField.cpp
     ${SOFAGENERALSIMPLEFEM_SRC}/HexahedralFEMForceFieldAndMass.cpp
     ${SOFAGENERALSIMPLEFEM_SRC}/HexahedronFEMForceFieldAndMass.cpp
     ${SOFAGENERALSIMPLEFEM_SRC}/TetrahedralCorotationalFEMForceField.cpp
     ${SOFAGENERALSIMPLEFEM_SRC}/TriangularFEMForceFieldOptim.cpp
     ${SOFAMISCFEM_SRC}/FastTetrahedralCorotationalForceField.cpp
-    ${SOFAMISCFEM_SRC}/TriangleFEMForceField.cpp
 )
 set(WRAPPER_FILES
     wrapper/SofaSimpleFem/config.h
@@ -61,24 +71,42 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
+# Minimal config
+set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
 sofa_find_package(SofaFramework REQUIRED)
 
 configure_file(${SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_SOURCE_DIR}/config.h.in 
     ${CMAKE_BINARY_DIR}/include/sofa/components/physicalmodel/solidmechanics/elasticity/fem/config.h)
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
-target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.LinearSolver)
-target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Topology)
+add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
+set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Topology_minimal)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver_minimal) # For RotationMatrix(...) in Hexa/Tetra
 
-target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
+target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFASIMPLEFEM)
+target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALSIMPLEFEM)
+target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAMISCFEM)
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFASIMPLEFEM_DIR}/src")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFAGENERALSIMPLEFEM_DIR}/src")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFAMISCFEM_DIR}/src")
 
-target_include_directories(${PROJECT_NAME} PUBLIC "${SOFASIMPLEFEM_DIR}/src")
-target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGENERALSIMPLEFEM_DIR}/src")
-target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAMISCFEM_DIR}/src")
+# Full config
+set(FULL_TARGET_NAME ${PROJECT_NAME})
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFASIMPLEFEM)
-target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGENERALSIMPLEFEM)
-target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAMISCFEM)
+add_library(${FULL_TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC SofaSimulationCore)
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver)
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.Topology)
+
+target_include_directories(${FULL_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
+target_include_directories(${FULL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+target_include_directories(${FULL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
+
+target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFASIMPLEFEM)
+target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALSIMPLEFEM)
+target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAMISCFEM)

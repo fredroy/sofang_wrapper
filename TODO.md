@@ -15,8 +15,8 @@
 - dont forget the mapping(?) from GeneralAnimationLoop
 
 # Sofa.Components.LinearSolver
-- SofaPreconditioner contains PrecondWarpConditioner, which needs weirdily TetraFem
 - Lots of modules needs LinearSolver just for \*Matrix files (Sparse, etc) -> move to core ?
+- RotationMatrix in SofaCore includes something SofaBaseLinearSolver!
 
 # Sofa.Components.Collision
 - remove useless headers in SofaMeshCollision
