@@ -11,25 +11,34 @@ set(SOFAGENERALLOADER_SRC "${SOFAGENERALLOADER_DIR}/src/SofaGeneralLoader")
 set(SOFAEXPORTER_DIR "${SOFAMODULES_SOURCE_DIR}/SofaExporter/")
 set(SOFAEXPORTER_SRC "${SOFAEXPORTER_DIR}/src/SofaExporter")
 
-set(HEADER_FILES
-	${SOFACOMPONENTSIOMISC_SOURCE_DIR}/config.h.in
+# Minimal set
+set(MINIMAL_HEADER_FILES
+    ${SOFACOMPONENTSIOMISC_SOURCE_DIR}/config.h.in
     ${SOFAGENERALLOADER_SRC}/ReadState.h
     ${SOFAGENERALLOADER_SRC}/ReadState.inl
+    ${SOFAEXPORTER_SRC}/WriteState.h
+    ${SOFAEXPORTER_SRC}/WriteState.inl
+)
+
+set(MINIMAL_SOURCE_FILES
+    ${SOFACOMPONENTSIOMISC_SOURCE_DIR}/initMinimal.cpp
+    ${SOFAGENERALLOADER_SRC}/ReadState.cpp
+    ${SOFAEXPORTER_SRC}/WriteState.cpp
+)
+
+# Full set
+set(HEADER_FILES
     ${SOFAGENERALLOADER_SRC}/ReadTopology.h
     ${SOFAGENERALLOADER_SRC}/ReadTopology.inl
     ${SOFAGENERALLOADER_SRC}/InputEventReader.h
-    ${SOFAEXPORTER_SRC}/WriteState.h
-    ${SOFAEXPORTER_SRC}/WriteState.inl
     ${SOFAEXPORTER_SRC}/WriteTopology.h
     ${SOFAEXPORTER_SRC}/WriteTopology.inl
 )
 
 set(SOURCE_FILES
     ${SOFACOMPONENTSIOMISC_SOURCE_DIR}/init.cpp
-    ${SOFAGENERALLOADER_SRC}/ReadState.cpp
     ${SOFAGENERALLOADER_SRC}/ReadTopology.cpp
     ${SOFAGENERALLOADER_SRC}/InputEventReader.cpp
-    ${SOFAEXPORTER_SRC}/WriteState.cpp
     ${SOFAEXPORTER_SRC}/WriteTopology.cpp
 )
 
@@ -40,20 +49,32 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
+# Minimal config
+set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
 sofa_find_package(SofaFramework REQUIRED)
-sofa_find_package(TinyXML REQUIRED) # for BaseVTKReader
 
 configure_file(${SOFACOMPONENTSIOMISC_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/io/misc/config.h)
 
+add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
+set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
+
+target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALLOADER)
+target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAEXPORTER)
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFAGENERALLOADER_DIR}/src")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFAEXPORTER_DIR}/src")
+
+# Full config
+set(FULL_TARGET_NAME ${PROJECT_NAME})
+
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
-target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
 
-target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
+target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAGENERALLOADER_DIR}/src")
+target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAEXPORTER_DIR}/src")
 
-target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGENERALLOADER_DIR}/src")
-target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAEXPORTER_DIR}/src")
-
-target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGENERALLOADER)
-target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAEXPORTER)
+target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALLOADER)
+target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAEXPORTER)
