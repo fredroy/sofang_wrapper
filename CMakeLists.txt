@@ -164,3 +164,13 @@ add_subdirectory(Applications ${CMAKE_CURRENT_BINARY_DIR}/Applications)
 
 # ## Applications
 # add_subdirectory(applications/projects)
+
+## Build external projects at the same time
+set(SOFA_EXTERNAL_DIRECTORIES "" CACHE STRING "list of paths separated by ';'")
+if(NOT "${SOFA_EXTERNAL_DIRECTORIES}" STREQUAL "")
+    foreach(dir ${SOFA_EXTERNAL_DIRECTORIES})
+        get_filename_component(name ${dir} NAME) # Get the name of the actual directory
+        message("Adding external directory: ${name} (${dir})")
+        add_subdirectory(${dir} "${CMAKE_CURRENT_BINARY_DIR}/external_directories/${name}")
+    endforeach()
+endif()
