@@ -11,12 +11,25 @@ set(SOFABOUNDARYCONDITION_SRC "${SOFABOUNDARYCONDITION_DIR}/src/SofaBoundaryCond
 set(SOFAGENERALOBJECTINTERACTION_DIR "${SOFAMODULES_SOURCE_DIR}/SofaGeneralObjectInteraction/")
 set(SOFAGENERALOBJECTINTERACTION_SRC "${SOFAGENERALOBJECTINTERACTION_DIR}/src/SofaGeneralObjectInteraction")
 
-set(HEADER_FILES
-	${SOFACOMPONENTSCONSTRAINTPROJECTIVE_SOURCE_DIR}/config.h.in
-    ${SOFABOUNDARYCONDITION_SRC}/AffineMovementConstraint.h
-    ${SOFABOUNDARYCONDITION_SRC}/AffineMovementConstraint.inl
+# Minimal set
+set(MINIMAL_HEADER_FILES
+    ${SOFACOMPONENTSCONSTRAINTPROJECTIVE_SOURCE_DIR}/config.h.in
     ${SOFABOUNDARYCONDITION_SRC}/FixedConstraint.h
     ${SOFABOUNDARYCONDITION_SRC}/FixedConstraint.inl
+    ${SOFAGENERALOBJECTINTERACTION_SRC}/AttachConstraint.h
+    ${SOFAGENERALOBJECTINTERACTION_SRC}/AttachConstraint.inl
+)
+
+set(MINIMAL_SOURCE_FILES
+    ${SOFACOMPONENTSCONSTRAINTPROJECTIVE_SOURCE_DIR}/initMinimal.cpp
+    ${SOFABOUNDARYCONDITION_SRC}/FixedConstraint.cpp
+    ${SOFAGENERALOBJECTINTERACTION_SRC}/AttachConstraint.cpp
+)
+
+# Full set
+set(HEADER_FILES
+    ${SOFABOUNDARYCONDITION_SRC}/AffineMovementConstraint.h
+    ${SOFABOUNDARYCONDITION_SRC}/AffineMovementConstraint.inl
     ${SOFABOUNDARYCONDITION_SRC}/FixedPlaneConstraint.h
     ${SOFABOUNDARYCONDITION_SRC}/FixedPlaneConstraint.inl
     ${SOFABOUNDARYCONDITION_SRC}/FixedRotationConstraint.h
@@ -53,14 +66,11 @@ set(HEADER_FILES
     ${SOFABOUNDARYCONDITION_SRC}/ProjectToPointConstraint.inl
     ${SOFABOUNDARYCONDITION_SRC}/ProjectDirectionConstraint.h
     ${SOFABOUNDARYCONDITION_SRC}/ProjectDirectionConstraint.inl
-    ${SOFAGENERALOBJECTINTERACTION_SRC}/AttachConstraint.h
-    ${SOFAGENERALOBJECTINTERACTION_SRC}/AttachConstraint.inl
 )
 
 set(SOURCE_FILES
     ${SOFACOMPONENTSCONSTRAINTPROJECTIVE_SOURCE_DIR}/init.cpp
     ${SOFABOUNDARYCONDITION_SRC}/AffineMovementConstraint.cpp
-    ${SOFABOUNDARYCONDITION_SRC}/FixedConstraint.cpp
     ${SOFABOUNDARYCONDITION_SRC}/FixedPlaneConstraint.cpp
     ${SOFABOUNDARYCONDITION_SRC}/FixedRotationConstraint.cpp
     ${SOFABOUNDARYCONDITION_SRC}/FixedTranslationConstraint.cpp
@@ -79,8 +89,6 @@ set(SOURCE_FILES
     ${SOFABOUNDARYCONDITION_SRC}/ProjectToPlaneConstraint.cpp
     ${SOFABOUNDARYCONDITION_SRC}/ProjectToPointConstraint.cpp
     ${SOFABOUNDARYCONDITION_SRC}/ProjectDirectionConstraint.cpp
-    ${SOFAGENERALOBJECTINTERACTION_SRC}/AttachConstraint.h
-    ${SOFAGENERALOBJECTINTERACTION_SRC}/AttachConstraint.inl
 )
 
 set(WRAPPER_FILES
@@ -89,21 +97,32 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
+# Minimal config
+set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
 sofa_find_package(SofaFramework REQUIRED)
 
 configure_file(${SOFACOMPONENTSCONSTRAINTPROJECTIVE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/constraint/projective/config.h)
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
-target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.LinearSolver)
-target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Topology)
+add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
+set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Topology_minimal)
 
-target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
+target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFABOUNDARYCONDITION)
+target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALOBJECTINTERACTION)
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFABOUNDARYCONDITION_DIR}/src")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFAGENERALOBJECTINTERACTION_DIR}/src")
 
-target_include_directories(${PROJECT_NAME} PUBLIC "${SOFABOUNDARYCONDITION_DIR}/src")
-target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGENERALOBJECTINTERACTION_DIR}/src")
+# Full config
+set(FULL_TARGET_NAME ${PROJECT_NAME})
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFABOUNDARYCONDITION)
-target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGENERALOBJECTINTERACTION)
+add_library(${FULL_TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver)
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.Topology)
+
+target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFABOUNDARYCONDITION)
+target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALOBJECTINTERACTION)

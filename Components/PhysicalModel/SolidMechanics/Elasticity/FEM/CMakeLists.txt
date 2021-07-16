@@ -103,10 +103,6 @@ target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
 target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver)
 target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.Topology)
 
-target_include_directories(${FULL_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
-target_include_directories(${FULL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
-target_include_directories(${FULL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
-
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFASIMPLEFEM)
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALSIMPLEFEM)
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAMISCFEM)
