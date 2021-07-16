@@ -65,7 +65,6 @@ target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFACONSTRAINT_DIR}/
 
 # Full config
 set(FULL_TARGET_NAME ${PROJECT_NAME})
-sofa_find_package(SofaFramework REQUIRED)
 
 add_library(${FULL_TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})

@@ -24,6 +24,7 @@
 - refactor LMDFilters
 - remove RigidMapping dep from LocalMinDistanceFilter ?
 - move RayTriangleIntersection utility class into helper ?
+- move CylinderModel into Misc 
 
 # Sofa.Components.Engine
 - Distance engine has a weird dep on 

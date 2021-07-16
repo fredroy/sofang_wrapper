@@ -38,6 +38,7 @@ set(MINIMAL_SOURCE_FILES
     ${SOFACONSTRAINT_SRC}/LCPConstraintSolver.cpp
     ${SOFACONSTRAINT_SRC}/LinearSolverConstraintCorrection.cpp
     ${SOFACONSTRAINT_SRC}/UncoupledConstraintCorrection.cpp
+    ${SOFACONSTRAINT_SRC}/UnilateralInteractionConstraint.cpp
 )
 
 # Full set
@@ -58,7 +59,6 @@ set(SOURCE_FILES
     ${SOFACONSTRAINT_SRC}/SlidingConstraint.cpp
     ${SOFACONSTRAINT_SRC}/StopperConstraint.cpp
     ${SOFACONSTRAINT_SRC}/UniformConstraint.cpp
-    ${SOFACONSTRAINT_SRC}/UnilateralInteractionConstraint.cpp
 )
 
 set(WRAPPER_FILES
