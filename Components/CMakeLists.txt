@@ -10,7 +10,7 @@ add_subdirectory(PhysicalModel/SolidMechanics/Elasticity/Springs)
 add_subdirectory(PhysicalModel/SolidMechanics/Elasticity/FEM)
 add_subdirectory(Constraint/Projective)
 add_subdirectory(Constraint/Lagrangian) # Weird dep on Mass and Fem
-# add_subdirectory(AnimationLoop) # Needs LinearSolver, Constraint
+add_subdirectory(AnimationLoop) # Needs LinearSolver, Constraint
 add_subdirectory(Mapping)
 # add_subdirectory(Collision/Models)
 # add_subdirectory(Collision/Detection/Algorithm)

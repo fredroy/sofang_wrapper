@@ -19,6 +19,7 @@ set(MINIMAL_HEADER_FILES
     ${SOFACONSTRAINT_SRC}/ConstraintStoreLambdaVisitor.h
     ${SOFACONSTRAINT_SRC}/GenericConstraintCorrection.h
     ${SOFACONSTRAINT_SRC}/GenericConstraintSolver.h
+    ${SOFACONSTRAINT_SRC}/LCPConstraintSolver.h
     ${SOFACONSTRAINT_SRC}/LinearSolverConstraintCorrection.h
     ${SOFACONSTRAINT_SRC}/LinearSolverConstraintCorrection.inl
     ${SOFACONSTRAINT_SRC}/UncoupledConstraintCorrection.h
@@ -34,13 +35,13 @@ set(MINIMAL_SOURCE_FILES
     ${SOFACONSTRAINT_SRC}/ConstraintStoreLambdaVisitor.cpp
     ${SOFACONSTRAINT_SRC}/GenericConstraintCorrection.cpp
     ${SOFACONSTRAINT_SRC}/GenericConstraintSolver.cpp
+    ${SOFACONSTRAINT_SRC}/LCPConstraintSolver.cpp
     ${SOFACONSTRAINT_SRC}/LinearSolverConstraintCorrection.cpp
     ${SOFACONSTRAINT_SRC}/UncoupledConstraintCorrection.cpp
 )
 
 # Full set
 set(HEADER_FILES
-    ${SOFACONSTRAINT_SRC}/LCPConstraintSolver.h
     ${SOFACONSTRAINT_SRC}/PrecomputedConstraintCorrection.h
     ${SOFACONSTRAINT_SRC}/PrecomputedConstraintCorrection.inl
     ${SOFACONSTRAINT_SRC}/SlidingConstraint.h
@@ -53,7 +54,6 @@ set(HEADER_FILES
 
 set(SOURCE_FILES
     ${SOFACOMPONENTSCONSTRAINTLAGRANGIAN_SOURCE_DIR}/init.cpp
-    ${SOFACONSTRAINT_SRC}/LCPConstraintSolver.cpp
     ${SOFACONSTRAINT_SRC}/PrecomputedConstraintCorrection.cpp
     ${SOFACONSTRAINT_SRC}/SlidingConstraint.cpp
     ${SOFACONSTRAINT_SRC}/StopperConstraint.cpp

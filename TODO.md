@@ -13,6 +13,7 @@
 
 # Sofa.Components.AnimationLoop
 - dont forget the mapping(?) from GeneralAnimationLoop
+- Should FreeMotionAnimationLoop instanciate a GenericConstraintSolver instead of LCPCS ?
 
 # Sofa.Components.LinearSolver
 - Lots of modules needs LinearSolver just for \*Matrix files (Sparse, etc) -> move to core ?
