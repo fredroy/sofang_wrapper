@@ -101,6 +101,11 @@ target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFALOADER_DIR}/src"
 target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFAGENERALLOADER_DIR}/src")
 target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFAEXPORTER_DIR}/src")
 
+get_property(BUILD_MINIMAL GLOBAL PROPERTY PROPERTY_SOFA_BUILD_MINIMAL SET)
+if(BUILD_MINIMAL)
+    return()
+endif()
+
 # Full config
 set(FULL_TARGET_NAME ${PROJECT_NAME})
 sofa_find_package(TinyXML REQUIRED) # for BaseVTKReader

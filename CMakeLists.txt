@@ -112,8 +112,6 @@ endif()
 add_subdirectory(${SOFA_SOURCE_DIR}/extlibs  ${CMAKE_CURRENT_BINARY_DIR}/extlibs)
 
 ### Main Sofa subdirectories
-add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/modules/Sofa.Compat ${CMAKE_CURRENT_BINARY_DIR}/Sofa/Sofa.Compat)
-
 add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/SofaFramework ${CMAKE_CURRENT_BINARY_DIR}/Sofa/SofaFramework)
 add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/SofaSimulation ${CMAKE_CURRENT_BINARY_DIR}/Sofa/SofaSimulation)
 
@@ -124,6 +122,15 @@ add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/SofaSimulation ${CMAKE_CURRENT_BINARY
 if(SOFA_WITH_OPENGL)
     add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/modules/Sofa.GL ${CMAKE_CURRENT_BINARY_DIR}/Sofa/Sofa.GL)
 endif()
+
+option(SOFA_BUILD_MINIMAL "Build with minimal components/features." OFF)
+if(SOFA_BUILD_MINIMAL)
+    set_property(GLOBAL PROPERTY PROPERTY_SOFA_BUILD_MINIMAL TRUE)
+    message("A minimal set of components will be built")
+else()
+    message("All components will be built")
+endif()
+
 # Components
 add_subdirectory(Components ${CMAKE_CURRENT_BINARY_DIR}/Components)
 # Applications

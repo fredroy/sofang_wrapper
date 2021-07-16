@@ -73,6 +73,11 @@ target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE
 target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
 target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFABASEVISUAL_DIR}/src")
 
+get_property(BUILD_MINIMAL GLOBAL PROPERTY PROPERTY_SOFA_BUILD_MINIMAL SET)
+if(BUILD_MINIMAL)
+    return()
+endif()
+
 # Full config
 set(FULL_TARGET_NAME ${PROJECT_NAME})
 

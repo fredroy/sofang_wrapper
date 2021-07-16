@@ -122,6 +122,11 @@ target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFABASECOLLISION_DI
 target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFACONSTRAINT_DIR}/src")
 target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFAGENERALMESHCOLLISION_DIR}/src")
 
+get_property(BUILD_MINIMAL GLOBAL PROPERTY PROPERTY_SOFA_BUILD_MINIMAL SET)
+if(BUILD_MINIMAL)
+    return()
+endif()
+
 # Full config
 set(FULL_TARGET_NAME ${PROJECT_NAME})
 
