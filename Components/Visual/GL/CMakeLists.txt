@@ -11,14 +11,24 @@ set(SOFAOPENGLVISUAL_SRC "${SOFAOPENGLVISUAL_DIR}/src/SofaOpenglVisual")
 set(SOFAGENERALENGINE_DIR "${SOFAMODULES_SOURCE_DIR}/SofaGeneralEngine/")
 set(SOFAGENERALENGINE_SRC "${SOFAGENERALENGINE_DIR}/src/SofaGeneralEngine")
 
+# Minimal set
+set(MINIMAL_HEADER_FILES
+    ${SOFACOMPONENTSVISUAL_SOURCE_DIR}/config.h.in
+    ${SOFAOPENGLVISUAL_SRC}/OglModel.h
+)
+
+set(MINIMAL_SOURCE_FILES
+    ${SOFACOMPONENTSVISUAL_SOURCE_DIR}/initMinimal.cpp
+    ${SOFAOPENGLVISUAL_SRC}/OglModel.cpp
+)
+
+# Full set
 set(HEADER_FILES
-	${SOFACOMPONENTSVISUAL_SOURCE_DIR}/config.h.in
     ${SOFAOPENGLVISUAL_SRC}/ClipPlane.h
     ${SOFAOPENGLVISUAL_SRC}/OglColorMap.h
     ${SOFAOPENGLVISUAL_SRC}/CompositingVisualLoop.h
     ${SOFAOPENGLVISUAL_SRC}/DataDisplay.h
     ${SOFAOPENGLVISUAL_SRC}/OglLabel.h
-    ${SOFAOPENGLVISUAL_SRC}/OglModel.h
     ${SOFAOPENGLVISUAL_SRC}/PointSplatModel.h
     ${SOFAOPENGLVISUAL_SRC}/MergeVisualModels.h
     ${SOFAOPENGLVISUAL_SRC}/LightManager.h
@@ -57,7 +67,6 @@ set(SOURCE_FILES
     ${SOFAOPENGLVISUAL_SRC}/DataDisplay.cpp
     ${SOFAOPENGLVISUAL_SRC}/OglGrid.cpp
     ${SOFAOPENGLVISUAL_SRC}/OglLabel.cpp
-    ${SOFAOPENGLVISUAL_SRC}/OglModel.cpp
     ${SOFAOPENGLVISUAL_SRC}/PointSplatModel.cpp
     ${SOFAOPENGLVISUAL_SRC}/MergeVisualModels.cpp
     ${SOFAOPENGLVISUAL_SRC}/Light.cpp
@@ -92,23 +101,32 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
+# Minimal config
+set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
 sofa_find_package(SofaFramework REQUIRED)
-sofa_find_package(TinyXML REQUIRED)
 sofa_find_package(Sofa.GL REQUIRED)
 
 configure_file(${SOFACOMPONENTSVISUAL_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/visual/gl/config.h)
 
+add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
+set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.GL)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Visual_minimal)
+
+target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAOPENGLVISUAL)
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
+target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFAOPENGLVISUAL_DIR}/src")
+
+# Full config
+set(FULL_TARGET_NAME ${PROJECT_NAME})
+
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
-target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.GL)
-target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Visual)
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
 
-target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
-target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
+target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAGENERALENGINE_DIR}/src")
 
-target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAOPENGLVISUAL_DIR}/src")
-target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGENERALENGINE_DIR}/src")
-
-target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAOPENGLVISUAL)
-target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGENERALENGINE)
+target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAOPENGLVISUAL)
+target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALENGINE)

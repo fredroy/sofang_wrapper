@@ -120,7 +120,6 @@ target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Collision.Models)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Visual)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Constraint.Projective)
 
-
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
