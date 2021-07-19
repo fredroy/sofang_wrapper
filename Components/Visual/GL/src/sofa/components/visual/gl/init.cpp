@@ -1,6 +1,6 @@
 #include <sofa/components/visual/gl/config.h>
 
-namespace sofa::component::visual::gl
+namespace sofa::components::visual::gl
 {
 
 extern "C" {
@@ -22,4 +22,4 @@ const char* getModuleName()
 	return MODULE_NAME;
 }
 
-} // namespace sofa::component::visual::gl
+} // namespace sofa::components::visual::gl
