@@ -69,5 +69,6 @@ target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/w
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFABASEUTILS_DIR}/src")
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGRAPHCOMPONENT_DIR}/src")
 
+target_compile_definitions(${PROJECT_NAME} PRIVATE BUILD_SOFACOMPONENTSUTILS)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFABASEUTILS)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGRAPHCOMPONENT)
