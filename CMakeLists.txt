@@ -12,8 +12,12 @@ set(Sofa_VERSION ${Sofa_VERSION_MAJOR}.${Sofa_VERSION_MINOR}.${Sofa_VERSION_PATC
 set(SOFA_VERSION_STR "\"${Sofa_VERSION}\"")
 set(SOFA_VERSION "${Sofa_VERSION_MAJOR}${Sofa_VERSION_MINOR}${Sofa_VERSION_PATCH}")
 
-set(SOFA_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../master_fredroy_sofang" CACHE STRING "Path to Sofa")
-set(SOFA_KERNEL_SOURCE_DIR "${SOFA_SOURCE_DIR}/SofaKernel" CACHE STRING "Path to SofaKernel")
+set(SOFA_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../master" CACHE PATH "Path to Sofa")
+set(SOFA_KERNEL_SOURCE_DIR "${SOFA_SOURCE_DIR}/SofaKernel" CACHE PATH "Path to SofaKernel")
+
+if(NOT EXISTS ${SOFA_KERNEL_SOURCE_DIR}/modules/Sofa.Config)
+    message(FATAL_ERROR "Cannot find a correct path for SofaKernel.")
+endif()
 
 ## Default build type
 if(NOT CMAKE_BUILD_TYPE)
