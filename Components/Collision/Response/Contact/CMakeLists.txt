@@ -85,6 +85,7 @@ target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.PhysicalMode
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Constraint.Lagrangian_minimal) # FrictionContact needs UnilateralCC
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Collision.Models_minimal)
 
+target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTSCOLLISIONRESPONSECONTACT)
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFABASECOLLISION)
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAMESHCOLLISION)
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFACONSTRAINT)
@@ -108,5 +109,6 @@ target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
 
 target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAUSERINTERACTION_DIR}/src")
 
+target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTSCOLLISIONRESPONSECONTACT)
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFACONSTRAINT)
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAUSERINTERACTION)
