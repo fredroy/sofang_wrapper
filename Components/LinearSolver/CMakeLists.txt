@@ -39,6 +39,7 @@ set(MINIMAL_HEADER_FILES
     ${SOFABASELINEARSOLVER_SRC}/MatrixExpr.h
     ${SOFABASELINEARSOLVER_SRC}/MatrixLinearSolver.h
     ${SOFABASELINEARSOLVER_SRC}/MatrixLinearSolver.inl
+    ${SOFABASELINEARSOLVER_SRC}/RotationMatrix.h
     ${SOFABASELINEARSOLVER_SRC}/SingleMatrixAccessor.h
     ${SOFABASELINEARSOLVER_SRC}/SparseMatrix.h
     ${SOFABASELINEARSOLVER_SRC}/matrix_bloc_traits.h
@@ -57,6 +58,7 @@ set(MINIMAL_SOURCE_FILES
     ${SOFABASELINEARSOLVER_SRC}/FullVector.cpp
     ${SOFABASELINEARSOLVER_SRC}/GraphScatteredTypes.cpp
     ${SOFABASELINEARSOLVER_SRC}/MatrixLinearSolver.cpp
+    ${SOFABASELINEARSOLVER_SRC}/RotationMatrix.cpp
     ${SOFABASELINEARSOLVER_SRC}/SingleMatrixAccessor.cpp
 )
 

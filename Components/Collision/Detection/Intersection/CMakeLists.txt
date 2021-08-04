@@ -45,8 +45,6 @@ set(MINIMAL_SOURCE_FILES
 
 # Full set
 set(HEADER_FILES
-    ${SOFACONSTRAINT_SRC}/LMDNewProximityIntersection.h
-    ${SOFACONSTRAINT_SRC}/LMDNewProximityIntersection.inl
     ${SOFAUSERINTERACTION_SRC}/RayDiscreteIntersection.h
     ${SOFAUSERINTERACTION_SRC}/RayDiscreteIntersection.inl
     ${SOFAUSERINTERACTION_SRC}/RayNewProximityIntersection.h
@@ -74,7 +72,6 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-    ${SOFACONSTRAINT_SRC}/LMDNewProximityIntersection.cpp
     ${SOFAUSERINTERACTION_SRC}/RayDiscreteIntersection.cpp
     ${SOFAUSERINTERACTION_SRC}/RayNewProximityIntersection.cpp
     ${SOFAMISCCOLLISION_SRC}/BaseIntTool.cpp

@@ -36,11 +36,6 @@ set(MINIMAL_HEADER_FILES
     ${SOFAMESHCOLLISION_SRC}/TriangleModel.h
     ${SOFAMESHCOLLISION_SRC}/TriangleModel.inl
     ${SOFAUSERINTERACTION_SRC}/RayModel.h
-    ${SOFAMESHCOLLISION_SRC}/LocalMinDistanceFilter.h
-    ${SOFAMESHCOLLISION_SRC}/PointLocalMinDistanceFilter.h
-    ${SOFAMESHCOLLISION_SRC}/LineLocalMinDistanceFilter.h
-    ${SOFAMESHCOLLISION_SRC}/TriangleLocalMinDistanceFilter.h
-    ${SOFAMESHCOLLISION_SRC}/TriangleLocalMinDistanceFilter.h
     ${SOFABASECOLLISION_SRC}/CylinderModel.h
     ${SOFABASECOLLISION_SRC}/CylinderModel.inl
 )
@@ -53,10 +48,6 @@ set(MINIMAL_SOURCE_FILES
     ${SOFAMESHCOLLISION_SRC}/PointModel.cpp
     ${SOFAMESHCOLLISION_SRC}/TriangleModel.cpp
     ${SOFAUSERINTERACTION_SRC}/RayModel.cpp
-    ${SOFAMESHCOLLISION_SRC}/LocalMinDistanceFilter.cpp
-    ${SOFAMESHCOLLISION_SRC}/PointLocalMinDistanceFilter.cpp
-    ${SOFAMESHCOLLISION_SRC}/LineLocalMinDistanceFilter.cpp
-    ${SOFAMESHCOLLISION_SRC}/TriangleLocalMinDistanceFilter.cpp
     ${SOFABASECOLLISION_SRC}/CylinderModel.cpp
 )
 

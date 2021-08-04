@@ -21,6 +21,7 @@ set(HEADER_FILES
     ${SOFABASEUTILS_SRC}/AddResourceRepository.h
     ${SOFAGRAPHCOMPONENT_SRC}/Gravity.h
     ${SOFAGRAPHCOMPONENT_SRC}/SceneCheck.h
+    ${SOFAGRAPHCOMPONENT_SRC}/SceneCheckDeprecatedComponents.h
     ${SOFAGRAPHCOMPONENT_SRC}/SceneCheckDuplicatedName.h
     ${SOFAGRAPHCOMPONENT_SRC}/SceneCheckMissingRequiredPlugin.h
     ${SOFAGRAPHCOMPONENT_SRC}/SceneCheckAPIChange.h
@@ -39,6 +40,7 @@ set(SOURCE_FILES
     ${SOFABASEUTILS_SRC}/RequiredPlugin.cpp
     ${SOFABASEUTILS_SRC}/AddResourceRepository.cpp
     ${SOFAGRAPHCOMPONENT_SRC}/Gravity.cpp
+    ${SOFAGRAPHCOMPONENT_SRC}/SceneCheckDeprecatedComponents.cpp
     ${SOFAGRAPHCOMPONENT_SRC}/SceneCheckDuplicatedName.cpp
     ${SOFAGRAPHCOMPONENT_SRC}/SceneCheckMissingRequiredPlugin.cpp
     ${SOFAGRAPHCOMPONENT_SRC}/SceneCheckAPIChange.cpp
