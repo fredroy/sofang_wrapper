@@ -108,13 +108,29 @@ set(WRAPPER_FILES
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
 sofa_find_package(SofaFramework REQUIRED)
-sofa_find_package(Boost REQUIRED COMPONENTS program_options)
+
+include(FetchContent)
+FetchContent_Declare(cxxopts
+        GIT_REPOSITORY https://github.com/jarro2783/cxxopts
+        GIT_TAG        v2.2.1
+)
+
+FetchContent_GetProperties(cxxopts)
+if(NOT cxxopts_POPULATED)
+    FetchContent_Populate(cxxopts)
+
+    set(CXXOPTS_BUILD_EXAMPLES OFF CACHE INTERNAL "")
+    set(CXXOPTS_BUILD_TESTS OFF CACHE INTERNAL "")
+    set(CXXOPTS_ENABLE_INSTALL ON CACHE INTERNAL "")
+
+    add_subdirectory(${cxxopts_SOURCE_DIR} ${cxxopts_BINARY_DIR})
+endif()
 
 configure_file(${SOFACOMPONENTSGUICORE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/gui/core/config.h)
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCommon SofaSimulationCore)
-target_link_libraries(${PROJECT_NAME} PUBLIC Boost::program_options)
+target_link_libraries(${PROJECT_NAME} PUBLIC cxxopts)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Collision.Response.Contact)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Collision.Models)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Visual)
