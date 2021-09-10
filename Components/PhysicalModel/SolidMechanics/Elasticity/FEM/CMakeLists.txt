@@ -82,7 +82,7 @@ add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOUR
 set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Topology_minimal)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver_minimal) # For RotationMatrix(...) in Hexa/Tetra
+# target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver_minimal) # For RotationMatrix(...) in Hexa/Tetra
 
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFASIMPLEFEM)
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALSIMPLEFEM)
@@ -105,7 +105,7 @@ set(FULL_TARGET_NAME ${PROJECT_NAME})
 add_library(${FULL_TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${FULL_TARGET_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver)
+# target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver)
 target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.Topology)
 
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFASIMPLEFEM)

@@ -76,7 +76,7 @@ add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOUR
 set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Topology_minimal)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver_minimal)
+# target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver_minimal)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.PhysicalModel.Mass) # Uncoupled needs UniformMass
 
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFACONSTRAINT)
