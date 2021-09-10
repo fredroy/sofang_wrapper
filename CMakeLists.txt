@@ -112,6 +112,15 @@ endif()
 add_subdirectory(${SOFA_SOURCE_DIR}/extlibs  ${CMAKE_CURRENT_BINARY_DIR}/extlibs)
 
 ### Main Sofa subdirectories
+option(SOFA_ENABLE_LEGACY_HEADERS "Enable the compatibility layer (headers located in legacy folders)." ON)
+if(SOFA_ENABLE_LEGACY_HEADERS)
+    message("Using legacy headers is enabled.")
+    message("Headers from v20.12 are usable, but it is advised to change your code to use the new headers introduced in v21.06.")
+
+    add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/modules/Sofa.Compat ${CMAKE_CURRENT_BINARY_DIR}/Sofa/Sofa.Compat)
+endif()
+
+### Main Sofa subdirectories
 add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/SofaFramework ${CMAKE_CURRENT_BINARY_DIR}/Sofa/SofaFramework)
 add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/SofaSimulation ${CMAKE_CURRENT_BINARY_DIR}/Sofa/SofaSimulation)
 
