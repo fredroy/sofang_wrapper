@@ -81,7 +81,7 @@ set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Mapping_minimal)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Container) # BarycentricMapper needs MechanicalObject
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs_min) # BarycentricPenalityContact
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs_minimal) # BarycentricPenalityContact
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Constraint.Lagrangian_minimal) # FrictionContact needs UnilateralCC
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Collision.Models_minimal)
 

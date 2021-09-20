@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
-project(Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs LANGUAGES CXX)
+project(SCPSES LANGUAGES CXX)
+
+# Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs 
 
 set(SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYSPRINGS_SOURCE_DIR "src/sofa/components/physicalmodel/solidmechanics/elasticity/springs")
 
@@ -115,13 +117,16 @@ set(WRAPPER_FILES
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
 # Minimal config
-set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_min) #..._minimal is too long for MSVC
+set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
 sofa_find_package(SofaFramework REQUIRED)
 
 configure_file(${SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYSPRINGS_SOURCE_DIR}/config.h.in 
     ${CMAKE_BINARY_DIR}/include/sofa/components/physicalmodel/solidmechanics/elasticity/springs/config.h)
 
 add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
+add_library(Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs_minimal ALIAS ${MINIMAL_TARGET_NAME})
+set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES OUTPUT_NAME Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs_minimal)
+set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES PROJECT_LABEL Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs_minimal)
 set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Topology_minimal)
@@ -146,6 +151,9 @@ endif()
 set(FULL_TARGET_NAME ${PROJECT_NAME})
 
 add_library(${FULL_TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
+add_library(Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs ALIAS ${FULL_TARGET_NAME})
+set_target_properties(${FULL_TARGET_NAME} PROPERTIES OUTPUT_NAME Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs)
+set_target_properties(${FULL_TARGET_NAME} PROPERTIES PROJECT_LABEL Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs)
 target_link_libraries(${FULL_TARGET_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
 target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver)
