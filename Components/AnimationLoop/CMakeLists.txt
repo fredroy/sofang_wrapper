@@ -53,7 +53,6 @@ configure_file(${SOFACOMPONENTSANIMATIONLOOP_SOURCE_DIR}/config.h.in ${CMAKE_BIN
 add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
 set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
-# target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver_minimal) # ConstraintSolverImpl needs FullMatrix
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Constraint.Lagrangian_minimal) # FreeMotionAL needs LCPConstraintSolver
 
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTSANIMATIONLOOP)
