@@ -8,8 +8,7 @@ add_subdirectory(Topology)
 add_subdirectory(PhysicalModel/Mass)
 add_subdirectory(PhysicalModel/SolidMechanics/Elasticity/Springs)
 add_subdirectory(PhysicalModel/SolidMechanics/Elasticity/FEM)
-add_subdirectory(Constraint/Projective)
-add_subdirectory(Constraint/Lagrangian) # Weird dep on Mass and Fem
+add_subdirectory(Constraint)
 add_subdirectory(AnimationLoop) # Needs LinearSolver, Constraint
 add_subdirectory(Mapping)
 add_subdirectory(Container)
