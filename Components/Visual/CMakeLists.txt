@@ -87,3 +87,9 @@ target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
 target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAGENERALVISUAL_DIR}/src")
 
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALVISUAL)
+
+# Subproject Visual.GL
+sofa_find_package(Sofa.GL REQUIRED)
+if(Sofa.GL_FOUND)
+    add_subdirectory(GL)
+endif()

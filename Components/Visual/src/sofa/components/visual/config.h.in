@@ -1,2 +1,15 @@
+#pragma once
+
 #include <sofa/config.h>
 #include <sofa/config/sharedlibrary_defines.h>
+
+#ifdef BUILD_SOFACOMPONENTSVISUAL
+#  define SOFACOMPONENTSVISUAL_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#else
+#  define SOFACOMPONENTSVISUAL_API SOFA_IMPORT_DYNAMIC_LIBRARY
+#endif
+
+namespace sofa::components::visual
+{
+	constexpr char* MODULE_NAME = "@PROJECT_NAME@";
+} // namespace sofa::components::visual
