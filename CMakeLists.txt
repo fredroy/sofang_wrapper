@@ -141,7 +141,7 @@ else()
 endif()
 
 # Components
-add_subdirectory(Components ${CMAKE_CURRENT_BINARY_DIR}/Components)
+add_subdirectory(Component ${CMAKE_CURRENT_BINARY_DIR}/Component)
 # Applications
 add_subdirectory(Applications ${CMAKE_CURRENT_BINARY_DIR}/Applications)
 
