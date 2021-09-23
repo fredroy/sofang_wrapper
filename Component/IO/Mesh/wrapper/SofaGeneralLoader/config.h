@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sofa/components/io/mesh/config.h>
+#include <sofa/component/io/mesh/config.h>
 
 #ifdef SOFA_BUILD_SOFAGENERALLOADER
 #  define SOFA_SOFAGENERALLOADER_API SOFA_EXPORT_DYNAMIC_LIBRARY

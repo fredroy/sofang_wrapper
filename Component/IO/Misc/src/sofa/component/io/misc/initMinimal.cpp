@@ -1,4 +1,4 @@
-#include <sofa/components/io/misc/config.h>
+#include <sofa/component/io/misc/config.h>
 
 namespace sofa::component::io::misc
 {

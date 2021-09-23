@@ -1,11 +1,11 @@
-#include <sofa/components/constraint/config.h>
+#include <sofa/component/constraint/config.h>
 
-namespace sofa::components::constraint
+namespace sofa::component::constraint
 {
 
 extern "C" {
-	SOFACOMPONENTSCONSTRAINT_API void initExternalModule();
-	SOFACOMPONENTSCONSTRAINT_API const char* getModuleName();
+	SOFACOMPONENTCONSTRAINT_API void initExternalModule();
+	SOFACOMPONENTCONSTRAINT_API const char* getModuleName();
 }
 
 void initExternalModule()
@@ -22,4 +22,4 @@ const char* getModuleName()
 	return MODULE_NAME;
 }
 
-} // namespace sofa::components::constraint
+} // namespace sofa::component::constraint

@@ -1,11 +1,11 @@
-#include <sofa/components/collision/response/config.h>
+#include <sofa/component/collision/response/config.h>
 
-namespace sofa::components::collision::response
+namespace sofa::component::collision::response
 {
 
 extern "C" {
-	SOFACOMPONENTSCOLLISIONRESPONSE_API void initExternalModule();
-	SOFACOMPONENTSCOLLISIONRESPONSE_API const char* getModuleName();
+	SOFACOMPONENTCOLLISIONRESPONSE_API void initExternalModule();
+	SOFACOMPONENTCOLLISIONRESPONSE_API const char* getModuleName();
 }
 
 void initExternalModule()
@@ -22,4 +22,4 @@ const char* getModuleName()
 	return MODULE_NAME;
 }
 
-} // namespace sofa::components::collision::response
+} // namespace sofa::component::collision::response

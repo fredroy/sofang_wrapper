@@ -3,13 +3,13 @@
 #include <sofa/config.h>
 #include <sofa/config/sharedlibrary_defines.h>
 
-#ifdef BUILD_SOFACOMPONENTSCONSTRAINT
-#  define SOFACOMPONENTSCONSTRAINT_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#ifdef BUILD_SOFACOMPONENTCONSTRAINT
+#  define SOFACOMPONENTCONSTRAINT_API SOFA_EXPORT_DYNAMIC_LIBRARY
 #else
-#  define SOFACOMPONENTSCONSTRAINT_API SOFA_IMPORT_DYNAMIC_LIBRARY
+#  define SOFACOMPONENTCONSTRAINT_API SOFA_IMPORT_DYNAMIC_LIBRARY
 #endif
 
-namespace sofa::components::constraint
+namespace sofa::component::constraint
 {
 	constexpr char* MODULE_NAME = "@PROJECT_NAME@";
-} // namespace sofa::components::constraint
+} // namespace sofa::component::constraint

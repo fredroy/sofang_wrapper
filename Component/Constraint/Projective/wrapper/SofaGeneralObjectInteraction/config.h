@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sofa/components/constraint/projective/config.h>
+#include <sofa/component/constraint/projective/config.h>
 
 #ifdef SOFA_BUILD_SOFAGENERALOBJECTINTERACTION
 #  define SOFA_SOFAGENERALOBJECTINTERACTION_API SOFA_EXPORT_DYNAMIC_LIBRARY

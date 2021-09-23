@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
-project(Sofa.Components.Topology LANGUAGES CXX)
+project(Sofa.Component.Topology LANGUAGES CXX)
 
-set(SOFACOMPONENTSTOPOLOGY_SOURCE_DIR "src/sofa/components/topology")
+set(SOFACOMPONENTTOPOLOGY_SOURCE_DIR "src/sofa/component/topology")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -18,7 +18,7 @@ set(SOFANONUNIFORMFEM_SRC "${SOFANONUNIFORMFEM_DIR}/src/SofaNonUniformFem")
 
 # Minimal set
 set(MINIMAL_HEADER_FILES
-    ${SOFACOMPONENTSTOPOLOGY_SOURCE_DIR}/config.h.in
+    ${SOFACOMPONENTTOPOLOGY_SOURCE_DIR}/config.h.in
     ${SOFABASETOPOLOGY_SRC}/fwd.h
     ${SOFABASETOPOLOGY_SRC}/initSofaBaseTopology.h
     ${SOFABASETOPOLOGY_SRC}/CommonAlgorithms.h
@@ -72,7 +72,7 @@ set(MINIMAL_HEADER_FILES
 )
 
 set(MINIMAL_SOURCE_FILES
-    ${SOFACOMPONENTSTOPOLOGY_SOURCE_DIR}/initMinimal.cpp
+    ${SOFACOMPONENTTOPOLOGY_SOURCE_DIR}/initMinimal.cpp
     ${SOFABASETOPOLOGY_SRC}/EdgeSetGeometryAlgorithms.cpp
     ${SOFABASETOPOLOGY_SRC}/EdgeSetTopologyContainer.cpp
     ${SOFABASETOPOLOGY_SRC}/EdgeSetTopologyModifier.cpp
@@ -135,7 +135,7 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-    ${SOFACOMPONENTSTOPOLOGY_SOURCE_DIR}/init.cpp
+    ${SOFACOMPONENTTOPOLOGY_SOURCE_DIR}/init.cpp
     ${SOFAGENERALTOPOLOGY_SRC}/CubeTopology.cpp
     ${SOFAGENERALTOPOLOGY_SRC}/CylinderGridTopology.cpp
     ${SOFAGENERALTOPOLOGY_SRC}/SphereGridTopology.cpp
@@ -174,7 +174,7 @@ source_group("wrapper" FILES ${WRAPPER_FILES})
 set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
 sofa_find_package(SofaFramework REQUIRED)
 
-configure_file(${SOFACOMPONENTSTOPOLOGY_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/topology/config.h)
+configure_file(${SOFACOMPONENTTOPOLOGY_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/topology/config.h)
 
 add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
 set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)

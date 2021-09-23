@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
-project(Sofa.Components.GUI.Core LANGUAGES CXX)
+project(Sofa.Component.GUI.Core LANGUAGES CXX)
 
-set(SOFACOMPONENTSGUICORE_SOURCE_DIR "src/sofa/components/gui/core")
+set(SOFACOMPONENTGUICORE_SOURCE_DIR "src/sofa/component/gui/core")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -18,7 +18,7 @@ set(SOFAGUI_DIR "${SOFA_SOURCE_DIR}/SofaGui/")
 set(SOFAGUI_SRC "${SOFAGUI_DIR}/src/SofaGui")
 
 set(HEADER_FILES
-	${SOFACOMPONENTSGUICORE_SOURCE_DIR}/config.h.in
+	${SOFACOMPONENTGUICORE_SOURCE_DIR}/config.h.in
     ${SOFAGRAPHCOMPONENT_SRC}/AddFrameButtonSetting.h
     ${SOFAGRAPHCOMPONENT_SRC}/AddRecordedCameraButtonSetting.h
     ${SOFAGRAPHCOMPONENT_SRC}/AttachBodyButtonSetting.h
@@ -62,7 +62,7 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-    ${SOFACOMPONENTSGUICORE_SOURCE_DIR}/init.cpp
+    ${SOFACOMPONENTGUICORE_SOURCE_DIR}/init.cpp
     ${SOFAGRAPHCOMPONENT_SRC}/AddFrameButtonSetting.cpp
     ${SOFAGRAPHCOMPONENT_SRC}/AddRecordedCameraButtonSetting.cpp
     ${SOFAGRAPHCOMPONENT_SRC}/AttachBodyButtonSetting.cpp
@@ -126,15 +126,15 @@ if(NOT cxxopts_POPULATED)
     add_subdirectory(${cxxopts_SOURCE_DIR} ${cxxopts_BINARY_DIR})
 endif()
 
-configure_file(${SOFACOMPONENTSGUICORE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/gui/core/config.h)
+configure_file(${SOFACOMPONENTGUICORE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/gui/core/config.h)
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCommon SofaSimulationCore)
 target_link_libraries(${PROJECT_NAME} PUBLIC cxxopts)
-target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Collision.Response.Contact)
-target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Collision.Models)
-target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Visual)
-target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Components.Constraint.Projective)
+target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.Collision.Response.Contact)
+target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.Collision.Models)
+target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.Visual)
+target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.Constraint.Projective)
 
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")

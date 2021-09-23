@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
-project(Sofa.Components.Visual.GL LANGUAGES CXX)
+project(Sofa.Component.Visual.GL LANGUAGES CXX)
 
-set(SOFACOMPONENTSVISUAL_SOURCE_DIR "src/sofa/components/visual/gl")
+set(SOFACOMPONENTVISUAL_SOURCE_DIR "src/sofa/component/visual/gl")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -13,12 +13,12 @@ set(SOFAGENERALENGINE_SRC "${SOFAGENERALENGINE_DIR}/src/SofaGeneralEngine")
 
 # Minimal set
 set(MINIMAL_HEADER_FILES
-    ${SOFACOMPONENTSVISUAL_SOURCE_DIR}/config.h.in
+    ${SOFACOMPONENTVISUAL_SOURCE_DIR}/config.h.in
     ${SOFAOPENGLVISUAL_SRC}/OglModel.h
 )
 
 set(MINIMAL_SOURCE_FILES
-    ${SOFACOMPONENTSVISUAL_SOURCE_DIR}/initMinimal.cpp
+    ${SOFACOMPONENTVISUAL_SOURCE_DIR}/initMinimal.cpp
     ${SOFAOPENGLVISUAL_SRC}/OglModel.cpp
 )
 
@@ -60,7 +60,7 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-    ${SOFACOMPONENTSVISUAL_SOURCE_DIR}/init.cpp
+    ${SOFACOMPONENTVISUAL_SOURCE_DIR}/init.cpp
     ${SOFAOPENGLVISUAL_SRC}/ClipPlane.cpp
     ${SOFAOPENGLVISUAL_SRC}/OglColorMap.cpp
     ${SOFAOPENGLVISUAL_SRC}/CompositingVisualLoop.cpp
@@ -106,15 +106,15 @@ set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
 sofa_find_package(SofaFramework REQUIRED)
 sofa_find_package(Sofa.GL REQUIRED)
 
-configure_file(${SOFACOMPONENTSVISUAL_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/visual/gl/config.h)
+configure_file(${SOFACOMPONENTVISUAL_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/visual/gl/config.h)
 
 add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
 set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.GL)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Visual_minimal)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.Visual_minimal)
 
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTSVISUALGL)
+target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTVISUALGL)
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAOPENGLVISUAL)
 target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
 target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
@@ -134,6 +134,6 @@ target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
 
 target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAGENERALENGINE_DIR}/src")
 
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTSVISUALGL)
+target_compile_definitions(${FULL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTVISUALGL)
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAOPENGLVISUAL)
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALENGINE)

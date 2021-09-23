@@ -1,6 +1,6 @@
-#include <sofa/components/collision/response/contact/config.h>
+#include <sofa/component/collision/response/contact/config.h>
 
-namespace sofa::components::collision::response::contact
+namespace sofa::component::collision::response::contact
 {
 
-} // namespace sofa::components::collision::response::contact
+} // namespace sofa::component::collision::response::contact

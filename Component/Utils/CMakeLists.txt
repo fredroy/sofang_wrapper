@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
-project(Sofa.Components.Utils LANGUAGES CXX)
+project(Sofa.Component.Utils LANGUAGES CXX)
 
-set(SOFACOMPONENTSUTILS_SOURCE_DIR "src/sofa/components/utils")
+set(SOFACOMPONENTUTILS_SOURCE_DIR "src/sofa/component/utils")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -12,7 +12,7 @@ set(SOFAGRAPHCOMPONENT_DIR "${SOFAMODULES_SOURCE_DIR}/SofaGraphComponent/")
 set(SOFAGRAPHCOMPONENT_SRC "${SOFAGRAPHCOMPONENT_DIR}/src/SofaGraphComponent/")
 
 set(HEADER_FILES
-	${SOFACOMPONENTSUTILS_SOURCE_DIR}/config.h.in
+	${SOFACOMPONENTUTILS_SOURCE_DIR}/config.h.in
     ${SOFABASEUTILS_SRC}/messageHandlerComponent.h
     ${SOFABASEUTILS_SRC}/MakeAliasComponent.h
     ${SOFABASEUTILS_SRC}/MakeDataAliasComponent.h
@@ -32,7 +32,7 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-    ${SOFACOMPONENTSUTILS_SOURCE_DIR}/init.cpp
+    ${SOFACOMPONENTUTILS_SOURCE_DIR}/init.cpp
     ${SOFABASEUTILS_SRC}/messageHandlerComponent.cpp
     ${SOFABASEUTILS_SRC}/MakeAliasComponent.cpp
     ${SOFABASEUTILS_SRC}/MakeDataAliasComponent.cpp
@@ -59,7 +59,7 @@ source_group("wrapper" FILES ${WRAPPER_FILES})
 
 sofa_find_package(SofaFramework REQUIRED)
 
-configure_file(${SOFACOMPONENTSUTILS_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/utils/config.h)
+configure_file(${SOFACOMPONENTUTILS_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/utils/config.h)
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
@@ -71,6 +71,6 @@ target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/w
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFABASEUTILS_DIR}/src")
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGRAPHCOMPONENT_DIR}/src")
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE BUILD_SOFACOMPONENTSUTILS)
+target_compile_definitions(${PROJECT_NAME} PRIVATE BUILD_SOFACOMPONENTUTILS)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFABASEUTILS)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGRAPHCOMPONENT)

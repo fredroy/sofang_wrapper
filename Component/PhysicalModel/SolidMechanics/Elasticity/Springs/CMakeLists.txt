@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.12)
 project(SCPSES LANGUAGES CXX)
 
-# Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs 
+# Sofa.Component.PhysicalModel.SolidMechanics.Elasticity.Springs 
 
-set(SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYSPRINGS_SOURCE_DIR "src/sofa/components/physicalmodel/solidmechanics/elasticity/springs")
+set(SOFACOMPONENTPHYSICALMODELSOLIDMECHANICSELASTICITYSPRINGS_SOURCE_DIR "src/sofa/component/physicalmodel/solidmechanics/elasticity/springs")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -23,7 +23,7 @@ set(SOFAGENERALOBJECTINTERACTION_SRC "${SOFAGENERALOBJECTINTERACTION_DIR}/src/So
 
 # Minimal set
 set(MINIMAL_HEADER_FILES
-    ${SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYSPRINGS_SOURCE_DIR}/config.h.in 
+    ${SOFACOMPONENTPHYSICALMODELSOLIDMECHANICSELASTICITYSPRINGS_SOURCE_DIR}/config.h.in 
     ${SOFADEFORMABLE_SRC}/MeshSpringForceField.h
     ${SOFADEFORMABLE_SRC}/MeshSpringForceField.inl
     ${SOFADEFORMABLE_SRC}/RestShapeSpringsForceField.h
@@ -41,7 +41,7 @@ set(MINIMAL_HEADER_FILES
 )
 
 set(MINIMAL_SOURCE_FILES
-    ${SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYSPRINGS_SOURCE_DIR}/initMinimal.cpp
+    ${SOFACOMPONENTPHYSICALMODELSOLIDMECHANICSELASTICITYSPRINGS_SOURCE_DIR}/initMinimal.cpp
     ${SOFADEFORMABLE_SRC}/MeshSpringForceField.cpp
     ${SOFADEFORMABLE_SRC}/RestShapeSpringsForceField.cpp
     ${SOFADEFORMABLE_SRC}/SpringForceField.cpp
@@ -88,7 +88,7 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-    ${SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYSPRINGS_SOURCE_DIR}/init.cpp
+    ${SOFACOMPONENTPHYSICALMODELSOLIDMECHANICSELASTICITYSPRINGS_SOURCE_DIR}/init.cpp
     ${SOFADEFORMABLE_SRC}/AngularSpringForceField.cpp
     ${SOFADEFORMABLE_SRC}/PolynomialRestShapeSpringsForceField.cpp
     ${SOFADEFORMABLE_SRC}/PolynomialSpringsForceField.cpp
@@ -120,17 +120,17 @@ source_group("wrapper" FILES ${WRAPPER_FILES})
 set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
 sofa_find_package(SofaFramework REQUIRED)
 
-configure_file(${SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYSPRINGS_SOURCE_DIR}/config.h.in 
-    ${CMAKE_BINARY_DIR}/include/sofa/components/physicalmodel/solidmechanics/elasticity/springs/config.h)
+configure_file(${SOFACOMPONENTPHYSICALMODELSOLIDMECHANICSELASTICITYSPRINGS_SOURCE_DIR}/config.h.in 
+    ${CMAKE_BINARY_DIR}/include/sofa/component/physicalmodel/solidmechanics/elasticity/springs/config.h)
 
 add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
-add_library(Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs_minimal ALIAS ${MINIMAL_TARGET_NAME})
-set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES OUTPUT_NAME Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs_minimal)
-set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES PROJECT_LABEL Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs_minimal)
+add_library(Sofa.Component.PhysicalModel.SolidMechanics.Elasticity.Springs_minimal ALIAS ${MINIMAL_TARGET_NAME})
+set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES OUTPUT_NAME Sofa.Component.PhysicalModel.SolidMechanics.Elasticity.Springs_minimal)
+set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES PROJECT_LABEL Sofa.Component.PhysicalModel.SolidMechanics.Elasticity.Springs_minimal)
 set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Topology_minimal)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver_minimal) # For EigenMatrix in RestShapeSpring
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.Topology_minimal)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.LinearSolver_minimal) # For EigenMatrix in RestShapeSpring
 
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFADEFORMABLE)
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAOBJECTINTERACTION)
@@ -151,13 +151,13 @@ endif()
 set(FULL_TARGET_NAME ${PROJECT_NAME})
 
 add_library(${FULL_TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
-add_library(Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs ALIAS ${FULL_TARGET_NAME})
-set_target_properties(${FULL_TARGET_NAME} PROPERTIES OUTPUT_NAME Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs)
-set_target_properties(${FULL_TARGET_NAME} PROPERTIES PROJECT_LABEL Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs)
+add_library(Sofa.Component.PhysicalModel.SolidMechanics.Elasticity.Springs ALIAS ${FULL_TARGET_NAME})
+set_target_properties(${FULL_TARGET_NAME} PROPERTIES OUTPUT_NAME Sofa.Component.PhysicalModel.SolidMechanics.Elasticity.Springs)
+set_target_properties(${FULL_TARGET_NAME} PROPERTIES PROJECT_LABEL Sofa.Component.PhysicalModel.SolidMechanics.Elasticity.Springs)
 target_link_libraries(${FULL_TARGET_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver)
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.Topology)
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Component.LinearSolver)
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Component.Topology)
 
 target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAGENERALDEFORMABLE_DIR}/src")
 target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAGENERALOBJECTINTERACTION_DIR}/src")

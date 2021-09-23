@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
-project(Sofa.Components.LinearSolver LANGUAGES CXX)
+project(Sofa.Component.LinearSolver LANGUAGES CXX)
 
-set(SOFACOMPONENTSLINEARSOLVER_SOURCE_DIR "src/sofa/components/linearsolver")
+set(SOFACOMPONENTLINEARSOLVER_SOURCE_DIR "src/sofa/component/linearsolver")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -23,7 +23,7 @@ set(SOFASPARSESOLVER_SRC "${SOFASPARSESOLVER_DIR}/src/SofaSparseSolver")
 
 # Minimal set
 set(MINIMAL_HEADER_FILES
-    ${SOFACOMPONENTSLINEARSOLVER_SOURCE_DIR}/config.h.in
+    ${SOFACOMPONENTLINEARSOLVER_SOURCE_DIR}/config.h.in
     ${SOFABASELINEARSOLVER_SRC}/BlocMatrixWriter.h
     ${SOFABASELINEARSOLVER_SRC}/CGLinearSolver.h
     ${SOFABASELINEARSOLVER_SRC}/CGLinearSolver.inl
@@ -40,7 +40,7 @@ set(MINIMAL_HEADER_FILES
 )
 
 set(MINIMAL_SOURCE_FILES
-    ${SOFACOMPONENTSLINEARSOLVER_SOURCE_DIR}/initMinimal.cpp
+    ${SOFACOMPONENTLINEARSOLVER_SOURCE_DIR}/initMinimal.cpp
     ${SOFABASELINEARSOLVER_SRC}/CGLinearSolver.cpp
     ${SOFABASELINEARSOLVER_SRC}/DefaultMultiMatrixAccessor.cpp
     ${SOFABASELINEARSOLVER_SRC}/GraphScatteredTypes.cpp
@@ -73,7 +73,7 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-    ${SOFACOMPONENTSLINEARSOLVER_SOURCE_DIR}/init.cpp
+    ${SOFACOMPONENTLINEARSOLVER_SOURCE_DIR}/init.cpp
     ${SOFAEIGEN2SOLVER_SRC}/SVDLinearSolver.cpp
     ${SOFAGENERALLINEARSOLVER_SRC}/BTDLinearSolver.cpp
     ${SOFAGENERALLINEARSOLVER_SRC}/CholeskySolver.cpp
@@ -109,7 +109,7 @@ if (SOFA_COMPONENTS_LINEARSOLVER_HAVE_OPENMP)
     list(APPEND MINIMAL_HEADER_FILES EigenBaseSparseMatrix_MT.h)
 endif()
 
-configure_file(${SOFACOMPONENTSLINEARSOLVER_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/linearsolver/config.h)
+configure_file(${SOFACOMPONENTLINEARSOLVER_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/linearsolver/config.h)
 
 add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
 set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
@@ -137,7 +137,7 @@ sofa_set_01(SOFA_COMPONENTS_LINEARSOLVER_HAVE_CSPARSE VALUE TRUE)
 
 sofa_find_package(metis QUIET) # Unix users can have an installed version of metis
 if(NOT metis_FOUND)
-    message(STATUS "Sofa.Components.LinearSolver: using built-in metis library")
+    message(STATUS "Sofa.Component.LinearSolver: using built-in metis library")
     add_subdirectory(${SOFASPARSESOLVER_DIR}/extlibs/metis-5.1.0 ${CMAKE_CURRENT_BINARY_DIR}/extlibs/metis-5.1.0)
 endif()
 sofa_set_01(SOFA_COMPONENTS_LINEARSOLVER_HAVE_METIS VALUE TRUE)

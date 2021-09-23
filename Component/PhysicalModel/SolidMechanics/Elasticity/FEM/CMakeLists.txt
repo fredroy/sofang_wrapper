@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
-project(Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.FEM LANGUAGES CXX)
+project(Sofa.Component.PhysicalModel.SolidMechanics.Elasticity.FEM LANGUAGES CXX)
 
-set(SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_SOURCE_DIR "src/sofa/components/physicalmodel/solidmechanics/elasticity/fem")
+set(SOFACOMPONENTPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_SOURCE_DIR "src/sofa/component/physicalmodel/solidmechanics/elasticity/fem")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -17,7 +17,7 @@ set(SOFAMISCFEM_SRC "${SOFAMISCFEM_DIR}/src/SofaMiscFem")
 
 # Minimal set
 set(MINIMAL_HEADER_FILES
-    ${SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_SOURCE_DIR}/config.h.in
+    ${SOFACOMPONENTPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_SOURCE_DIR}/config.h.in
     ${SOFASIMPLEFEM_SRC}/HexahedronFEMForceField.h
     ${SOFASIMPLEFEM_SRC}/HexahedronFEMForceField.inl
     ${SOFASIMPLEFEM_SRC}/TetrahedronFEMForceField.h
@@ -29,7 +29,7 @@ set(MINIMAL_HEADER_FILES
 )
 
 set(MINIMAL_SOURCE_FILES
-    ${SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_SOURCE_DIR}/initMinimal.cpp
+    ${SOFACOMPONENTPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_SOURCE_DIR}/initMinimal.cpp
     ${SOFASIMPLEFEM_SRC}/HexahedronFEMForceField.cpp
     ${SOFASIMPLEFEM_SRC}/TetrahedronFEMForceField.cpp
     ${SOFAGENERALSIMPLEFEM_SRC}/BeamFEMForceField.cpp
@@ -55,7 +55,7 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-    ${SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_SOURCE_DIR}/init.cpp
+    ${SOFACOMPONENTPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_SOURCE_DIR}/init.cpp
     ${SOFASIMPLEFEM_SRC}/TetrahedronDiffusionFEMForceField.cpp
     ${SOFAGENERALSIMPLEFEM_SRC}/HexahedralFEMForceField.cpp
     ${SOFAGENERALSIMPLEFEM_SRC}/HexahedralFEMForceFieldAndMass.cpp
@@ -75,14 +75,14 @@ source_group("wrapper" FILES ${WRAPPER_FILES})
 set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
 sofa_find_package(SofaFramework REQUIRED)
 
-configure_file(${SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_SOURCE_DIR}/config.h.in 
-    ${CMAKE_BINARY_DIR}/include/sofa/components/physicalmodel/solidmechanics/elasticity/fem/config.h)
+configure_file(${SOFACOMPONENTPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_SOURCE_DIR}/config.h.in 
+    ${CMAKE_BINARY_DIR}/include/sofa/component/physicalmodel/solidmechanics/elasticity/fem/config.h)
 
 add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
 set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Topology_minimal)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver_minimal) # For BlocMatrixWriter
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.Topology_minimal)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.LinearSolver_minimal) # For BlocMatrixWriter
 
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFASIMPLEFEM)
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALSIMPLEFEM)
@@ -105,8 +105,8 @@ set(FULL_TARGET_NAME ${PROJECT_NAME})
 add_library(${FULL_TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${FULL_TARGET_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
-# target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver)
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.Topology)
+# target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Component.LinearSolver)
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Component.Topology)
 
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFASIMPLEFEM)
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALSIMPLEFEM)

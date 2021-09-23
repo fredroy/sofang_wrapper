@@ -1,6 +1,6 @@
-#include <sofa/components/linearsolver/config.h>
+#include <sofa/component/linearsolver/config.h>
 
-namespace sofa::components::linearsolver
+namespace sofa::component::linearsolver
 {
 
 }

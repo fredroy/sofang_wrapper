@@ -1,11 +1,11 @@
-#include <sofa/components/physicalmodel/solidmechanics/elasticity/fem/config.h>
+#include <sofa/component/physicalmodel/solidmechanics/elasticity/fem/config.h>
 
-namespace sofa::components::physicalmodel::solidmechanics::elasticity::fem
+namespace sofa::component::physicalmodel::solidmechanics::elasticity::fem
 {
 
 extern "C" {
-	SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_API void initExternalModule();
-	SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_API const char* getModuleName();
+	SOFACOMPONENTPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_API void initExternalModule();
+	SOFACOMPONENTPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_API const char* getModuleName();
 }
 
 void initExternalModule()
@@ -22,4 +22,4 @@ const char* getModuleName()
 	return MODULE_NAME;
 }
 
-} // namespace sofa::components::physicalmodel::solidmechanics::elasticity::fem
+} // namespace sofa::component::physicalmodel::solidmechanics::elasticity::fem

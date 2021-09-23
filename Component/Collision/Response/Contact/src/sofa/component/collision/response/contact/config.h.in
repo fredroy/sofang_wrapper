@@ -3,13 +3,13 @@
 #include <sofa/config.h>
 #include <sofa/config/sharedlibrary_defines.h>
 
-#ifdef BUILD_SOFACOMPONENTSCOLLISIONRESPONSECONTACT
-#  define SOFACOMPONENTSCOLLISIONRESPONSECONTACT_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#ifdef BUILD_SOFACOMPONENTCOLLISIONRESPONSECONTACT
+#  define SOFACOMPONENTCOLLISIONRESPONSECONTACT_API SOFA_EXPORT_DYNAMIC_LIBRARY
 #else
-#  define SOFACOMPONENTSCOLLISIONRESPONSECONTACT_API SOFA_IMPORT_DYNAMIC_LIBRARY
+#  define SOFACOMPONENTCOLLISIONRESPONSECONTACT_API SOFA_IMPORT_DYNAMIC_LIBRARY
 #endif
 
-namespace sofa::components::collision::response::contact
+namespace sofa::component::collision::response::contact
 {
 	constexpr char* MODULE_NAME = "@PROJECT_NAME@";
-} // namespace sofa::components::collision::response::contact
+} // namespace sofa::component::collision::response::contact

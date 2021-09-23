@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sofa/components/collision/response/contact/config.h>
+#include <sofa/component/collision/response/contact/config.h>
 
 #ifdef SOFA_BUILD_SOFAMESHCOLLISION
 #  define SOFA_SOFAMESHCOLLISION_API SOFA_EXPORT_DYNAMIC_LIBRARY

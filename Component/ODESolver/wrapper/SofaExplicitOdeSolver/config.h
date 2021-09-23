@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sofa/components/odesolver/config.h>
+#include <sofa/component/odesolver/config.h>
 
 #ifdef SOFA_BUILD_SOFAEXPLICITODESOLVER
 #  define SOFA_SOFAEXPLICITODESOLVER_API SOFA_EXPORT_DYNAMIC_LIBRARY

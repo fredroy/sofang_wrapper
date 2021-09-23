@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
-project(Sofa.Components.Controller LANGUAGES CXX)
+project(Sofa.Component.Controller LANGUAGES CXX)
 
-set(SOFACOMPONENTSCONTROLLER_SOURCE_DIR "src/sofa/components/controller")
+set(SOFACOMPONENTCONTROLLER_SOURCE_DIR "src/sofa/component/controller")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -10,7 +10,7 @@ set(SOFAUSERINTERACTION_DIR "${SOFAMODULES_SOURCE_DIR}/SofaUserInteraction/")
 set(SOFAUSERINTERACTION_SRC "${SOFAUSERINTERACTION_DIR}/src/SofaUserInteraction")
 
 set(HEADER_FILES
-	${SOFACOMPONENTSCONTROLLER_SOURCE_DIR}/config.h.in
+	${SOFACOMPONENTCONTROLLER_SOURCE_DIR}/config.h.in
     ${SOFAUSERINTERACTION_SRC}/Controller.h
     ${SOFAUSERINTERACTION_SRC}/MechanicalStateController.h
     ${SOFAUSERINTERACTION_SRC}/MechanicalStateController.inl
@@ -18,7 +18,7 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-    ${SOFACOMPONENTSCONTROLLER_SOURCE_DIR}/init.cpp
+    ${SOFACOMPONENTCONTROLLER_SOURCE_DIR}/init.cpp
     ${SOFAUSERINTERACTION_SRC}/Controller.cpp
     ${SOFAUSERINTERACTION_SRC}/MechanicalStateController.cpp
     ${SOFAUSERINTERACTION_SRC}/SleepController.cpp
@@ -31,7 +31,7 @@ source_group("wrapper" FILES ${WRAPPER_FILES})
 
 sofa_find_package(SofaFramework REQUIRED)
 
-configure_file(${SOFACOMPONENTSCONTROLLER_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/controller/config.h)
+configure_file(${SOFACOMPONENTCONTROLLER_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/controller/config.h)
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)

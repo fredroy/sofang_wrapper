@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
-project(Sofa.Components.Constraint.Lagrangian LANGUAGES CXX)
+project(Sofa.Component.Constraint.Lagrangian LANGUAGES CXX)
 
-set(SOFACOMPONENTSCONSTRAINTLAGRANGIAN_SOURCE_DIR "src/sofa/components/constraint/lagrangian")
+set(SOFACOMPONENTCONSTRAINTLAGRANGIAN_SOURCE_DIR "src/sofa/component/constraint/lagrangian")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -11,7 +11,7 @@ set(SOFACONSTRAINT_SRC "${SOFACONSTRAINT_DIR}/src/SofaConstraint")
 
 # Minimal set
 set(MINIMAL_HEADER_FILES
-    ${SOFACOMPONENTSCONSTRAINTLAGRANGIAN_SOURCE_DIR}/config.h.in
+    ${SOFACOMPONENTCONSTRAINTLAGRANGIAN_SOURCE_DIR}/config.h.in
     ${SOFACONSTRAINT_SRC}/BilateralConstraintResolution.h
     ${SOFACONSTRAINT_SRC}/BilateralInteractionConstraint.h
     ${SOFACONSTRAINT_SRC}/BilateralInteractionConstraint.inl
@@ -29,7 +29,7 @@ set(MINIMAL_HEADER_FILES
 )
 
 set(MINIMAL_SOURCE_FILES
-    ${SOFACOMPONENTSCONSTRAINTLAGRANGIAN_SOURCE_DIR}/initMinimal.cpp
+    ${SOFACOMPONENTCONSTRAINTLAGRANGIAN_SOURCE_DIR}/initMinimal.cpp
     ${SOFACONSTRAINT_SRC}/BilateralInteractionConstraint.cpp
     ${SOFACONSTRAINT_SRC}/ConstraintSolverImpl.cpp
     ${SOFACONSTRAINT_SRC}/ConstraintStoreLambdaVisitor.cpp
@@ -54,7 +54,7 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-    ${SOFACOMPONENTSCONSTRAINTLAGRANGIAN_SOURCE_DIR}/init.cpp
+    ${SOFACOMPONENTCONSTRAINTLAGRANGIAN_SOURCE_DIR}/init.cpp
     ${SOFACONSTRAINT_SRC}/PrecomputedConstraintCorrection.cpp
     ${SOFACONSTRAINT_SRC}/SlidingConstraint.cpp
     ${SOFACONSTRAINT_SRC}/StopperConstraint.cpp
@@ -70,14 +70,14 @@ source_group("wrapper" FILES ${WRAPPER_FILES})
 set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
 sofa_find_package(SofaFramework REQUIRED)
 
-configure_file(${SOFACOMPONENTSCONSTRAINTLAGRANGIAN_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/constraint/lagrangian/config.h)
+configure_file(${SOFACOMPONENTCONSTRAINTLAGRANGIAN_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/constraint/lagrangian/config.h)
 
 add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
 set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Topology_minimal)
-# target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver_minimal)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.PhysicalModel.Mass) # Uncoupled needs UniformMass
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.Topology_minimal)
+# target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.LinearSolver_minimal)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.PhysicalModel.Mass) # Uncoupled needs UniformMass
 
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFACONSTRAINT)
 target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFACONSTRAINT_DIR}/src")
@@ -95,10 +95,10 @@ set(FULL_TARGET_NAME ${PROJECT_NAME})
 
 add_library(${FULL_TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.LinearSolver)
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.ODESolver) # PrecompuptedCC needs EulerImplicit
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.Topology)
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.FEM) # PrecompuptedCC needs TetraFEM
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Component.LinearSolver)
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Component.ODESolver) # PrecompuptedCC needs EulerImplicit
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Component.Topology)
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Component.PhysicalModel.SolidMechanics.Elasticity.FEM) # PrecompuptedCC needs TetraFEM
 
 target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFACONSTRAINT_DIR}/src")
 

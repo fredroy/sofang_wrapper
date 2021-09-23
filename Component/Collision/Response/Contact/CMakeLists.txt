@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
-project(Sofa.Components.Collision.Response.Contact LANGUAGES CXX)
+project(Sofa.Component.Collision.Response.Contact LANGUAGES CXX)
 
-set(SOFACOMPONENTSCOLLISIONDETECTIONRESPONSECONTACT_SOURCE_DIR "src/sofa/components/collision/response/contact")
+set(SOFACOMPONENTCOLLISIONDETECTIONRESPONSECONTACT_SOURCE_DIR "src/sofa/component/collision/response/contact")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -18,7 +18,7 @@ set(SOFAUSERINTERACTION_SRC "${SOFAUSERINTERACTION_DIR}/src/SofaUserInteraction"
 
 # Minimal set
 set(MINIMAL_HEADER_FILES
-    ${SOFACOMPONENTSCOLLISIONDETECTIONRESPONSECONTACT_SOURCE_DIR}/config.h.in
+    ${SOFACOMPONENTCOLLISIONDETECTIONRESPONSECONTACT_SOURCE_DIR}/config.h.in
     ${SOFABASECOLLISION_SRC}/BaseContactMapper.h
     ${SOFAMESHCOLLISION_SRC}/BarycentricContactMapper.h
     ${SOFAMESHCOLLISION_SRC}/BarycentricContactMapper.inl
@@ -37,7 +37,7 @@ set(MINIMAL_HEADER_FILES
 )
 
 set(MINIMAL_SOURCE_FILES
-    ${SOFACOMPONENTSCOLLISIONDETECTIONRESPONSECONTACT_SOURCE_DIR}/initMinimal.cpp
+    ${SOFACOMPONENTCOLLISIONDETECTIONRESPONSECONTACT_SOURCE_DIR}/initMinimal.cpp
     ${SOFABASECOLLISION_SRC}/BaseContactMapper.cpp
     ${SOFAMESHCOLLISION_SRC}/BarycentricContactMapper.cpp
     ${SOFAMESHCOLLISION_SRC}/BarycentricPenalityContact.cpp
@@ -74,18 +74,18 @@ source_group("wrapper" FILES ${WRAPPER_FILES})
 set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
 sofa_find_package(SofaFramework REQUIRED)
 
-configure_file(${SOFACOMPONENTSCOLLISIONDETECTIONRESPONSECONTACT_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/collision/response/contact/config.h)
+configure_file(${SOFACOMPONENTCOLLISIONDETECTIONRESPONSECONTACT_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/collision/response/contact/config.h)
 
 add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
 set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Mapping_minimal)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Container) # BarycentricMapper needs MechanicalObject
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.PhysicalModel.SolidMechanics.Elasticity.Springs_minimal) # BarycentricPenalityContact
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Constraint.Lagrangian_minimal) # FrictionContact needs UnilateralCC
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Collision.Models_minimal)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.Mapping_minimal)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.Container) # BarycentricMapper needs MechanicalObject
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.PhysicalModel.SolidMechanics.Elasticity.Springs_minimal) # BarycentricPenalityContact
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.Constraint.Lagrangian_minimal) # FrictionContact needs UnilateralCC
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.Collision.Models_minimal)
 
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTSCOLLISIONRESPONSECONTACT)
+target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTCOLLISIONRESPONSECONTACT)
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFABASECOLLISION)
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAMESHCOLLISION)
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFACONSTRAINT)
@@ -109,6 +109,6 @@ target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
 
 target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAUSERINTERACTION_DIR}/src")
 
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTSCOLLISIONRESPONSECONTACT)
+target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTCOLLISIONRESPONSECONTACT)
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFACONSTRAINT)
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAUSERINTERACTION)

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
-project(Sofa.Components.IO.Misc LANGUAGES CXX)
+project(Sofa.Component.IO.Misc LANGUAGES CXX)
 
-set(SOFACOMPONENTSIOMISC_SOURCE_DIR "src/sofa/components/io/misc")
+set(SOFACOMPONENTIOMISC_SOURCE_DIR "src/sofa/component/io/misc")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -13,7 +13,7 @@ set(SOFAEXPORTER_SRC "${SOFAEXPORTER_DIR}/src/SofaExporter")
 
 # Minimal set
 set(MINIMAL_HEADER_FILES
-    ${SOFACOMPONENTSIOMISC_SOURCE_DIR}/config.h.in
+    ${SOFACOMPONENTIOMISC_SOURCE_DIR}/config.h.in
     ${SOFAGENERALLOADER_SRC}/ReadState.h
     ${SOFAGENERALLOADER_SRC}/ReadState.inl
     ${SOFAEXPORTER_SRC}/WriteState.h
@@ -21,7 +21,7 @@ set(MINIMAL_HEADER_FILES
 )
 
 set(MINIMAL_SOURCE_FILES
-    ${SOFACOMPONENTSIOMISC_SOURCE_DIR}/initMinimal.cpp
+    ${SOFACOMPONENTIOMISC_SOURCE_DIR}/initMinimal.cpp
     ${SOFAGENERALLOADER_SRC}/ReadState.cpp
     ${SOFAEXPORTER_SRC}/WriteState.cpp
 )
@@ -36,7 +36,7 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-    ${SOFACOMPONENTSIOMISC_SOURCE_DIR}/init.cpp
+    ${SOFACOMPONENTIOMISC_SOURCE_DIR}/init.cpp
     ${SOFAGENERALLOADER_SRC}/ReadTopology.cpp
     ${SOFAGENERALLOADER_SRC}/InputEventReader.cpp
     ${SOFAEXPORTER_SRC}/WriteTopology.cpp
@@ -53,7 +53,7 @@ source_group("wrapper" FILES ${WRAPPER_FILES})
 set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
 sofa_find_package(SofaFramework REQUIRED)
 
-configure_file(${SOFACOMPONENTSIOMISC_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/io/misc/config.h)
+configure_file(${SOFACOMPONENTIOMISC_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/io/misc/config.h)
 
 add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
 set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)

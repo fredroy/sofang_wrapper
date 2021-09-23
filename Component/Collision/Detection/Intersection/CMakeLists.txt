@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
-project(Sofa.Components.Collision.Detection.Intersection LANGUAGES CXX)
+project(Sofa.Component.Collision.Detection.Intersection LANGUAGES CXX)
 
-set(SOFACOMPONENTSCOLLISIONDETECTIONINTERSECTION_SOURCE_DIR "src/sofa/components/collision/detection/intersection")
+set(SOFACOMPONENTCOLLISIONDETECTIONINTERSECTION_SOURCE_DIR "src/sofa/component/collision/detection/intersection")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -20,7 +20,7 @@ set(SOFAMISCCOLLISION_SRC "${SOFAMISCCOLLISION_DIR}/src/SofaMiscCollision")
 
 # Minimal set
 set(MINIMAL_HEADER_FILES
-    ${SOFACOMPONENTSCOLLISIONDETECTIONINTERSECTION_SOURCE_DIR}/config.h.in
+    ${SOFACOMPONENTCOLLISIONDETECTIONINTERSECTION_SOURCE_DIR}/config.h.in
     ${SOFABASECOLLISION_SRC}/BaseProximityIntersection.h
     ${SOFABASECOLLISION_SRC}/DiscreteIntersection.h
     ${SOFABASECOLLISION_SRC}/MinProximityIntersection.h
@@ -33,7 +33,7 @@ set(MINIMAL_HEADER_FILES
 )
 
 set(MINIMAL_SOURCE_FILES
-    ${SOFACOMPONENTSCOLLISIONDETECTIONINTERSECTION_SOURCE_DIR}/initMinimal.cpp
+    ${SOFACOMPONENTCOLLISIONDETECTIONINTERSECTION_SOURCE_DIR}/initMinimal.cpp
     ${SOFABASECOLLISION_SRC}/BaseProximityIntersection.cpp
     ${SOFABASECOLLISION_SRC}/DiscreteIntersection.cpp
     ${SOFABASECOLLISION_SRC}/MinProximityIntersection.cpp
@@ -100,15 +100,15 @@ source_group("wrapper" FILES ${WRAPPER_FILES})
 set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
 sofa_find_package(SofaFramework REQUIRED)
 
-configure_file(${SOFACOMPONENTSCOLLISIONDETECTIONINTERSECTION_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/collision/detection/intersection/config.h)
+configure_file(${SOFACOMPONENTCOLLISIONDETECTIONINTERSECTION_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/collision/detection/intersection/config.h)
 
 add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
 set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Topology_minimal)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Collision.Models_minimal)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.Topology_minimal)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.Collision.Models_minimal)
 
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTSCOLLISIONDETECTIONINTERSECTION)
+target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTCOLLISIONDETECTIONINTERSECTION)
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFABASECOLLISION)
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFACONSTRAINT)
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALMESHCOLLISION)
@@ -129,12 +129,12 @@ set(FULL_TARGET_NAME ${PROJECT_NAME})
 
 add_library(${FULL_TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Collision.Models)
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.Collision.Models)
 
 target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAUSERINTERACTION_DIR}/src")
 target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAMISCCOLLISION_DIR}/src")
 
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTSCOLLISIONDETECTIONINTERSECTION)
+target_compile_definitions(${FULL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTCOLLISIONDETECTIONINTERSECTION)
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFACONSTRAINT)
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAUSERINTERACTION)
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAMISCCOLLISION)

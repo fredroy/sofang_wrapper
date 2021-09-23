@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sofa/components/linearsolver/config.h>
+#include <sofa/component/linearsolver/config.h>
 
 #define SOFASPARSESOLVER_HAVE_METIS SOFA_COMPONENTS_LINEARSOLVER_HAVE_METIS
 #define SOFASPARSESOLVER_HAVE_CSPARSE SOFA_COMPONENTS_LINEARSOLVER_HAVE_CSPARSE

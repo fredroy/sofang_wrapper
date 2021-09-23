@@ -1,6 +1,6 @@
-#include <sofa/components/collision/models/config.h>
+#include <sofa/component/collision/models/config.h>
 
-namespace sofa::components::collision::models
+namespace sofa::component::collision::models
 {
 
-} // namespace sofa::components::collision::models
+} // namespace sofa::component::collision::models

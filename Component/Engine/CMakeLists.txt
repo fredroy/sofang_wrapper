@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
-project(Sofa.Components.Engine LANGUAGES CXX)
+project(Sofa.Component.Engine LANGUAGES CXX)
 
-set(SOFACOMPONENTSENGINE_SOURCE_DIR "src/sofa/components/engine")
+set(SOFACOMPONENTENGINE_SOURCE_DIR "src/sofa/component/engine")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -16,13 +16,13 @@ set(SOFAMISCENGINE_SRC "${SOFAMISCENGINE_DIR}/src/SofaMiscEngine")
 
 # Minimal set
 set(MINIMAL_HEADER_FILES
-    ${SOFACOMPONENTSENGINE_SOURCE_DIR}/config.h.in
+    ${SOFACOMPONENTENGINE_SOURCE_DIR}/config.h.in
     ${SOFAENGINE_SRC}/BoxROI.h
     ${SOFAENGINE_SRC}/BoxROI.inl
 )
 
 set(MINIMAL_SOURCE_FILES
-    ${SOFACOMPONENTSENGINE_SOURCE_DIR}/initMinimal.cpp
+    ${SOFACOMPONENTENGINE_SOURCE_DIR}/initMinimal.cpp
     ${SOFAENGINE_SRC}/BoxROI.cpp
 )
 
@@ -218,7 +218,7 @@ source_group("wrapper" FILES ${WRAPPER_FILES})
 set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
 sofa_find_package(SofaFramework REQUIRED)
 
-configure_file(${SOFACOMPONENTSENGINE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/engine/config.h)
+configure_file(${SOFACOMPONENTENGINE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/engine/config.h)
 
 add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
 set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
@@ -240,7 +240,7 @@ set(FULL_TARGET_NAME ${PROJECT_NAME})
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Components.Collision.Models) # for TriangleOctree in DilateEng and Random..Eng
+target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Component.Collision.Models) # for TriangleOctree in DilateEng and Random..Eng
 
 target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAGENERALENGINE_DIR}/src")
 target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAMISCENGINE_DIR}/src")

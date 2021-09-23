@@ -1,6 +1,6 @@
-#include <sofa/components/gui/core/config.h>
+#include <sofa/component/gui/core/config.h>
 
-namespace sofa::components::gui::core
+namespace sofa::component::gui::core
 {
 
-} // sofa::components::gui::core
+} // sofa::component::gui::core

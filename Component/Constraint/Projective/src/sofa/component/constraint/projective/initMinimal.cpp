@@ -1,6 +1,6 @@
-#include <sofa/components/constraint/projective/config.h>
+#include <sofa/component/constraint/projective/config.h>
 
-namespace sofa::components::constraint::projective
+namespace sofa::component::constraint::projective
 {
 
-} // namespace sofa::components::constraint::projective
+} // namespace sofa::component::constraint::projective

@@ -1,4 +1,4 @@
-#include <sofa/components/topology/config.h>
+#include <sofa/component/topology/config.h>
 
 namespace sofa::component::topology
 {

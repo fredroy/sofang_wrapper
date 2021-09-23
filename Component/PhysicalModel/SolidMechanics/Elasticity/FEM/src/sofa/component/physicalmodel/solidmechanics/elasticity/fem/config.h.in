@@ -3,13 +3,13 @@
 #include <sofa/config.h>
 #include <sofa/config/sharedlibrary_defines.h>
 
-#ifdef BUILD_SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYFEM
-#  define SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#ifdef BUILD_SOFACOMPONENTPHYSICALMODELSOLIDMECHANICSELASTICITYFEM
+#  define SOFACOMPONENTPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_API SOFA_EXPORT_DYNAMIC_LIBRARY
 #else
-#  define SOFACOMPONENTSPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_API SOFA_IMPORT_DYNAMIC_LIBRARY
+#  define SOFACOMPONENTPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_API SOFA_IMPORT_DYNAMIC_LIBRARY
 #endif
 
-namespace sofa::components::physicalmodel::solidmechanics::elasticity::fem
+namespace sofa::component::physicalmodel::solidmechanics::elasticity::fem
 {
 	constexpr char* MODULE_NAME = "@PROJECT_NAME@";
-} // namespace sofa::components::physicalmodel::solidmechanics::elasticity::fem
+} // namespace sofa::component::physicalmodel::solidmechanics::elasticity::fem

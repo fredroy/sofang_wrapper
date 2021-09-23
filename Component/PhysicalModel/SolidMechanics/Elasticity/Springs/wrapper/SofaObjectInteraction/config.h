@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sofa/components/physicalmodel/solidmechanics/elasticity/springs/config.h>
+#include <sofa/component/physicalmodel/solidmechanics/elasticity/springs/config.h>
 
 #ifdef SOFA_BUILD_SOFAOBJECTINTERACTION
 #  define SOFA_SOFAOBJECTINTERACTION_API SOFA_EXPORT_DYNAMIC_LIBRARY

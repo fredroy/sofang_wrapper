@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sofa/components/visual/gl/config.h>
+#include <sofa/component/visual/gl/config.h>
 
 #ifdef SOFA_BUILD_SOFAGENERALENGINE
 #  define SOFA_SOFAGENERALENGINE_API SOFA_EXPORT_DYNAMIC_LIBRARY

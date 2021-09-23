@@ -1,11 +1,11 @@
-#include <sofa/components/physicalmodel/mass/config.h>
+#include <sofa/component/physicalmodel/mass/config.h>
 
-namespace sofa::components::physicalmodel::mass
+namespace sofa::component::physicalmodel::mass
 {
 
 extern "C" {
-	SOFACOMPONENTSPHYSICALMODELMASS_API void initExternalModule();
-	SOFACOMPONENTSPHYSICALMODELMASS_API const char* getModuleName();
+	SOFACOMPONENTPHYSICALMODELMASS_API void initExternalModule();
+	SOFACOMPONENTPHYSICALMODELMASS_API const char* getModuleName();
 }
 
 void initExternalModule()
@@ -22,4 +22,4 @@ const char* getModuleName()
 	return MODULE_NAME;
 }
 
-} // namespace sofa::components::physicalmodel::mass
+} // namespace sofa::component::physicalmodel::mass

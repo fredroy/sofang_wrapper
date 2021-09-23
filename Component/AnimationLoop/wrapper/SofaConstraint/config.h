@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sofa/components/animationloop/config.h>
+#include <sofa/component/animationloop/config.h>
 
 #ifdef SOFA_BUILD_SOFACONSTRAINT
 #  define SOFA_SOFACONSTRAINT_API SOFA_EXPORT_DYNAMIC_LIBRARY

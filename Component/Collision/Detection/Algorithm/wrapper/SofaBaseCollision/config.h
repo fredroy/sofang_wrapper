@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sofa/components/collision/detection/algorithm/config.h>
+#include <sofa/component/collision/detection/algorithm/config.h>
 
 #ifdef SOFA_BUILD_SOFABASECOLLISION
 #  define SOFA_SOFABASECOLLISION_API SOFA_EXPORT_DYNAMIC_LIBRARY

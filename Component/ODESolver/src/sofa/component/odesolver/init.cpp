@@ -1,11 +1,11 @@
-#include <sofa/components/odesolver/config.h>
+#include <sofa/component/odesolver/config.h>
 
-namespace sofa::components::odesolver
+namespace sofa::component::odesolver
 {
 	
 extern "C" {
-    SOFACOMPONENTSODESOLVER_API void initExternalModule();
-    SOFACOMPONENTSODESOLVER_API const char* getModuleName();
+    SOFACOMPONENTODESOLVER_API void initExternalModule();
+    SOFACOMPONENTODESOLVER_API const char* getModuleName();
 }
 
 void initExternalModule()
@@ -22,4 +22,4 @@ const char* getModuleName()
 	return MODULE_NAME;
 }
 
-} // namespace sofa::components::odesolver
+} // namespace sofa::component::odesolver

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sofa/components/gui/core/config.h>
+#include <sofa/component/gui/core/config.h>
 
 #ifdef SOFA_BUILD_SOFAGUI
 #  define SOFA_SOFAGUI_API SOFA_EXPORT_DYNAMIC_LIBRARY

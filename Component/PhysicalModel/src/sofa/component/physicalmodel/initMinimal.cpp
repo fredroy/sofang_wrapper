@@ -1,11 +1,11 @@
-#include <sofa/components/physicalmodel/config.h>
+#include <sofa/component/physicalmodel/config.h>
 
-namespace sofa::components::physicalmodel
+namespace sofa::component::physicalmodel
 {
 
 extern "C" {
-	SOFACOMPONENTSPHYSICALMODEL_API void initExternalModule();
-	SOFACOMPONENTSPHYSICALMODEL_API const char* getModuleName();
+	SOFACOMPONENTPHYSICALMODEL_API void initExternalModule();
+	SOFACOMPONENTPHYSICALMODEL_API const char* getModuleName();
 }
 
 void initExternalModule()
@@ -22,4 +22,4 @@ const char* getModuleName()
 	return MODULE_NAME;
 }
 
-} // namespace sofa::components::physicalmodel
+} // namespace sofa::component::physicalmodel

@@ -1,11 +1,11 @@
-#include <sofa/components/collision/config.h>
+#include <sofa/component/collision/config.h>
 
-namespace sofa::components::collision
+namespace sofa::component::collision
 {
 
 extern "C" {
-	SOFACOMPONENTSCOLLISION_API void initExternalModule();
-	SOFACOMPONENTSCOLLISION_API const char* getModuleName();
+	SOFACOMPONENTCOLLISION_API void initExternalModule();
+	SOFACOMPONENTCOLLISION_API const char* getModuleName();
 }
 
 void initExternalModule()
@@ -22,4 +22,4 @@ const char* getModuleName()
 	return MODULE_NAME;
 }
 
-} // namespace sofa::components::collision
+} // namespace sofa::component::collision

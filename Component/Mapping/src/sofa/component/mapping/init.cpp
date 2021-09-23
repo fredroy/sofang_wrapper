@@ -1,6 +1,6 @@
-#include <sofa/components/mapping/config.h>
+#include <sofa/component/mapping/config.h>
 
-namespace sofa::components::mapping
+namespace sofa::component::mapping
 {
 
-} // namespace sofa::components::mapping
+} // namespace sofa::component::mapping

@@ -1,11 +1,11 @@
-#include <sofa/components/visual/config.h>
+#include <sofa/component/visual/config.h>
 
-namespace sofa::components::visual
+namespace sofa::component::visual
 {
 
 extern "C" {
-    SOFACOMPONENTSVISUAL_API void initExternalModule();
-    SOFACOMPONENTSVISUAL_API const char* getModuleName();
+    SOFACOMPONENTVISUAL_API void initExternalModule();
+    SOFACOMPONENTVISUAL_API const char* getModuleName();
 }
 
 void initExternalModule()
@@ -22,4 +22,4 @@ const char* getModuleName()
 	return MODULE_NAME;
 }
 
-} // namespace sofa::components::visual
+} // namespace sofa::component::visual

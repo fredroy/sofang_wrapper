@@ -1,10 +1,10 @@
-#include <sofa/components/linearsolver/config.h>
+#include <sofa/component/linearsolver/config.h>
 
 #include <SofaBaseLinearSolver/MatrixLinearSolver.inl>
 #include <SofaDenseSolver/NewMatMatrix.h>
 #include <SofaDenseSolver/NewMatVector.h>
 
-namespace sofa::components::linearsolver
+namespace sofa::component::linearsolver
 {
 
 }

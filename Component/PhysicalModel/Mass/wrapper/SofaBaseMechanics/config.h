@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sofa/components/physicalmodel/mass/config.h>
+#include <sofa/component/physicalmodel/mass/config.h>
 
 #ifdef SOFA_BUILD_SOFABASEMECHANICS
 #  define SOFA_SOFABASEMECHANICS_API SOFA_EXPORT_DYNAMIC_LIBRARY

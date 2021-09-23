@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sofa/components/physicalmodel/solidmechanics/elasticity/fem/config.h>
+#include <sofa/component/physicalmodel/solidmechanics/elasticity/fem/config.h>
 
 #ifdef SOFA_BUILD_SOFAMISCFEM
 #  define SOFA_SOFAMISCFEM_API SOFA_EXPORT_DYNAMIC_LIBRARY

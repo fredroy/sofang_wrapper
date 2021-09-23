@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
-project(Sofa.Components.AnimationLoop LANGUAGES CXX)
+project(Sofa.Component.AnimationLoop LANGUAGES CXX)
 
-set(SOFACOMPONENTSANIMATIONLOOP_SOURCE_DIR "src/sofa/components/animationloop")
+set(SOFACOMPONENTANIMATIONLOOP_SOURCE_DIR "src/sofa/component/animationloop")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -13,13 +13,13 @@ set(SOFAGENERALANIMATIONLOOP_SRC "${SOFAGENERALANIMATIONLOOP_DIR}/src/SofaGenera
 
 # Minimal set
 set(MINIMAL_HEADER_FILES
-    ${SOFACOMPONENTSANIMATIONLOOP_SOURCE_DIR}/config.h.in
+    ${SOFACOMPONENTANIMATIONLOOP_SOURCE_DIR}/config.h.in
     ${SOFACONSTRAINT_SRC}/FreeMotionAnimationLoop.h
     ${SOFACONSTRAINT_SRC}/FreeMotionTask.h
 )
 
 set(MINIMAL_SOURCE_FILES
-    ${SOFACOMPONENTSANIMATIONLOOP_SOURCE_DIR}/initMinimal.cpp
+    ${SOFACOMPONENTANIMATIONLOOP_SOURCE_DIR}/initMinimal.cpp
     ${SOFACONSTRAINT_SRC}/FreeMotionAnimationLoop.cpp
     ${SOFACONSTRAINT_SRC}/FreeMotionTask.cpp
 )
@@ -32,7 +32,7 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-	${SOFACOMPONENTSANIMATIONLOOP_SOURCE_DIR}/init.cpp
+	${SOFACOMPONENTANIMATIONLOOP_SOURCE_DIR}/init.cpp
     ${SOFACONSTRAINT_SRC}/ConstraintAnimationLoop.cpp
     ${SOFAGENERALANIMATIONLOOP_SRC}/MultiStepAnimationLoop.cpp
     ${SOFAGENERALANIMATIONLOOP_SRC}/MultiTagAnimationLoop.cpp
@@ -48,14 +48,14 @@ source_group("wrapper" FILES ${WRAPPER_FILES})
 set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
 sofa_find_package(SofaFramework REQUIRED)
 
-configure_file(${SOFACOMPONENTSANIMATIONLOOP_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/components/animationloop/config.h)
+configure_file(${SOFACOMPONENTANIMATIONLOOP_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/animationloop/config.h)
 
 add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
 set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Components.Constraint.Lagrangian_minimal) # FreeMotionAL needs LCPConstraintSolver
+target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.Constraint.Lagrangian_minimal) # FreeMotionAL needs LCPConstraintSolver
 
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTSANIMATIONLOOP)
+target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTANIMATIONLOOP)
 target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFACONSTRAINT)
 target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
 target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
@@ -75,6 +75,6 @@ target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
 
 target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAGENERALANIMATIONLOOP_DIR}/src")
 
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTSANIMATIONLOOP)
+target_compile_definitions(${FULL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTANIMATIONLOOP)
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFACONSTRAINT)
 target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALANIMATIONLOOP)

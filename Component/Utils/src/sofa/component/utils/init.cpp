@@ -1,6 +1,6 @@
-#include <sofa/components/utils/config.h>
+#include <sofa/component/utils/config.h>
 
-namespace sofa::components::utils
+namespace sofa::component::utils
 {
 
 void init()
@@ -13,8 +13,8 @@ void init()
 }
 
 extern "C" {
-    SOFACOMPONENTSUTILS_API void initExternalModule();
-    SOFACOMPONENTSUTILS_API const char* getModuleName();
+    SOFACOMPONENTUTILS_API void initExternalModule();
+    SOFACOMPONENTUTILS_API const char* getModuleName();
 }
 
 void initExternalModule()
@@ -24,7 +24,7 @@ void initExternalModule()
 
 const char* getModuleName()
 {
-	return sofa::components::utils::MODULE_NAME;
+	return sofa::component::utils::MODULE_NAME;
 }
 
-} // namespace sofa::components::utils
+} // namespace sofa::component::utils

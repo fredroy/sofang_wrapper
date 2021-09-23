@@ -3,13 +3,13 @@
 #include <sofa/config.h>
 #include <sofa/config/sharedlibrary_defines.h>
 
-#ifdef BUILD_SOFACOMPONENTSCOLLISIONDETECTIONALGORITHM
-#  define SOFACOMPONENTSCOLLISIONDETECTIONALGORITHM_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#ifdef BUILD_SOFACOMPONENTCOLLISIONDETECTIONALGORITHM
+#  define SOFACOMPONENTCOLLISIONDETECTIONALGORITHM_API SOFA_EXPORT_DYNAMIC_LIBRARY
 #else
-#  define SOFACOMPONENTSCOLLISIONDETECTIONALGORITHM_API SOFA_IMPORT_DYNAMIC_LIBRARY
+#  define SOFACOMPONENTCOLLISIONDETECTIONALGORITHM_API SOFA_IMPORT_DYNAMIC_LIBRARY
 #endif
 
-namespace sofa::components::collision::detection::algorithm
+namespace sofa::component::collision::detection::algorithm
 {
 	constexpr char* MODULE_NAME = "@PROJECT_NAME@";
-} // namespace sofa::components::collision::detection::algorithm
+} // namespace sofa::component::collision::detection::algorithm

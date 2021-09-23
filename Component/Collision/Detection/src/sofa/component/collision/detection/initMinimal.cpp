@@ -1,11 +1,11 @@
-#include <sofa/components/collision/detection/config.h>
+#include <sofa/component/collision/detection/config.h>
 
-namespace sofa::components::collision::detection
+namespace sofa::component::collision::detection
 {
 
 extern "C" {
-	SOFACOMPONENTSCOLLISIONDETECTION_API void initExternalModule();
-	SOFACOMPONENTSCOLLISIONDETECTION_API const char* getModuleName();
+	SOFACOMPONENTCOLLISIONDETECTION_API void initExternalModule();
+	SOFACOMPONENTCOLLISIONDETECTION_API const char* getModuleName();
 }
 
 void initExternalModule()
@@ -22,4 +22,4 @@ const char* getModuleName()
 	return MODULE_NAME;
 }
 
-} // namespace sofa::components::collision::detection
+} // namespace sofa::component::collision::detection

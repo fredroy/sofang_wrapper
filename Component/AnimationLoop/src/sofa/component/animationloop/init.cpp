@@ -1,11 +1,11 @@
-#include <sofa/components/animationloop/config.h>
+#include <sofa/component/animationloop/config.h>
 
-namespace sofa::components::animationloop
+namespace sofa::component::animationloop
 {
 	
 extern "C" {
-    SOFACOMPONENTSANIMATIONLOOP_API void initExternalModule();
-    SOFACOMPONENTSANIMATIONLOOP_API const char* getModuleName();
+    SOFACOMPONENTANIMATIONLOOP_API void initExternalModule();
+    SOFACOMPONENTANIMATIONLOOP_API const char* getModuleName();
 }
 
 void initExternalModule()
@@ -22,4 +22,4 @@ const char* getModuleName()
 	return MODULE_NAME;
 }
 
-} // namespace sofa::components::animationloop
+} // namespace sofa::component::animationloop

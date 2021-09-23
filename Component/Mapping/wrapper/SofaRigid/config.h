@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sofa/components/mapping/config.h>
+#include <sofa/component/mapping/config.h>
 
 #ifdef SOFA_BUILD_SOFARIGID
 #  define SOFA_SOFARIGID_API SOFA_EXPORT_DYNAMIC_LIBRARY

@@ -1,11 +1,11 @@
-#include <sofa/components/io/config.h>
+#include <sofa/component/io/config.h>
 
-namespace sofa::components::io
+namespace sofa::component::io
 {
 
 extern "C" {
-    SOFACOMPONENTSIO_API void initExternalModule();
-    SOFACOMPONENTSIO_API const char* getModuleName();
+    SOFACOMPONENTIO_API void initExternalModule();
+    SOFACOMPONENTIO_API const char* getModuleName();
 }
 
 void initExternalModule()
@@ -22,4 +22,4 @@ const char* getModuleName()
 	return MODULE_NAME;
 }
 
-} // namespace sofa::components::io
+} // namespace sofa::component::io

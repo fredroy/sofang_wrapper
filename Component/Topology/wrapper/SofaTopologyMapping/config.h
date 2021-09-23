@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sofa/components/topology/config.h>
+#include <sofa/component/topology/config.h>
 
 #ifdef SOFA_BUILD_SOFATOPOLOGYMAPPING
 #  define SOFA_SOFATOPOLOGYMAPPING_API SOFA_EXPORT_DYNAMIC_LIBRARY
