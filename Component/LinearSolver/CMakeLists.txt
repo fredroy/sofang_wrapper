@@ -32,11 +32,6 @@ set(MINIMAL_HEADER_FILES
     ${SOFABASELINEARSOLVER_SRC}/MatrixLinearSolver.h
     ${SOFABASELINEARSOLVER_SRC}/MatrixLinearSolver.inl
     ${SOFABASELINEARSOLVER_SRC}/SingleMatrixAccessor.h
-    ${SOFAEIGEN2SOLVER_SRC}/EigenBaseSparseMatrix.h
-    ${SOFAEIGEN2SOLVER_SRC}/EigenMatrixManipulator.h
-    ${SOFAEIGEN2SOLVER_SRC}/EigenSparseMatrix.h
-    ${SOFAEIGEN2SOLVER_SRC}/EigenVector.h
-    ${SOFAEIGEN2SOLVER_SRC}/EigenVectorWrapper.h
 )
 
 set(MINIMAL_SOURCE_FILES
@@ -51,8 +46,6 @@ set(MINIMAL_SOURCE_FILES
 # Full set
 set(HEADER_FILES
     ${SOFAEIGEN2SOLVER_SRC}/SVDLinearSolver.h
-    ${SOFAEIGEN2SOLVER_SRC}/EigenMatrixManipulator.cpp
-    ${SOFAEIGEN2SOLVER_SRC}/EigenVector.cpp
     ${SOFAGENERALLINEARSOLVER_SRC}/BTDLinearSolver.h
     ${SOFAGENERALLINEARSOLVER_SRC}/BTDLinearSolver.inl
     ${SOFAGENERALLINEARSOLVER_SRC}/CholeskySolver.h
