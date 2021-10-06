@@ -132,14 +132,6 @@ if(SOFA_WITH_OPENGL)
     add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/modules/Sofa.GL ${CMAKE_CURRENT_BINARY_DIR}/Sofa/Sofa.GL)
 endif()
 
-option(SOFA_BUILD_MINIMAL "Build with minimal components/features." OFF)
-if(SOFA_BUILD_MINIMAL)
-    set_property(GLOBAL PROPERTY PROPERTY_SOFA_BUILD_MINIMAL TRUE)
-    message("A minimal set of components will be built")
-else()
-    message("All components will be built")
-endif()
-
 # Components
 add_subdirectory(Component ${CMAKE_CURRENT_BINARY_DIR}/Component)
 # Applications

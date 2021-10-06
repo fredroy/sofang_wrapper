@@ -21,8 +21,7 @@ set(SOFASPARSESOLVER_SRC "${SOFASPARSESOLVER_DIR}/src/SofaSparseSolver")
 # Adding SofaPreconditioner ?
 # Weird dependencies on SofaSimpleFEM anyway
 
-# Minimal set
-set(MINIMAL_HEADER_FILES
+set(HEADER_FILES
     ${SOFACOMPONENTLINEARSOLVER_SOURCE_DIR}/config.h.in
     ${SOFABASELINEARSOLVER_SRC}/BlocMatrixWriter.h
     ${SOFABASELINEARSOLVER_SRC}/CGLinearSolver.h
@@ -32,19 +31,6 @@ set(MINIMAL_HEADER_FILES
     ${SOFABASELINEARSOLVER_SRC}/MatrixLinearSolver.h
     ${SOFABASELINEARSOLVER_SRC}/MatrixLinearSolver.inl
     ${SOFABASELINEARSOLVER_SRC}/SingleMatrixAccessor.h
-)
-
-set(MINIMAL_SOURCE_FILES
-    ${SOFACOMPONENTLINEARSOLVER_SOURCE_DIR}/initMinimal.cpp
-    ${SOFABASELINEARSOLVER_SRC}/CGLinearSolver.cpp
-    ${SOFABASELINEARSOLVER_SRC}/DefaultMultiMatrixAccessor.cpp
-    ${SOFABASELINEARSOLVER_SRC}/GraphScatteredTypes.cpp
-    ${SOFABASELINEARSOLVER_SRC}/MatrixLinearSolver.cpp
-    ${SOFABASELINEARSOLVER_SRC}/SingleMatrixAccessor.cpp
-)
-
-# Full set
-set(HEADER_FILES
     ${SOFAEIGEN2SOLVER_SRC}/SVDLinearSolver.h
     ${SOFAGENERALLINEARSOLVER_SRC}/BTDLinearSolver.h
     ${SOFAGENERALLINEARSOLVER_SRC}/BTDLinearSolver.inl
@@ -67,6 +53,11 @@ set(HEADER_FILES
 
 set(SOURCE_FILES
     ${SOFACOMPONENTLINEARSOLVER_SOURCE_DIR}/init.cpp
+    ${SOFABASELINEARSOLVER_SRC}/CGLinearSolver.cpp
+    ${SOFABASELINEARSOLVER_SRC}/DefaultMultiMatrixAccessor.cpp
+    ${SOFABASELINEARSOLVER_SRC}/GraphScatteredTypes.cpp
+    ${SOFABASELINEARSOLVER_SRC}/MatrixLinearSolver.cpp
+    ${SOFABASELINEARSOLVER_SRC}/SingleMatrixAccessor.cpp
     ${SOFAEIGEN2SOLVER_SRC}/SVDLinearSolver.cpp
     ${SOFAGENERALLINEARSOLVER_SRC}/BTDLinearSolver.cpp
     ${SOFAGENERALLINEARSOLVER_SRC}/CholeskySolver.cpp
@@ -89,8 +80,7 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
-# Minimal config
-set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
+set(TARGET_NAME ${PROJECT_NAME})
 sofa_find_package(SofaFramework REQUIRED)
 sofa_find_package(Eigen3 REQUIRED)
 
@@ -99,31 +89,8 @@ if (SOFA_OPENMP AND "${EIGEN3_VERSION}" VERSION_LESS 3.2.9)
 endif()
 
 if (SOFA_COMPONENTS_LINEARSOLVER_HAVE_OPENMP)
-    list(APPEND MINIMAL_HEADER_FILES EigenBaseSparseMatrix_MT.h)
+    list(APPEND HEADER_FILES EigenBaseSparseMatrix_MT.h)
 endif()
-
-configure_file(${SOFACOMPONENTLINEARSOLVER_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/linearsolver/config.h)
-
-add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
-set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Eigen3::Eigen)
-
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFABASELINEARSOLVER)
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAEIGEN2SOLVER)
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFABASELINEARSOLVER_DIR}/src")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFAEIGEN2SOLVER_DIR}/src")
-
-get_property(BUILD_MINIMAL GLOBAL PROPERTY PROPERTY_SOFA_BUILD_MINIMAL SET)
-if(BUILD_MINIMAL)
-    return()
-endif()
-
-# Full config
-set(FULL_TARGET_NAME ${PROJECT_NAME})
 
 add_subdirectory(${SOFASPARSESOLVER_DIR}/extlibs/csparse ${CMAKE_CURRENT_BINARY_DIR}/extlibs/csparse)
 sofa_set_01(SOFA_COMPONENTS_LINEARSOLVER_HAVE_CSPARSE VALUE TRUE)
@@ -137,16 +104,26 @@ sofa_set_01(SOFA_COMPONENTS_LINEARSOLVER_HAVE_METIS VALUE TRUE)
 
 sofa_find_package(Newmat REQUIRED)
 
-add_library(${FULL_TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC newmat)
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC metis csparse)
+configure_file(${SOFACOMPONENTLINEARSOLVER_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/linearsolver/config.h)
 
-target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAGENERALLINEARSOLVER_DIR}/src")
-target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFADENSESOLVER_DIR}/src")
-target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFASPARSESOLVER_DIR}/src")
+add_library(${TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
+set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(${TARGET_NAME} PUBLIC SofaSimulationCore)
+target_link_libraries(${TARGET_NAME} PUBLIC Eigen3::Eigen)
+target_link_libraries(${TARGET_NAME} PUBLIC newmat)
+target_link_libraries(${TARGET_NAME} PUBLIC metis csparse)
 
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAEIGEN2SOLVER)
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALLINEARSOLVER)
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFADENSESOLVER)
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFASPARSESOLVER)
+target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFABASELINEARSOLVER)
+target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAEIGEN2SOLVER)
+target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALLINEARSOLVER)
+target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFADENSESOLVER)
+target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFASPARSESOLVER)
+
+target_include_directories(${TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
+target_include_directories(${TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+target_include_directories(${TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
+target_include_directories(${TARGET_NAME} PUBLIC "${SOFABASELINEARSOLVER_DIR}/src")
+target_include_directories(${TARGET_NAME} PUBLIC "${SOFAEIGEN2SOLVER_DIR}/src")
+target_include_directories(${TARGET_NAME} PUBLIC "${SOFAGENERALLINEARSOLVER_DIR}/src")
+target_include_directories(${TARGET_NAME} PUBLIC "${SOFADENSESOLVER_DIR}/src")
+target_include_directories(${TARGET_NAME} PUBLIC "${SOFASPARSESOLVER_DIR}/src")

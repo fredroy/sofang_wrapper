@@ -30,12 +30,11 @@ configure_file(${SOFACOMPONENTCONTAINER_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_D
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.LinearSolver_minimal)
+target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.LinearSolver)
 
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
-
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFABASEMECHANICS_DIR}/src")
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFABASEMECHANICS)

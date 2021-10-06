@@ -42,7 +42,7 @@ configure_file(${SOFACOMPONENTPHYSICALMODELMASS_SOURCE_DIR}/config.h.in ${CMAKE_
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.Topology_minimal)
+target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.Topology)
 
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")

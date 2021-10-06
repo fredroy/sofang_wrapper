@@ -14,8 +14,7 @@ set(SOFAGENERALLOADER_SRC "${SOFAGENERALLOADER_DIR}/src/SofaGeneralLoader")
 set(SOFAEXPORTER_DIR "${SOFAMODULES_SOURCE_DIR}/SofaExporter/")
 set(SOFAEXPORTER_SRC "${SOFAEXPORTER_DIR}/src/SofaExporter")
 
-# Minimal set
-set(MINIMAL_HEADER_FILES
+set(HEADER_FILES
     ${SOFACOMPONENTIOMESH_SOURCE_DIR}/config.h.in
     ${SOFALOADER_SRC}/BaseVTKReader.h
     ${SOFALOADER_SRC}/BaseVTKReader.inl
@@ -24,20 +23,6 @@ set(MINIMAL_HEADER_FILES
     ${SOFAGENERALLOADER_SRC}/MeshGmshLoader.h
     ${SOFAEXPORTER_SRC}/OBJExporter.h
     ${SOFAEXPORTER_SRC}/VTKExporter.h
-)
-
-set(MINIMAL_SOURCE_FILES
-    ${SOFACOMPONENTIOMESH_SOURCE_DIR}/initMinimal.cpp
-    ${SOFALOADER_SRC}/BaseVTKReader.cpp
-    ${SOFALOADER_SRC}/MeshObjLoader.cpp
-    ${SOFALOADER_SRC}/MeshVTKLoader.cpp
-    ${SOFAGENERALLOADER_SRC}/MeshGmshLoader.cpp
-    ${SOFAEXPORTER_SRC}/OBJExporter.cpp
-    ${SOFAEXPORTER_SRC}/VTKExporter.cpp
-)
-
-# Full set
-set(HEADER_FILES
     ${SOFAGENERALLOADER_SRC}/GIDMeshLoader.h
     ${SOFAGENERALLOADER_SRC}/GridMeshCreator.h
     ${SOFAGENERALLOADER_SRC}/MeshOffLoader.h
@@ -56,6 +41,12 @@ set(HEADER_FILES
 
 set(SOURCE_FILES
     ${SOFACOMPONENTIOMESH_SOURCE_DIR}/init.cpp
+    ${SOFALOADER_SRC}/BaseVTKReader.cpp
+    ${SOFALOADER_SRC}/MeshObjLoader.cpp
+    ${SOFALOADER_SRC}/MeshVTKLoader.cpp
+    ${SOFAGENERALLOADER_SRC}/MeshGmshLoader.cpp
+    ${SOFAEXPORTER_SRC}/OBJExporter.cpp
+    ${SOFAEXPORTER_SRC}/VTKExporter.cpp
     ${SOFAGENERALLOADER_SRC}/GIDMeshLoader.cpp
     ${SOFAGENERALLOADER_SRC}/GridMeshCreator.cpp
     ${SOFAGENERALLOADER_SRC}/MeshOffLoader.cpp
@@ -79,41 +70,24 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
-# Minimal config
-set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
+set(TARGET_NAME ${PROJECT_NAME})
+sofa_find_package(TinyXML REQUIRED) # for BaseVTKReader
 sofa_find_package(SofaFramework REQUIRED)
 
 configure_file(${SOFACOMPONENTIOMESH_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/io/mesh/config.h)
 
-add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
-set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${MINIMAL_TARGET_NAME} PRIVATE tinyxml)
+add_library(${TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
+set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(${TARGET_NAME} PUBLIC SofaSimulationCore)
+target_link_libraries(${TARGET_NAME} PRIVATE tinyxml)
 
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTIOMESH)
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFALOADER)
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALLOADER)
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAEXPORTER)
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFALOADER_DIR}/src")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFAGENERALLOADER_DIR}/src")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFAEXPORTER_DIR}/src")
-
-get_property(BUILD_MINIMAL GLOBAL PROPERTY PROPERTY_SOFA_BUILD_MINIMAL SET)
-if(BUILD_MINIMAL)
-    return()
-endif()
-
-# Full config
-set(FULL_TARGET_NAME ${PROJECT_NAME})
-sofa_find_package(TinyXML REQUIRED) # for BaseVTKReader
-
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
-
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTIOMESH)
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFALOADER)
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALLOADER)
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAEXPORTER)
+target_compile_definitions(${TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTIOMESH)
+target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFALOADER)
+target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALLOADER)
+target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAEXPORTER)
+target_include_directories(${TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
+target_include_directories(${TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+target_include_directories(${TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
+target_include_directories(${TARGET_NAME} PUBLIC "${SOFALOADER_DIR}/src")
+target_include_directories(${TARGET_NAME} PUBLIC "${SOFAGENERALLOADER_DIR}/src")
+target_include_directories(${TARGET_NAME} PUBLIC "${SOFAEXPORTER_DIR}/src")

@@ -5,50 +5,29 @@ set(SOFACOMPONENTIO_SOURCE_DIR "src/sofa/component/io")
 
 set(SOFACOMPONENTIO_DIRS Mesh Misc)
 set(SOFACOMPONENTIO_TARGETS)
-set(SOFACOMPONENTIO_TARGETS_MINIMAL)
 foreach(io_dir ${SOFACOMPONENTIO_DIRS})
     add_subdirectory(${io_dir})
     list(APPEND SOFACOMPONENTIO_TARGETS ${PROJECT_NAME}.${io_dir})
-    list(APPEND SOFACOMPONENTIO_TARGETS_MINIMAL ${PROJECT_NAME}.${io_dir}_minimal)
 endforeach()
 
 
-# Minimal set
-set(MINIMAL_HEADER_FILES
+set(HEADER_FILES
     ${SOFACOMPONENTIO_SOURCE_DIR}/config.h.in
 )
 
-set(MINIMAL_SOURCE_FILES
-    ${SOFACOMPONENTIO_SOURCE_DIR}/initMinimal.cpp
-)
-
-# Full set
 set(SOURCE_FILES
     ${SOFACOMPONENTIO_SOURCE_DIR}/init.cpp
 )
 
-# Minimal config
-set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
+set(TARGET_NAME ${PROJECT_NAME})
 
 configure_file(${SOFACOMPONENTIO_SOURCE_DIR}/config.h.in 
     ${CMAKE_BINARY_DIR}/include/sofa/component/io/config.h)
 
-add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES})
-set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC ${SOFACOMPONENTIO_TARGETS_MINIMAL})
+add_library(${TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
+set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(${TARGET_NAME} PUBLIC ${SOFACOMPONENTIO_TARGETS})
 
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTIO)
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
-
-get_property(BUILD_MINIMAL GLOBAL PROPERTY PROPERTY_SOFA_BUILD_MINIMAL SET)
-if(BUILD_MINIMAL)
-    return()
-endif()
-
-# Full config
-set(FULL_TARGET_NAME ${PROJECT_NAME})
-
-add_library(${FULL_TARGET_NAME} SHARED ${SOURCE_FILES})
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${SOFACOMPONENTIO_TARGETS})
+target_compile_definitions(${TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTIO)
+target_include_directories(${TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
+target_include_directories(${TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")

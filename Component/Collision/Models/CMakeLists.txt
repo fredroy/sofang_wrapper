@@ -18,8 +18,7 @@ set(SOFAUSERINTERACTION_SRC "${SOFAUSERINTERACTION_DIR}/src/SofaUserInteraction"
 set(SOFAMISCCOLLISION_DIR "${SOFAMODULES_SOURCE_DIR}/SofaMiscCollision/")
 set(SOFAMISCCOLLISION_SRC "${SOFAMISCCOLLISION_DIR}/src/SofaMiscCollision")
 
-# Minimal set
-set(MINIMAL_HEADER_FILES
+set(HEADER_FILES
     ${SOFACOMPONENTCOLLISIONMODELS_SOURCE_DIR}/config.h.in    
     ${SOFABASECOLLISION_SRC}/Cube.h
     ${SOFABASECOLLISION_SRC}/CubeModel.h
@@ -40,8 +39,8 @@ set(MINIMAL_HEADER_FILES
     ${SOFABASECOLLISION_SRC}/CylinderModel.inl
 )
 
-set(MINIMAL_SOURCE_FILES
-    ${SOFACOMPONENTCOLLISIONMODELS_SOURCE_DIR}/initMinimal.cpp
+set(SOURCE_FILES
+    ${SOFACOMPONENTCOLLISIONMODELS_SOURCE_DIR}/init.cpp
     ${SOFABASECOLLISION_SRC}/CubeModel.cpp
     ${SOFABASECOLLISION_SRC}/SphereModel.cpp
     ${SOFAMESHCOLLISION_SRC}/LineModel.cpp
@@ -49,24 +48,6 @@ set(MINIMAL_SOURCE_FILES
     ${SOFAMESHCOLLISION_SRC}/TriangleModel.cpp
     ${SOFAUSERINTERACTION_SRC}/RayModel.cpp
     ${SOFABASECOLLISION_SRC}/CylinderModel.cpp
-)
-
-# Full set
-set(HEADER_FILES
-	${SOFACOMPONENTCOLLISIONMODELS_SOURCE_DIR}/config.h.in
-    ${SOFAMESHCOLLISION_SRC}/RayTriangleIntersection.h
-    ${SOFAGENERALMESHCOLLISION_SRC}/TriangleOctree.h
-    ${SOFAGENERALMESHCOLLISION_SRC}/TriangleOctreeModel.h
-    ${SOFAMISCCOLLISION_SRC}/CapsuleModel.h
-    ${SOFAMISCCOLLISION_SRC}/CapsuleModel.inl
-    ${SOFAMISCCOLLISION_SRC}/OBBModel.h
-    ${SOFAMISCCOLLISION_SRC}/OBBModel.inl
-    ${SOFAMISCCOLLISION_SRC}/RigidCapsuleModel.h
-    ${SOFAMISCCOLLISION_SRC}/RigidCapsuleModel.inl
-
-)
-
-set(SOURCE_FILES
     ${SOFAMESHCOLLISION_SRC}/RayTriangleIntersection.cpp
     ${SOFAGENERALMESHCOLLISION_SRC}/TriangleOctree.cpp
     ${SOFAGENERALMESHCOLLISION_SRC}/TriangleOctreeModel.cpp
@@ -84,46 +65,28 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
-# Minimal config
-set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
+set(TARGET_NAME ${PROJECT_NAME})
 sofa_find_package(SofaFramework REQUIRED)
 
 configure_file(${SOFACOMPONENTCOLLISIONMODELS_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/collision/models/config.h)
 
-add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
-set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.Topology_minimal)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC Sofa.Component.Mapping_minimal) # for LocalMinDistanceFilter
+add_library(${TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
+set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(${TARGET_NAME} PUBLIC SofaSimulationCore)
+target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Topology)
+target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Mapping) # for LocalMinDistanceFilter
 
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTCOLLISIONMODELS)
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFABASECOLLISION)
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAMESHCOLLISION)
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAUSERINTERACTION)
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFABASECOLLISION_DIR}/src")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFAMESHCOLLISION_DIR}/src")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFAUSERINTERACTION_DIR}/src")
-
-get_property(BUILD_MINIMAL GLOBAL PROPERTY PROPERTY_SOFA_BUILD_MINIMAL SET)
-if(BUILD_MINIMAL)
-    return()
-endif()
-
-# Full config
-set(FULL_TARGET_NAME ${PROJECT_NAME})
-
-add_library(${FULL_TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
-
-target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAGENERALMESHCOLLISION_DIR}/src")
-target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAMISCCOLLISION_DIR}/src")
-
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTCOLLISIONMODELS)
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFABASECOLLISION)
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAMESHCOLLISION)
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALMESHCOLLISION)
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAUSERINTERACTION)
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAMISCCOLLISION)
+target_compile_definitions(${TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTCOLLISIONMODELS)
+target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFABASECOLLISION)
+target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAMESHCOLLISION)
+target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAUSERINTERACTION)
+target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALMESHCOLLISION)
+target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAMISCCOLLISION)
+target_include_directories(${TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
+target_include_directories(${TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+target_include_directories(${TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
+target_include_directories(${TARGET_NAME} PUBLIC "${SOFABASECOLLISION_DIR}/src")
+target_include_directories(${TARGET_NAME} PUBLIC "${SOFAMESHCOLLISION_DIR}/src")
+target_include_directories(${TARGET_NAME} PUBLIC "${SOFAUSERINTERACTION_DIR}/src")
+target_include_directories(${TARGET_NAME} PUBLIC "${SOFAGENERALMESHCOLLISION_DIR}/src")
+target_include_directories(${TARGET_NAME} PUBLIC "${SOFAMISCCOLLISION_DIR}/src")

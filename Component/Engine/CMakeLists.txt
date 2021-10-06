@@ -14,20 +14,10 @@ set(SOFAGENERALENGINE_SRC "${SOFAGENERALENGINE_DIR}/src/SofaGeneralEngine")
 set(SOFAMISCENGINE_DIR "${SOFAMODULES_SOURCE_DIR}/SofaMiscEngine/")
 set(SOFAMISCENGINE_SRC "${SOFAMISCENGINE_DIR}/src/SofaMiscEngine")
 
-# Minimal set
-set(MINIMAL_HEADER_FILES
+set(HEADER_FILES
     ${SOFACOMPONENTENGINE_SOURCE_DIR}/config.h.in
     ${SOFAENGINE_SRC}/BoxROI.h
     ${SOFAENGINE_SRC}/BoxROI.inl
-)
-
-set(MINIMAL_SOURCE_FILES
-    ${SOFACOMPONENTENGINE_SOURCE_DIR}/initMinimal.cpp
-    ${SOFAENGINE_SRC}/BoxROI.cpp
-)
-
-# Full set
-set(HEADER_FILES
     ${SOFAGENERALENGINE_SRC}/AverageCoord.h
     ${SOFAGENERALENGINE_SRC}/AverageCoord.inl
     ${SOFAGENERALENGINE_SRC}/ClusteringEngine.h
@@ -145,6 +135,8 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
+    ${SOFACOMPONENTENGINE_SOURCE_DIR}/init.cpp
+    ${SOFAENGINE_SRC}/BoxROI.cpp
     ${SOFAGENERALENGINE_SRC}/AverageCoord.cpp
     ${SOFAGENERALENGINE_SRC}/ClusteringEngine.cpp
     ${SOFAGENERALENGINE_SRC}/ComplementaryROI.cpp
@@ -214,36 +206,22 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
-# Minimal config
-set(MINIMAL_TARGET_NAME ${PROJECT_NAME}_minimal)
+set(TARGET_NAME ${PROJECT_NAME})
 sofa_find_package(SofaFramework REQUIRED)
 
 configure_file(${SOFACOMPONENTENGINE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/engine/config.h)
 
-add_library(${MINIMAL_TARGET_NAME} SHARED ${MINIMAL_HEADER_FILES} ${MINIMAL_SOURCE_FILES} ${WRAPPER_FILES})
-set_target_properties(${MINIMAL_TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
-target_link_libraries(${MINIMAL_TARGET_NAME} PUBLIC SofaSimulationCore)
+add_library(${TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
+set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+target_link_libraries(${TARGET_NAME} PUBLIC SofaSimulationCore)
+target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Collision.Models) # for TriangleOctree in DilateEng and Random..Eng
 
-target_compile_definitions(${MINIMAL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAENGINE)
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
-target_include_directories(${MINIMAL_TARGET_NAME} PUBLIC "${SOFAENGINE_DIR}/src")
-
-get_property(BUILD_MINIMAL GLOBAL PROPERTY PROPERTY_SOFA_BUILD_MINIMAL SET)
-if(BUILD_MINIMAL)
-    return()
-endif()
-
-# Full config
-set(FULL_TARGET_NAME ${PROJECT_NAME})
-
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC ${MINIMAL_TARGET_NAME})
-target_link_libraries(${FULL_TARGET_NAME} PUBLIC Sofa.Component.Collision.Models) # for TriangleOctree in DilateEng and Random..Eng
-
-target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAGENERALENGINE_DIR}/src")
-target_include_directories(${FULL_TARGET_NAME} PUBLIC "${SOFAMISCENGINE_DIR}/src")
-
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALENGINE)
-target_compile_definitions(${FULL_TARGET_NAME} PRIVATE SOFA_BUILD_SOFAMISCENGINE)
+target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAENGINE)
+target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALENGINE)
+target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAMISCENGINE)
+target_include_directories(${TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
+target_include_directories(${TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+target_include_directories(${TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
+target_include_directories(${TARGET_NAME} PUBLIC "${SOFAENGINE_DIR}/src")
+target_include_directories(${TARGET_NAME} PUBLIC "${SOFAGENERALENGINE_DIR}/src")
+target_include_directories(${TARGET_NAME} PUBLIC "${SOFAMISCENGINE_DIR}/src")
