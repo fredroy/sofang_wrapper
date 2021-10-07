@@ -8,8 +8,6 @@ set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
 
 set(SOFABASELINEARSOLVER_DIR "${SOFAKERNELMODULES_SOURCE_DIR}/SofaBaseLinearSolver/")
 set(SOFABASELINEARSOLVER_SRC "${SOFABASELINEARSOLVER_DIR}/src/SofaBaseLinearSolver")
-set(SOFAEIGEN2SOLVER_DIR "${SOFAKERNELMODULES_SOURCE_DIR}/SofaEigen2Solver/")
-set(SOFAEIGEN2SOLVER_SRC "${SOFAEIGEN2SOLVER_DIR}/src/SofaEigen2Solver")
 
 set(SOFAGENERALLINEARSOLVER_DIR "${SOFAMODULES_SOURCE_DIR}/SofaGeneralLinearSolver/")
 set(SOFAGENERALLINEARSOLVER_SRC "${SOFAGENERALLINEARSOLVER_DIR}/src/SofaGeneralLinearSolver")
@@ -31,7 +29,7 @@ set(HEADER_FILES
     ${SOFABASELINEARSOLVER_SRC}/MatrixLinearSolver.h
     ${SOFABASELINEARSOLVER_SRC}/MatrixLinearSolver.inl
     ${SOFABASELINEARSOLVER_SRC}/SingleMatrixAccessor.h
-    ${SOFAEIGEN2SOLVER_SRC}/SVDLinearSolver.h
+    ${SOFADENSESOLVER_SRC}/SVDLinearSolver.h
     ${SOFAGENERALLINEARSOLVER_SRC}/BTDLinearSolver.h
     ${SOFAGENERALLINEARSOLVER_SRC}/BTDLinearSolver.inl
     ${SOFAGENERALLINEARSOLVER_SRC}/CholeskySolver.h
@@ -58,7 +56,7 @@ set(SOURCE_FILES
     ${SOFABASELINEARSOLVER_SRC}/GraphScatteredTypes.cpp
     ${SOFABASELINEARSOLVER_SRC}/MatrixLinearSolver.cpp
     ${SOFABASELINEARSOLVER_SRC}/SingleMatrixAccessor.cpp
-    ${SOFAEIGEN2SOLVER_SRC}/SVDLinearSolver.cpp
+    ${SOFADENSESOLVER_SRC}/SVDLinearSolver.cpp
     ${SOFAGENERALLINEARSOLVER_SRC}/BTDLinearSolver.cpp
     ${SOFAGENERALLINEARSOLVER_SRC}/CholeskySolver.cpp
     ${SOFAGENERALLINEARSOLVER_SRC}/MinResLinearSolver.cpp
@@ -73,7 +71,6 @@ set(SOURCE_FILES
 
 set(WRAPPER_FILES
     wrapper/SofaBaseLinearSolver/config.h
-    wrapper/SofaEigen2Solver/config.h
     wrapper/SofaGeneralLinearSolver/config.h
     wrapper/SofaDenseSolver/config.h
     wrapper/SofaSparseSolver/config.h
@@ -114,7 +111,6 @@ target_link_libraries(${TARGET_NAME} PUBLIC newmat)
 target_link_libraries(${TARGET_NAME} PUBLIC metis csparse)
 
 target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFABASELINEARSOLVER)
-target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAEIGEN2SOLVER)
 target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALLINEARSOLVER)
 target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFADENSESOLVER)
 target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFASPARSESOLVER)
@@ -123,7 +119,6 @@ target_include_directories(${TARGET_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINA
 target_include_directories(${TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 target_include_directories(${TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")
 target_include_directories(${TARGET_NAME} PUBLIC "${SOFABASELINEARSOLVER_DIR}/src")
-target_include_directories(${TARGET_NAME} PUBLIC "${SOFAEIGEN2SOLVER_DIR}/src")
 target_include_directories(${TARGET_NAME} PUBLIC "${SOFAGENERALLINEARSOLVER_DIR}/src")
 target_include_directories(${TARGET_NAME} PUBLIC "${SOFADENSESOLVER_DIR}/src")
 target_include_directories(${TARGET_NAME} PUBLIC "${SOFASPARSESOLVER_DIR}/src")
