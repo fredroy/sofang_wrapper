@@ -61,6 +61,12 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
+sofang_check_dependencies(Sofa.Component.Mapping)
+sofang_check_dependencies(Sofa.Component.Container) # BarycentricMapper needs MechanicalObject
+sofang_check_dependencies(Sofa.Component.PhysicalModel.SolidMechanics.Elasticity.Springs) # BarycentricPenalityContact
+sofang_check_dependencies(Sofa.Component.Constraint.Lagrangian) # FrictionContact needs UnilateralCC
+sofang_check_dependencies(Sofa.Component.Collision.Models)
+
 set(TARGET_NAME ${PROJECT_NAME})
 sofa_find_package(SofaFramework REQUIRED)
 
@@ -70,9 +76,9 @@ add_library(${TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILE
 set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${TARGET_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Mapping)
-target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Container) # BarycentricMapper needs MechanicalObject
-target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.PhysicalModel.SolidMechanics.Elasticity.Springs) # BarycentricPenalityContact
-target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Constraint.Lagrangian) # FrictionContact needs UnilateralCC
+target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Container)
+target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.PhysicalModel.SolidMechanics.Elasticity.Springs)
+target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Constraint.Lagrangian)
 target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Collision.Models)
 
 target_compile_definitions(${TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTCOLLISIONRESPONSECONTACT)

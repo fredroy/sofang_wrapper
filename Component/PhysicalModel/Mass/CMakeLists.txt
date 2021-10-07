@@ -36,6 +36,8 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
+sofang_check_dependencies(Sofa.Component.Topology)
+
 sofa_find_package(SofaFramework REQUIRED)
 
 configure_file(${SOFACOMPONENTPHYSICALMODELMASS_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/physicalmodel/mass/config.h)

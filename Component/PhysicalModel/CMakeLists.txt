@@ -6,7 +6,7 @@ set(SOFACOMPONENTPHYSICALMODEL_SOURCE_DIR "src/sofa/component/physicalmodel")
 set(SOFACOMPONENTPHYSICALMODEL_DIRS Mass SolidMechanics)
 set(SOFACOMPONENTPHYSICALMODEL_TARGETS)
 foreach(physicalmodel_dir ${SOFACOMPONENTPHYSICALMODEL_DIRS})
-	add_subdirectory(${physicalmodel_dir})
+	sofang_add_component_subdirectory(${physicalmodel_dir})
     list(APPEND SOFACOMPONENTPHYSICALMODEL_TARGETS ${PROJECT_NAME}.${physicalmodel_dir})
 endforeach()
 

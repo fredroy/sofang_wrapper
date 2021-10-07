@@ -24,6 +24,8 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
+sofang_check_dependencies(Sofa.Component.LinearSolver)
+
 sofa_find_package(SofaFramework REQUIRED)
 
 configure_file(${SOFACOMPONENTCONTAINER_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/container/config.h)

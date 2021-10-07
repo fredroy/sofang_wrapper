@@ -36,6 +36,8 @@ set(WRAPPER_FILES
 
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
+sofang_check_dependencies(Sofa.Component.Constraint.Lagrangian) # FreeMotionAL needs LCPConstraintSolver
+
 set(TARGET_NAME ${PROJECT_NAME})
 sofa_find_package(SofaFramework REQUIRED)
 
@@ -44,7 +46,7 @@ configure_file(${SOFACOMPONENTANIMATIONLOOP_SOURCE_DIR}/config.h.in ${CMAKE_BINA
 add_library(${TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${TARGET_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Constraint.Lagrangian) # FreeMotionAL needs LCPConstraintSolver
+target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Constraint.Lagrangian) 
 
 target_compile_definitions(${TARGET_NAME} PRIVATE BUILD_SOFACOMPONENTANIMATIONLOOP)
 target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFACONSTRAINT)

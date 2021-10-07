@@ -70,6 +70,9 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
+sofang_check_dependencies(Sofa.Component.Topology)
+sofang_check_dependencies(Sofa.Component.LinearSolver) # For BlocMatrixWriter
+
 set(TARGET_NAME ${PROJECT_NAME})
 sofa_find_package(SofaFramework REQUIRED)
 
@@ -80,7 +83,7 @@ add_library(${TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILE
 set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${TARGET_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Topology)
-target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.LinearSolver) # For BlocMatrixWriter
+target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.LinearSolver)
 
 target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFASIMPLEFEM)
 target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALSIMPLEFEM)

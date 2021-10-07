@@ -45,6 +45,8 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
+sofang_check_dependencies(Sofa.Component.Topology)
+
 set(TARGET_NAME ${PROJECT_NAME})
 sofa_find_package(SofaFramework REQUIRED)
 sofa_find_package(TinyXML REQUIRED) # BaseCamera
@@ -68,5 +70,5 @@ target_include_directories(${TARGET_NAME} PUBLIC "${SOFAGENERALVISUAL_DIR}/src")
 # Subproject Visual.GL
 sofa_find_package(Sofa.GL REQUIRED)
 if(Sofa.GL_FOUND)
-    add_subdirectory(GL)
+    sofang_add_component_subdirectory(GL)
 endif()

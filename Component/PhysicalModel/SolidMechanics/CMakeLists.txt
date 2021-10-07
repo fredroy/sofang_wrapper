@@ -6,7 +6,7 @@ set(SOFACOMPONENTPHYSICALMODELSOLIDMECHANICS_SOURCE_DIR "src/sofa/component/phys
 set(SOFACOMPONENTPHYSICALMODELSOLIDMECHANICS_DIRS Elasticity)
 set(SOFACOMPONENTPHYSICALMODELSOLIDMECHANICS_TARGETS)
 foreach(solidmechanics_dir ${SOFACOMPONENTPHYSICALMODELSOLIDMECHANICS_DIRS})
-	add_subdirectory(${solidmechanics_dir})
+	sofang_add_component_subdirectory(${solidmechanics_dir})
 	list(APPEND SOFACOMPONENTPHYSICALMODELSOLIDMECHANICS_TARGETS ${PROJECT_NAME}.${solidmechanics_dir})
 endforeach()
 

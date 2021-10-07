@@ -206,6 +206,8 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
+sofang_check_dependencies(Sofa.Component.Collision.Models) # for TriangleOctree in DilateEng and Random..Eng
+
 set(TARGET_NAME ${PROJECT_NAME})
 sofa_find_package(SofaFramework REQUIRED)
 
@@ -214,7 +216,7 @@ configure_file(${SOFACOMPONENTENGINE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}
 add_library(${TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${TARGET_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Collision.Models) # for TriangleOctree in DilateEng and Random..Eng
+target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Collision.Models)
 
 target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAENGINE)
 target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALENGINE)

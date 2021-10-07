@@ -107,6 +107,8 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
+sofang_check_dependencies(Sofa.Component.Topology)
+
 set(TARGET_NAME ${PROJECT_NAME})
 sofa_find_package(SofaFramework REQUIRED)
 
@@ -120,7 +122,6 @@ set_target_properties(${TARGET_NAME} PROPERTIES PROJECT_LABEL ${TOO_LONG_TARGET_
 set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${TARGET_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Topology)
-# target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.LinearSolver)
 
 target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFADEFORMABLE)
 target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAOBJECTINTERACTION)
