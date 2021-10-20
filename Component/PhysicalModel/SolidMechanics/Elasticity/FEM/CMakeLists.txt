@@ -55,14 +55,6 @@ set(SOURCE_FILES
     ${SOFAGENERALSIMPLEFEM_SRC}/TriangularFEMForceFieldOptim.cpp
     ${SOFAMISCFEM_SRC}/FastTetrahedralCorotationalForceField.cpp
 )
-
-# Full set
-set(HEADER_FILES
-)
-
-set(SOURCE_FILES
-    ${SOFACOMPONENTPHYSICALMODELSOLIDMECHANICSELASTICITYFEM_SOURCE_DIR}/init.cpp
-)
 set(WRAPPER_FILES
     wrapper/SofaSimpleFem/config.h
     wrapper/SofaGeneralSimpleFem/config.h
