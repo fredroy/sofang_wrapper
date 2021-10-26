@@ -5,9 +5,9 @@ set(SOFACOMPONENTTOPOLOGY_SOURCE_DIR "src/sofa/component/topology")
 
 set(SOFACOMPONENTTOPOLOGY_DIRS StaticContainer Grid DynamicContainer Mapping)
 set(SOFACOMPONENTTOPOLOGY_TARGETS)
-foreach(collision_dir ${SOFACOMPONENTTOPOLOGY_DIRS})
-	sofang_add_component_subdirectory(${collision_dir})
-	list(APPEND SOFACOMPONENTTOPOLOGY_TARGETS ${PROJECT_NAME}.${collision_dir})
+foreach(topology_dir ${SOFACOMPONENTTOPOLOGY_DIRS})
+	sofang_add_component_subdirectory(${topology_dir} ${PROJECT_NAME}.${topology_dir})
+	list(APPEND SOFACOMPONENTTOPOLOGY_TARGETS ${PROJECT_NAME}.${topology_dir})
 endforeach()
 
 set(HEADER_FILES

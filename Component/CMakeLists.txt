@@ -1,11 +1,23 @@
 cmake_minimum_required(VERSION 3.12)
 
 
-macro(sofang_add_component_subdirectory ComponentArg)
-	string(TOUPPER ${ComponentArg} UpperComponentArg)
-	option(SOFANG_ENABLE_${UpperComponentArg} "Build ${ComponentArg}." ON)
-	if(SOFANG_ENABLE_${UpperComponentArg})
-		add_subdirectory(${ComponentArg})
+macro(sofang_add_component_subdirectory DirectoryArg)
+	set(DirectoryName ${DirectoryArg})
+	set(ExtraMacroArgs ${ARGN})
+	# Get the length of the list
+  	list(LENGTH ExtraMacroArgs NumExtraMacroArgs)
+  	if(NumExtraMacroArgs GREATER 0)
+  		set(DirectoryName ${ARGV1})
+	else()
+		set(DirectoryName Sofa.Component.${DirectoryName})
+  	endif()
+
+	string(TOUPPER ${DirectoryName} UpperDirectoryName)
+	string(REPLACE "." "_" UpperDirectoryName ${UpperDirectoryName})
+
+	option(SOFANG_ENABLE_${UpperDirectoryName} "Build ${DirectoryName}." ON)
+	if(SOFANG_ENABLE_${UpperDirectoryName})
+		add_subdirectory(${DirectoryArg})
 	endif()
 endmacro()
 
