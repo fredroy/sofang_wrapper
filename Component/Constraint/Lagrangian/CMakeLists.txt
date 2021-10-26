@@ -57,10 +57,9 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
-sofang_check_dependencies(Sofa.Component.PhysicalModel.Mass)
-sofang_check_dependencies(Sofa.Component.LinearSolver)
-sofang_check_dependencies(Sofa.Component.ODESolver)
-sofang_check_dependencies(Sofa.Component.PhysicalModel.SolidMechanics.Elasticity.FEM)
+sofang_check_dependencies(Sofa.Component.PhysicalModel.Mass) # UncoupledCC needs UniformMass
+sofang_check_dependencies(Sofa.Component.LinearSolver) # PrecomputedCC needs CGLinearSolver
+sofang_check_dependencies(Sofa.Component.ODESolver) # PrecomputedCC needs EulerSolver
 
 set(TARGET_NAME ${PROJECT_NAME})
 sofa_find_package(SofaFramework REQUIRED)
@@ -70,10 +69,9 @@ configure_file(${SOFACOMPONENTCONSTRAINTLAGRANGIAN_SOURCE_DIR}/config.h.in ${CMA
 add_library(${TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${TARGET_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.PhysicalModel.Mass) # Uncoupled needs UniformMass
+target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.PhysicalModel.Mass)
 target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.LinearSolver)
-target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.ODESolver) # PrecompuptedCC needs EulerImplicit
-target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.PhysicalModel.SolidMechanics.Elasticity.FEM) # PrecompuptedCC needs TetraFEM
+target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.ODESolver)
 
 target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFACONSTRAINT)
 target_include_directories(${TARGET_NAME} PUBLIC "${SOFACONSTRAINT_DIR}/src")
