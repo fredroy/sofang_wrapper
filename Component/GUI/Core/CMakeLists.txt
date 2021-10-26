@@ -107,6 +107,8 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
+sofang_check_dependencies(Sofa.Component.Topology.Mapping) # TopologyChangeManager needs Hexa2TetraMapping
+
 sofa_find_package(SofaFramework REQUIRED)
 
 include(FetchContent)
