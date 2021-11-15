@@ -45,7 +45,7 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
-sofang_check_dependencies(Sofa.Component.Topology)
+sofang_check_dependencies(Sofa.Component.Topology.Grid) # VisualModelImpl calls
 
 set(TARGET_NAME ${PROJECT_NAME})
 sofa_find_package(SofaFramework REQUIRED)
@@ -57,7 +57,7 @@ add_library(${TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILE
 set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${TARGET_NAME} PRIVATE tinyxml)
 target_link_libraries(${TARGET_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Topology)
+target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Topology.Grid)
 
 target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFABASEVISUAL)
 target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALVISUAL)
@@ -70,5 +70,5 @@ target_include_directories(${TARGET_NAME} PUBLIC "${SOFAGENERALVISUAL_DIR}/src")
 # Subproject Visual.GL
 sofa_find_package(Sofa.GL REQUIRED)
 if(Sofa.GL_FOUND)
-    sofang_add_component_subdirectory(GL)
+    sofang_add_subdirectory_and_option(GL ${PROJECT_NAME}.GL)
 endif()

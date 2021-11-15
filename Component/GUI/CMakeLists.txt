@@ -78,6 +78,7 @@ sofang_check_dependencies(Sofa.Component.Collision.Response.Contact)
 sofang_check_dependencies(Sofa.Component.Collision.Models)
 sofang_check_dependencies(Sofa.Component.Visual)
 sofang_check_dependencies(Sofa.Component.Constraint.Projective)
+sofang_check_dependencies(Sofa.Component.Topology.Mapping) # TopologyChangeManager needs Hexa2TetraMapping
 
 sofa_find_package(SofaFramework REQUIRED)
 
@@ -89,6 +90,8 @@ target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.Collision.Response.C
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.Collision.Models)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.Visual)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.Constraint.Projective)
+target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.Topology.Mapping)
+
 
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")

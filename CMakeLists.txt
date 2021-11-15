@@ -132,6 +132,32 @@ if(SOFA_WITH_OPENGL)
     add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/modules/Sofa.GL ${CMAKE_CURRENT_BINARY_DIR}/Sofa/Sofa.GL)
 endif()
 
+# some cmake utility macros (probably to set in a cmake/ dir)
+
+macro(sofang_add_subdirectory_and_option DirectoryArg FullDirectoryArg)
+    set(DirectoryName ${FullDirectoryArg})
+
+    string(TOUPPER ${DirectoryName} UpperDirectoryName)
+    string(REPLACE "." "_" UpperDirectoryName ${UpperDirectoryName})
+
+    option(SOFANG_ENABLE_${UpperDirectoryName} "Build ${DirectoryName}." ON)
+    if(SOFANG_ENABLE_${UpperDirectoryName})
+        add_subdirectory(${DirectoryArg})
+    endif()
+endmacro()
+
+macro(sofang_check_dependencies)
+    if(${ARGC} EQUAL 0)
+        message(FATAL_ERROR "sofang_check_dependencies macro needs at least one argument")
+    endif()
+    set(list_deps "${ARGN}")
+    foreach(dep IN LISTS list_deps)
+        if(NOT TARGET ${dep})
+            message(FATAL_ERROR "This target needs ${dep}")
+        endif()
+    endforeach()
+endmacro()
+
 # Components
 add_subdirectory(Component ${CMAKE_CURRENT_BINARY_DIR}/Component)
 

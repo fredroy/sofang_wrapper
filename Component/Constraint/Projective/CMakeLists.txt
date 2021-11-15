@@ -96,8 +96,6 @@ configure_file(${SOFACOMPONENTCONSTRAINTPROJECTIVE_SOURCE_DIR}/config.h.in ${CMA
 add_library(${TARGET_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(${TARGET_NAME} PUBLIC SofaSimulationCore)
-target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.LinearSolver)
-target_link_libraries(${TARGET_NAME} PUBLIC Sofa.Component.Topology)
 
 target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFABOUNDARYCONDITION)
 target_compile_definitions(${TARGET_NAME} PRIVATE SOFA_BUILD_SOFAGENERALOBJECTINTERACTION)
