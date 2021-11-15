@@ -4,12 +4,12 @@
 #include <sofa/config/sharedlibrary_defines.h>
 
 #ifdef BUILD_SOFAUI
-#  define SOFACOMPONENTUI_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#  define SOFAUI_API SOFA_EXPORT_DYNAMIC_LIBRARY
 #else
-#  define SOFACOMPONENTUI_API SOFA_IMPORT_DYNAMIC_LIBRARY
+#  define SOFAUI_API SOFA_IMPORT_DYNAMIC_LIBRARY
 #endif
 
-namespace sofa::component::ui
+namespace sofa::ui
 {
 	constexpr char* MODULE_NAME = "@PROJECT_NAME@";
-} // namespace sofa::component::ui
+} // namespace sofa::ui

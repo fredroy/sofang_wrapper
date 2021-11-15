@@ -4,8 +4,8 @@ namespace sofa::ui
 {
 
 extern "C" {
-	SOFACOMPONENTUI_API void initExternalModule();
-	SOFACOMPONENTUI_API const char* getModuleName();
+	SOFAUI_API void initExternalModule();
+	SOFAUI_API const char* getModuleName();
 }
 
 void initExternalModule()

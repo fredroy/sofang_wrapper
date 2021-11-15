@@ -51,7 +51,7 @@ set(WRAPPER_FILES
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
-sofang_check_dependencies(Sofa.Component.GUI)
+sofang_check_dependencies(Sofa.Component.UI)
 
 sofa_find_package(SofaFramework REQUIRED)
 
@@ -77,7 +77,7 @@ configure_file(${SOFAUICORE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCommon SofaSimulationCore)
 target_link_libraries(${PROJECT_NAME} PUBLIC cxxopts)
-target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.GUI)
+target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.UI)
 
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src/")

@@ -3,7 +3,7 @@ project(Sofa.Component LANGUAGES CXX)
 
 set(SOFACOMPONENT_SOURCE_DIR "src/sofa/component")
 
-set(SOFACOMPONENT_DIRS Utils ODESolver LinearSolver Topology PhysicalModel Constraint AnimationLoop Mapping Container Collision Engine Visual IO GUI Controller) # Device
+set(SOFACOMPONENT_DIRS Utils ODESolver LinearSolver Topology PhysicalModel Constraint AnimationLoop Mapping Container Collision Engine Visual IO UI Controller) # Device
 set(SOFACOMPONENT_TARGETS)
 foreach(component_dir ${SOFACOMPONENT_DIRS})
 	sofang_add_subdirectory_and_option(${component_dir} ${PROJECT_NAME}.${component_dir})

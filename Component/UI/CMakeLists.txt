@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.12)
-project(Sofa.Component.GUI LANGUAGES CXX)
+project(Sofa.Component.UI LANGUAGES CXX)
 
-set(SOFACOMPONENTGUI_SOURCE_DIR "src/sofa/component/gui")
+# Could be also Sofa.UI.Component... ?
+
+set(SOFACOMPONENTUI_SOURCE_DIR "src/sofa/component/ui")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -12,7 +14,7 @@ set(SOFAUSERINTERACTION_DIR "${SOFAMODULES_SOURCE_DIR}/SofaUserInteraction/")
 set(SOFAUSERINTERACTION_SRC "${SOFAUSERINTERACTION_DIR}/src/SofaUserInteraction")
 
 set(HEADER_FILES
-	${SOFACOMPONENTGUI_SOURCE_DIR}/config.h.in
+	${SOFACOMPONENTUI_SOURCE_DIR}/config.h.in
     ${SOFAGRAPHCOMPONENT_SRC}/AddFrameButtonSetting.h
     ${SOFAGRAPHCOMPONENT_SRC}/AddRecordedCameraButtonSetting.h
     ${SOFAGRAPHCOMPONENT_SRC}/AttachBodyButtonSetting.h
@@ -44,7 +46,7 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-    ${SOFACOMPONENTGUI_SOURCE_DIR}/init.cpp
+    ${SOFACOMPONENTUI_SOURCE_DIR}/init.cpp
     ${SOFAGRAPHCOMPONENT_SRC}/AddFrameButtonSetting.cpp
     ${SOFAGRAPHCOMPONENT_SRC}/AddRecordedCameraButtonSetting.cpp
     ${SOFAGRAPHCOMPONENT_SRC}/AttachBodyButtonSetting.cpp
@@ -82,7 +84,7 @@ sofang_check_dependencies(Sofa.Component.Topology.Mapping) # TopologyChangeManag
 
 sofa_find_package(SofaFramework REQUIRED)
 
-configure_file(${SOFACOMPONENTGUI_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/gui/config.h)
+configure_file(${SOFACOMPONENTUI_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/ui/config.h)
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)

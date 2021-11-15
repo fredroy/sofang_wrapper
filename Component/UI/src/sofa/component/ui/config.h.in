@@ -1,0 +1,17 @@
+#pragma once
+
+#include <sofa/config.h>
+#include <sofa/config/sharedlibrary_defines.h>
+
+#ifdef BUILD_SOFACOMPONENTUI
+#  define SOFACOMPONENTUI_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#else
+#  define SOFACOMPONENTUI_API SOFA_IMPORT_DYNAMIC_LIBRARY
+#endif
+
+namespace sofa::component::ui
+{
+	void SOFACOMPONENTUI_API init(); // to force-load
+
+	constexpr char* MODULE_NAME = "@PROJECT_NAME@";
+} // namespace sofa::component::ui
