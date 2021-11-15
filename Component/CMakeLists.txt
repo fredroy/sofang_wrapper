@@ -36,5 +36,5 @@ sofang_add_component_subdirectory(Visual)
 sofang_add_component_subdirectory(IO)
 # sofang_add_component_subdirectory(Device)
 
-sofang_add_component_subdirectory(GUI/Core)
+sofang_add_component_subdirectory(GUI)
 sofang_add_component_subdirectory(Controller)

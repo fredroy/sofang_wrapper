@@ -27,9 +27,9 @@ sofa_find_package(SofaFramework REQUIRED)
 add_executable(${PROJECT_NAME} ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
 
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationGraph)
-target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.GUI.Core)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.Utils)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.IO.Mesh)
+target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.UI.Core)
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${RUNSOFA_SOURCE_DIR}")
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/wrapper/")

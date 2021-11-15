@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
-project(Sofa.Component.GUI.Core LANGUAGES CXX)
+project(Sofa.Component.GUI LANGUAGES CXX)
 
-set(SOFACOMPONENTGUICORE_SOURCE_DIR "src/sofa/component/gui/core")
+set(SOFACOMPONENTGUI_SOURCE_DIR "src/sofa/component/gui")
 
 set(SOFAMODULES_SOURCE_DIR "${SOFA_SOURCE_DIR}/modules")
 set(SOFAKERNELMODULES_SOURCE_DIR "${SOFA_KERNEL_SOURCE_DIR}/modules")
@@ -11,14 +11,8 @@ set(SOFAGRAPHCOMPONENT_SRC "${SOFAGRAPHCOMPONENT_DIR}/src/SofaGraphComponent/")
 set(SOFAUSERINTERACTION_DIR "${SOFAMODULES_SOURCE_DIR}/SofaUserInteraction/")
 set(SOFAUSERINTERACTION_SRC "${SOFAUSERINTERACTION_DIR}/src/SofaUserInteraction")
 
-set(SOFAGUICOMMON_DIR "${SOFAMODULES_SOURCE_DIR}/SofaGuiCommon/")
-set(SOFAGUICOMMON_SRC "${SOFAGUICOMMON_DIR}/src/sofa/gui")
-
-set(SOFAGUI_DIR "${SOFA_SOURCE_DIR}/SofaGui/")
-set(SOFAGUI_SRC "${SOFAGUI_DIR}/src/SofaGui")
-
 set(HEADER_FILES
-	${SOFACOMPONENTGUICORE_SOURCE_DIR}/config.h.in
+	${SOFACOMPONENTGUI_SOURCE_DIR}/config.h.in
     ${SOFAGRAPHCOMPONENT_SRC}/AddFrameButtonSetting.h
     ${SOFAGRAPHCOMPONENT_SRC}/AddRecordedCameraButtonSetting.h
     ${SOFAGRAPHCOMPONENT_SRC}/AttachBodyButtonSetting.h
@@ -47,22 +41,10 @@ set(HEADER_FILES
     ${SOFAUSERINTERACTION_SRC}/StartNavigationPerformer.h
     ${SOFAUSERINTERACTION_SRC}/SuturePointPerformer.h
     ${SOFAUSERINTERACTION_SRC}/SuturePointPerformer.inl
-    ${SOFAGUICOMMON_SRC}/BaseGUI.h
-    ${SOFAGUICOMMON_SRC}/BaseViewer.h
-    ${SOFAGUICOMMON_SRC}/BatchGUI.h
-    ${SOFAGUICOMMON_SRC}/ColourPickingVisitor.h
-    ${SOFAGUICOMMON_SRC}/FilesRecentlyOpenedManager.h
-    ${SOFAGUICOMMON_SRC}/GuiDataRepository.h
-    ${SOFAGUICOMMON_SRC}/GUIManager.h
-    ${SOFAGUICOMMON_SRC}/MouseOperations.h
-    ${SOFAGUICOMMON_SRC}/OperationFactory.h
-    ${SOFAGUICOMMON_SRC}/PickHandler.h
-    ${SOFAGUICOMMON_SRC}/ViewerFactory.h
-    ${SOFAGUICOMMON_SRC}/ArgumentParser.h
 )
 
 set(SOURCE_FILES
-    ${SOFACOMPONENTGUICORE_SOURCE_DIR}/init.cpp
+    ${SOFACOMPONENTGUI_SOURCE_DIR}/init.cpp
     ${SOFAGRAPHCOMPONENT_SRC}/AddFrameButtonSetting.cpp
     ${SOFAGRAPHCOMPONENT_SRC}/AddRecordedCameraButtonSetting.cpp
     ${SOFAGRAPHCOMPONENT_SRC}/AttachBodyButtonSetting.cpp
@@ -84,53 +66,25 @@ set(SOURCE_FILES
     ${SOFAUSERINTERACTION_SRC}/RemovePrimitivePerformer.cpp
     ${SOFAUSERINTERACTION_SRC}/StartNavigationPerformer.cpp
     ${SOFAUSERINTERACTION_SRC}/SuturePointPerformer.cpp
-    ${SOFAGUICOMMON_SRC}/BaseGUI.cpp
-    ${SOFAGUICOMMON_SRC}/BaseViewer.cpp
-    ${SOFAGUICOMMON_SRC}/BatchGUI.cpp
-    ${SOFAGUICOMMON_SRC}/ColourPickingVisitor.cpp
-    ${SOFAGUICOMMON_SRC}/FilesRecentlyOpenedManager.cpp
-    ${SOFAGUICOMMON_SRC}/GuiDataRepository.cpp
-    ${SOFAGUICOMMON_SRC}/GUIManager.cpp
-    ${SOFAGUICOMMON_SRC}/MouseOperations.cpp
-    ${SOFAGUICOMMON_SRC}/PickHandler.cpp
-    ${SOFAGUICOMMON_SRC}/ViewerFactory.cpp
-    ${SOFAGUICOMMON_SRC}/ArgumentParser.cpp
-    ${SOFAGUI_SRC}/initSofaGui.cpp
 )
 
 set(WRAPPER_FILES
     wrapper/SofaGraphComponent/config.h
     wrapper/SofaUserInteraction/config.h
-    wrapper/sofa/gui/config.h
-    wrapper/SofaGui/config.h
-    wrapper/SofaGui/initSofaGui.h
 )
 source_group("wrapper" FILES ${WRAPPER_FILES})
 
+sofang_check_dependencies(Sofa.Component.Collision.Response.Contact)
+sofang_check_dependencies(Sofa.Component.Collision.Models)
+sofang_check_dependencies(Sofa.Component.Visual)
+sofang_check_dependencies(Sofa.Component.Constraint.Projective)
+
 sofa_find_package(SofaFramework REQUIRED)
 
-include(FetchContent)
-FetchContent_Declare(cxxopts
-        GIT_REPOSITORY https://github.com/jarro2783/cxxopts
-        GIT_TAG        v2.2.1
-)
-
-FetchContent_GetProperties(cxxopts)
-if(NOT cxxopts_POPULATED)
-    FetchContent_Populate(cxxopts)
-
-    set(CXXOPTS_BUILD_EXAMPLES OFF CACHE INTERNAL "")
-    set(CXXOPTS_BUILD_TESTS OFF CACHE INTERNAL "")
-    set(CXXOPTS_ENABLE_INSTALL ON CACHE INTERNAL "")
-
-    add_subdirectory(${cxxopts_SOURCE_DIR} ${cxxopts_BINARY_DIR})
-endif()
-
-configure_file(${SOFACOMPONENTGUICORE_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/gui/core/config.h)
+configure_file(${SOFACOMPONENTGUI_SOURCE_DIR}/config.h.in ${CMAKE_BINARY_DIR}/include/sofa/component/gui/config.h)
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${WRAPPER_FILES})
-target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCommon SofaSimulationCore)
-target_link_libraries(${PROJECT_NAME} PUBLIC cxxopts)
+target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCore)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.Collision.Response.Contact)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.Collision.Models)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Component.Visual)
@@ -142,9 +96,6 @@ target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/w
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGRAPHCOMPONENT_DIR}/src")
 target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAUSERINTERACTION_DIR}/src")
-target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGUICOMMON_DIR}/src")
-target_include_directories(${PROJECT_NAME} PUBLIC "${SOFAGUICOMMON_DIR}/compat")
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGRAPHCOMPONENT)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAUSERINTERACTION)
-target_compile_definitions(${PROJECT_NAME} PRIVATE SOFA_BUILD_SOFAGUICOMMON)

@@ -134,6 +134,10 @@ endif()
 
 # Components
 add_subdirectory(Component ${CMAKE_CURRENT_BINARY_DIR}/Component)
+
+# UI
+add_subdirectory(UI ${CMAKE_CURRENT_BINARY_DIR}/UI)
+
 # Applications
 add_subdirectory(Applications ${CMAKE_CURRENT_BINARY_DIR}/Applications)
 
